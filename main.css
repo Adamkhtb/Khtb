@@ -1,0 +1,93 @@
+/* General Body Styling */
+body {
+    margin: 0;
+    font-family: "dico-code-one", mono;
+    font-weight: 400;
+    font-style: normal;
+    background: center/cover no-repeat;
+    height: 100vh;
+    transition: background 0.5s ease, backdrop-filter 0.5s ease;
+  }
+  
+  /* Background Focus Animation */
+  @keyframes focusIn {
+    from {
+      backdrop-filter: blur(20px);
+      filter: brightness(0.7);
+    }
+    to {
+      backdrop-filter: blur(0);
+      filter: brightness(1);
+    }
+  }
+  
+  .focus-in {
+    animation: focusIn 0.8s ease forwards;
+  }
+  
+  /* Header Styling */
+  .header {
+    position: sticky;
+    top: 0;
+    color: rgb(0, 0, 0);
+    padding: 20px;
+    font-size: 100px;
+    text-align: left;
+    transition: font-size 0.3s, padding 0.3s;
+  }
+  
+  /* Content Section Styling */
+  .content {
+    height: 200vh;
+    padding: 20px;
+  }
+  
+  .about, .work, .contact {
+    position: sticky;
+    top: 50px;
+    padding-bottom: 20px;
+  }
+  
+  .work {
+    top: 100px;
+  }
+  
+  .contact {
+    top: 150px;
+  }
+  
+  /* Horizontal Rule Styling */
+  hr, .hr1, .hr2, .hr3 {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+    position: sticky;
+  }
+  
+  .hr1 { top: 75px; }
+  .hr2 { top: 125px; }
+  .hr3 { top: 175px; }
+  
+  /* Image Styling */
+  img {
+    width: 50px;
+    height: 75px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  
+  img:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Name at Bottom of Page */
+  .lastname {
+    position: sticky;
+    bottom: 8px;
+    right: 16px;
+    font-size: 18px;
+  }
+  

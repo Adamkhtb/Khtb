@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://use.typekit.net/hed8dlg.css">
+    <title>Adam Alkhateeb | Portfolio</title>
+  </head>
+  
+  <body>
+    <div class="header" id="header">ADAM</div>
+
+    <hr>
+    <div class="content">
+      <p class="about">About</p>
+      <p>Hi! My name is Adam Alkhateeb. </p>
+      <hr class="hr1">
+      <p class="work">Work</p>
+      <img src="chair.png" alt="chair">
+      <img src="soup.jpg" alt="soup">
+      <img src="human.png" alt="human">
+      <img src="map4vcu.jpg" alt="map">
+      <hr class="hr2">
+      <p class="contact">Contact</p>
+      <hr class="hr3">
+      <hr>
+    </div>
+
+    <div class="lastname">ALKHATEEB</div>
+
+    <script>
+      const images = {
+        'human.png': 'wakeup.jpg',
+        'soup.jpg': 'soup-bg.jpg',
+        'chair.png': 'chillinchair.jpg',
+        'map4vcu.jpg': 'idk'
+      };
+
+      document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('mouseover', (e) => {
+          const src = e.target.getAttribute('src');
+          if (images[src]) {
+            // Set background image with blur effect
+            document.body.style.backgroundImage = `url('${images[src]}')`;
+            document.body.style.backdropFilter = 'blur(20px)';
+            document.body.style.transition = 'background 0.5s ease, backdrop-filter 0.5s ease';
+
+            // Trigger the focus animation
+            document.body.classList.add('focus-in');
+          }
+        });
+
+        img.addEventListener('mouseout', () => {
+          // Reset background on mouse out
+          document.body.style.backgroundImage = 'none';
+          document.body.style.backdropFilter = 'blur(0px)';
+
+          // Remove the focus animation
+          document.body.classList.remove('focus-in');
+        });
+      });
+
+      // Shrink header on scroll
+      window.addEventListener("scroll", function () {
+        const header = document.getElementById("header");
+        const shrinkPoint = 100;
+
+        if (window.scrollY > shrinkPoint) {
+          header.style.fontSize = "18px";
+          header.style.padding = "10px";
+        } else {
+          header.style.fontSize = "100px";
+          header.style.padding = "20px";
+        }
+      });
+    </script>
+  </body>
+</html>
