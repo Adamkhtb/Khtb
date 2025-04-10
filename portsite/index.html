@@ -8,11 +8,14 @@
     <link rel="stylesheet" href="https://use.typekit.net/hed8dlg.css">
     <title>Adam Alkhateeb | Portfolio</title>
   </head>
+
+
+
   
   <body>
     <div class="header" id="header">ADAM</div>
 
-    <hr>
+    <hr class="hr0">
     <div class="content">
       <p class="about">About</p>
       <p>Hi! My name is Adam Alkhateeb. </p>
@@ -22,59 +25,93 @@
       <img src="soup.jpg" alt="soup">
       <img src="human.png" alt="human">
       <img src="map4vcu.jpg" alt="map">
+      <img src="puredata.png" alt="puredata">
+      <img src="motion.png" alt="motion">
+      <img src="log.png" alt="drownindesign">
       <hr class="hr2">
       <p class="contact">Contact</p>
+      <p>Email:adamalkhateeb001@gmail.com</p>
+      <p>Leave A Note Here</p>
       <hr class="hr3">
-      <hr>
+      <hr class="hr4">
     </div>
 
-    <div class="lastname">ALKHATEEB</div>
+
+
+    <div class="last-name" id="footer">ALKHATEEB</div>
 
     <script>
-      const images = {
-        'human.png': 'wakeup.jpg',
-        'soup.jpg': 'soup-bg.jpg',
-        'chair.png': 'chillinchair.jpg',
-        'map4vcu.jpg': 'idk'
-      };
+const images = {
+  'human.png': 'human.gif',
+  'soup.jpg': 'soup-bg.jpg',
+  'chair.png': 'sit.gif',
+  'map4vcu.jpg': 'map.gif',
+  'puredata.png': 'puredata.gif',
+  'motion.png': 'motion.gif',
+  'log.png' : 'drown.gif',
+};
 
-      document.querySelectorAll('img').forEach(img => {
-        img.addEventListener('mouseover', (e) => {
-          const src = e.target.getAttribute('src');
-          if (images[src]) {
-            // Set background image with blur effect
-            document.body.style.backgroundImage = `url('${images[src]}')`;
-            document.body.style.backdropFilter = 'blur(20px)';
-            document.body.style.transition = 'background 0.5s ease, backdrop-filter 0.5s ease';
+// Create the preview container if it doesn't exist
+let previewContainer = document.getElementById('image-preview');
+if (!previewContainer) {
+  previewContainer = document.createElement('div');
+  previewContainer.id = 'image-preview';
+  document.body.appendChild(previewContainer);
+}
 
-            // Trigger the focus animation
-            document.body.classList.add('focus-in');
-          }
-        });
+document.querySelectorAll('img').forEach(img => {
+  img.addEventListener('mouseover', (e) => {
+    const src = e.target.getAttribute('src');
+    if (images[src]) {
+      // Add the large image inside the preview container
+      previewContainer.innerHTML = `<img src="${images[src]}" alt="preview">`;
+      previewContainer.style.display = 'flex';
+    }
+  });
 
-        img.addEventListener('mouseout', () => {
-          // Reset background on mouse out
-          document.body.style.backgroundImage = 'none';
-          document.body.style.backdropFilter = 'blur(0px)';
+  img.addEventListener('mouseout', () => {
+    // Hide the preview image when mouse leaves
+    previewContainer.style.display = 'none';
+  });
+});
 
-          // Remove the focus animation
-          document.body.classList.remove('focus-in');
-        });
-      });
+//scrol
+let headerTicking = false;
+let footerTicking = false;
 
-      // Shrink header on scroll
-      window.addEventListener("scroll", function () {
-        const header = document.getElementById("header");
-        const shrinkPoint = 100;
+window.addEventListener("scroll", function () {
+  if (!headerTicking) {
+    window.requestAnimationFrame(function () {
+      const header = document.getElementById("header");
+      const threshold = 100;
+      if (window.scrollY > threshold) {
+        header.classList.add("shrink");
+      } else {
+        header.classList.remove("shrink");
+      }
+      headerTicking = false;
+    });
+    headerTicking = true;
+  }
+});
 
-        if (window.scrollY > shrinkPoint) {
-          header.style.fontSize = "18px";
-          header.style.padding = "10px";
-        } else {
-          header.style.fontSize = "100px";
-          header.style.padding = "20px";
-        }
-      });
+window.addEventListener("scroll", function () {
+  if (!footerTicking) {
+    window.requestAnimationFrame(function () {
+      const footer = document.getElementById("footer");
+      const threshold = 100;
+      if (window.scrollY > threshold) {
+        footer.classList.add("grow");
+      } else {
+        footer.classList.remove("grow");
+      }
+      footerTicking = false;
+    });
+    footerTicking = true;
+  }
+});
+
+
     </script>
   </body>
 </html>
