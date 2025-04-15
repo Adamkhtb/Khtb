@@ -1,80 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="https://use.typekit.net/hed8dlg.css">
-    <title>Adam Alkhateeb | Portfolio</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="main.css" />
+  <link rel="stylesheet" href="https://use.typekit.net/hed8dlg.css" />
+  <title>Adam Alkhateeb | Portfolio</title>
+</head>
+
+<body>
   
-  <body>
+  <div id="popup">
+    <div id="popup-box">
+      <p>Please view this website on a computer at full screen for best viewing experience.</p>
+      <button onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+
+  <div id="left">
+    <div class="border">
+
     <div class="header" id="header">ADAM</div>
 
-    <hr>
     <div class="content">
       <p class="about">About</p>
-      <p>Hi! My name is Adam Alkhateeb. </p>
-      <hr class="hr1">
-      <p class="work">Work</p>
-      <img src="chair.png" alt="chair">
-      <img src="soup.jpg" alt="soup">
-      <img src="human.png" alt="human">
-      <img src="map4vcu.jpg" alt="map">
-      <hr class="hr2">
-      <p class="contact">Contact</p>
-      <hr class="hr3">
-      <hr>
+      <p>Hi! My name is Adam Alkhateeb.</p>
+
+      <hr/>
+
+    <div class="resume">
+      <p class="project" data-image="ressite.jpg">Resume</p>
     </div>
 
-    <div class="lastname">ALKHATEEB</div>
 
-    <script>
-      const images = {
-        'human.png': 'wakeup.jpg',
-        'soup.jpg': 'soup-bg.jpg',
-        'chair.png': 'chillinchair.jpg',
-        'map4vcu.jpg': 'idk'
-      };
 
-      document.querySelectorAll('img').forEach(img => {
-        img.addEventListener('mouseover', (e) => {
-          const src = e.target.getAttribute('src');
-          if (images[src]) {
-            // Set background image with blur effect
-            document.body.style.backgroundImage = `url('${images[src]}')`;
-            document.body.style.backdropFilter = 'blur(20px)';
-            document.body.style.transition = 'background 0.5s ease, backdrop-filter 0.5s ease';
 
-            // Trigger the focus animation
-            document.body.classList.add('focus-in');
-          }
-        });
+      <hr/>
+      <p class="work">Work</p>
 
-        img.addEventListener('mouseout', () => {
-          // Reset background on mouse out
-          document.body.style.backgroundImage = 'none';
-          document.body.style.backdropFilter = 'blur(0px)';
+      <div class="project" data-image="sit.gif">How2sitinaChair.jpg</div>
+      <div class="project" data-image="soup-bg.jpg">goodSoup.png</div>
+      <div class="project" data-image="human.gif">How2beHuman.pdf</div>
+      <div class="project" data-image="map.gif">Map4VCU.gif</div>
+      <div class="project" data-image="puredata.gif">AVT.png</div>
+      <div class="project" data-image="motion.gif">motionGraphics.mov</div>
+      <div class="project" data-image="drown.gif">Drown.toe</div>
 
-          // Remove the focus animation
-          document.body.classList.remove('focus-in');
-        });
-      });
 
-      // Shrink header on scroll
-      window.addEventListener("scroll", function () {
-        const header = document.getElementById("header");
-        const shrinkPoint = 100;
+      <hr/>
+      <div class="picture">
+        <p>Picture</p>
+        <img class = kramer src="kramer.jpeg">
+        <div class="buttons">
+          <button class="change-btn">change</button>
+        </div>
+      </div>
 
-        if (window.scrollY > shrinkPoint) {
-          header.style.fontSize = "18px";
-          header.style.padding = "10px";
-        } else {
-          header.style.fontSize = "100px";
-          header.style.padding = "20px";
-        }
-      });
-    </script>
-  </body>
+
+      <hr/>
+      <p class="contact">Contact</p>
+      <p>adamalkhateeb001@gmail.com</p>
+      <p>Leave A Note Here</p>
+    </div>
+  </div>
+</div>
+
+  <div id="right">
+
+
+
+
+
+
+  <div class = "container">
+    <div class ="square-overlay">
+        <div class = "square1"></div>
+        <div class = "square2"></div>
+        <div class = "square3"></div>
+        <div class = "square4"></div>
+        <div class = "square5"></div>
+        <div class = "square6"></div>
+        <div class = "square7"></div>
+        <div class = "square8"></div>
+        <div class = "square9"></div>
+        <div class = "square10"></div>
+        <div class = "square11"></div>
+        <div class = "square12"></div>
+        <div class = "square13"></div>
+        <div class = "square14"></div>
+        <div class = "square15"></div>
+        <div class = "square16"></div>
+        <div class = "square17"></div>
+        <div class = "square18"></div>
+        <div class = "square19"></div>
+        <div class = "square20"></div>
+      </div>
+     </div>
+
+
+    
+
+  <div id="image-preview"></div>
+    <div class="last-name" id="footer">ALKHATEEB</div>
+  </div>
+
+  <script src="jquery-3.7.1.min.js"></script>
+  <script src="jquery-ui.min.js"></script>
+  <script src="main.js"></script>
+</body>
 </html>
