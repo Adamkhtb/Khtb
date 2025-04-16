@@ -9,13 +9,14 @@ body {
   background-size: 50vh;
   background-attachment: fixed;
   transition: background 0.5s ease, backdrop-filter 0.5s ease;
+  color: #ffffff;
 }
 
 #left {
   flex: 1;
   height: 100vh;
   overflow-y: scroll;
-  background: rgb(213, 213, 213);
+  background: rgb(17, 17, 17);
   padding: 20px;
   box-sizing: border-box;
 }
@@ -24,7 +25,7 @@ body {
   flex: 1;
   height: 100vh;
   overflow-y: scroll;
-  background: rgb(213, 213, 213);
+  background: rgb(17, 17, 17);
   padding: 20px;
   box-sizing: border-box;
 }
@@ -33,14 +34,15 @@ body {
   position: fixed;
   top: 0;
   left: 5px;
-  color: black;
+  color: rgb(255, 255, 255);
   font-size: 100px;
   padding: 15px;
   transition: font-size 0.3s, padding 0.3s;
   z-index: 1000;
   background-color: white;
+  width: 100%;
 
-  background: rgb(213, 213, 213);
+  background: rgb(17, 17, 17);
 }
 
 .header.shrink {
@@ -67,12 +69,15 @@ body {
 }
 
 .project {
-  border: solid 1px black;
+  color: #ffffff;
+  border: solid 1px rgb(255, 255, 255); 
   margin: 10px 0;
   padding: 10px;
   width: fit-content;
-  background-color: linear-gradient(120deg, #f0f0f0, #ffffff);
+  background: rgb(17, 17, 17);
   cursor: pointer;
+  border-style:5px  #ffff;
+
 }
 
 #image-preview {
@@ -164,6 +169,8 @@ body {
   transition: filter 0.3s ease;
 }
 
+body 
+
 
 .kramer{
   height:20vh;
@@ -174,7 +181,7 @@ body {
 
 
 body{
-  background-color: white;
+  background: rgb(17, 17, 17);
 }
 
 .square3
@@ -185,8 +192,8 @@ body{
   margin-left:350px;
   width:61px;
   height:77px;
-  background: rgb(213, 213, 213);
-  border: 1px solid #000000;
+  background: rgb(17, 17, 17);
+  border: 1px solid #ffffff;
   animation-name: float;
   animation-iteration-count: infinite;
   animation-duration: 3s;
@@ -202,13 +209,14 @@ body{
   margin-left:200px;
   width:100px;
   height:210px;
-  background: rgb(213, 213, 213);
-  border: 1px solid #000000;
+  background: rgb(17, 17, 17);
+  border: 1px solid #ffffff;
   animation-name: float;
   animation-iteration-count: infinite;
   animation-duration: 5s;
   animation-timing-function: ease-in-out;
   z-index:27;
+  
 }
 
 .square5
@@ -219,13 +227,15 @@ body{
   margin-top: 100px;
   width:150px;
   height:200px;
-  background: rgb(213, 213, 213);
-  border: 1px solid #000000;
+  background: rgb(17, 17, 17);
+  border: 1px solid #ffffff;
   animation-name: float;
   animation-iteration-count: infinite;
   animation-duration: 4s;
   animation-timing-function: ease-in-out;
   z-index: 26;
+  
+
 }
 
 .square6
@@ -236,13 +246,15 @@ body{
   margin-top: 150px;
   width:150px;
   height:200px;
-  background: rgb(213, 213, 213);
-  border: 1px solid #000000;
+  background: rgb(17, 17, 17);
+  border: 1px solid #ffffff;
   animation-name: float;
   animation-iteration-count: infinite;
   animation-duration: 4.5s;
   animation-timing-function: ease-in-out;
   z-index: 25;
+ 
+
 }
 
 .square7
@@ -254,13 +266,15 @@ body{
   width:100px;
   height:130px;
   animation-name: float;
-  background: rgb(213, 213, 213);
-  border: 1px solid #000000;;
+  background: rgb(17, 17, 17);
+  border: 1px solid #ffffff;;
     animation-name: float;
   animation-iteration-count: infinite;
   animation-duration: 3s;
   animation-timing-function: ease-in-out;
   z-index: 24;
+
+
 }
 
 .square8
@@ -271,13 +285,14 @@ body{
   margin-top: 479px;
   width:115px;
   height:130px;
-  background: rgb(213, 213, 213);
-  border: 1px solid #000000;
+  background: rgb(17, 17, 17);
+  border: 1px solid #ffffff;
   animation-name: float;
   animation-iteration-count: infinite;
   animation-duration: 4s;
   animation-timing-function: ease-in-out;
   z-index: 23;
+  
 }
 
 .square10
@@ -288,13 +303,14 @@ body{
   margin-top: 346px;
   width:318px;
   height:122px;
-  background: rgb(213, 213, 213);
-  border: 1px solid #000000;
+  background: rgb(17, 17, 17);
+  border: 1px solid #ffffff;
   animation-name: float;
   animation-iteration-count: infinite;
   animation-duration: 3s;
   animation-timing-function: ease-in-out;
   z-index: 22;
+
 }
 
 .square9
@@ -305,13 +321,15 @@ body{
   margin-top: 300px;
   width:318px;
   height:122px;
-  background: rgb(213, 213, 213);
-  border: 1px solid #000000;
+  background: rgb(17, 17, 17);;
+  border: 1px solid #ffffff;
   animation-name: float;
   animation-iteration-count: infinite;
   animation-duration: 3.5s;
   animation-timing-function: ease-in-out;
   z-index: 22;
+ 
+
 }
 
 .square11
@@ -322,13 +340,15 @@ body{
   margin-top: 139px;
   width:72px;
   height:75px;
-  background: rgb(213, 213, 213);
-  border: 1px solid #000000;
+  background: rgb(17, 17, 17);
+  border: 1px solid #ffffff;
   animation-name: float;
   animation-iteration-count: infinite;
   animation-duration: 2s;
   animation-timing-function: ease-in-out;
   z-index: 22;
+
+
 }
 
 .square12
@@ -339,13 +359,15 @@ body{
   margin-top: 148px;
   width:78px;
   height:137px;
-  background: rgb(213, 213, 213);
-  border: 1px solid #000000;
+  background: rgb(17, 17, 17);
+  border: 1px solid #ffffff;
   animation-name: float;
   animation-iteration-count: infinite;
   animation-duration: 2s;
   animation-timing-function: ease-in-out;
   z-index: 22;
+
+
 }
 
 .square13
@@ -356,13 +378,15 @@ body{
   margin-top: 103px;
   width:16px;
   height:21px;
-  background: rgb(213, 213, 213);
-  border: 1px solid #000000;
+  background: rgb(17, 17, 17);
+  border: 1px solid #ffffff;
   animation-name: float;
   animation-iteration-count: infinite;
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
   z-index: 22;
+
+
 }
 
 .square14
@@ -373,13 +397,15 @@ body{
   margin-top: 200px;
   width:16px;
   height:21px;
-  background: rgb(213, 213, 213);
-  border: 1px solid #000000;
+  background: rgb(17, 17, 17);
+  border: 1px solid #ffffff;
   animation-name: float;
   animation-iteration-count: infinite;
   animation-duration: 2s;
   animation-timing-function: ease-in-out;
   z-index: 22;
+
+
 }
 
 .square15
@@ -390,14 +416,16 @@ body{
   margin-left:251px;
   width:100px;
   height:84px;
-  background: rgb(213, 213, 213);
-  border: 1px solid #000000;
+  background: rgb(17, 17, 17);
+  border: 1px solid #ffffff;
   animation-name: float;
   animation-iteration-count: infinite;
   animation-duration: 4s;
   animation-timing-function: ease-in-out;
   z-index:27;
+  
 }
+
 
 .square16
 {
@@ -407,13 +435,15 @@ body{
   margin-left:117px;
   width:100px;
   height:287px;
-  background: rgb(213, 213, 213);
-  border: 1px solid #000000;
+  background: rgb(17, 17, 17);
+  border: 1px solid #ffffff;
   animation-name: float;
   animation-iteration-count: infinite;
   animation-duration: 4s;
   animation-timing-function: ease-in-out;
   z-index:27;
+
+
 }
 
 .square17
@@ -424,13 +454,15 @@ body{
   margin-left:70px;
   width:63px;
   height:111px;
-  background: rgb(213, 213, 213);
-  border: 1px solid #000000;;
+  background: rgb(17, 17, 17);
+  border: 1px solid #ffffff;;
   animation-name: float;
   animation-iteration-count: infinite;
   animation-duration: 4s;
   animation-timing-function: ease-in-out;
   z-index:26;
+  
+
 }
 
 .square18
@@ -441,13 +473,15 @@ body{
   margin-left:430px;
   width:90px;
   height:130px;
-  background: rgb(213, 213, 213);
-  border: 1px solid #000000;
+  background: rgb(17, 17, 17);
+  border: 1px solid #ffffff;
   animation-name: float;
   animation-iteration-count: infinite;
   animation-duration: 3s;
   animation-timing-function: ease-in-out;
   z-index:29;
+
+
 }
 
 .square19
@@ -458,13 +492,15 @@ body{
   margin-left:246px;
   width:154px;
   height:83px;
-  background: rgb(213, 213, 213);
-  border: 1px solid #000000;
+  background: rgb(17, 17, 17);
+  border: 1px solid #ffffff;
   animation-name: float;
   animation-iteration-count: infinite;
   animation-duration: 3s;
   animation-timing-function: ease-in-out;
   z-index:22;
+  
+
 }
 
 .square19
@@ -475,13 +511,14 @@ body{
   margin-left:510px;
   width:36px;
   height:100px;
-  background: rgb(213, 213, 213);
-  border: 1px solid #000000;
+  background: rgb(17, 17, 17);
+  border: 1px solid #ffffff;
   animation-name: float;
   animation-iteration-count: infinite;
   animation-duration: 3s;
   animation-timing-function: ease-in-out;
   z-index:29;
+  
 }
 
 .container
@@ -513,7 +550,7 @@ body{
 
 
 body {
-  background: linear-gradient(120deg, #f0f0f0, #ffffff);
+  background: rgb(17, 17, 17);
   background-size: 200% 200%;
   animation: gradientShift 10s ease infinite;
 }
@@ -522,4 +559,64 @@ body {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background:  rgb(17, 17, 17); 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ffffff; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+hr {
+  border-top: 1px solid rgb(255, 255, 255);
+}
+
+
+.custom-popup {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  font-family: "dico-mono", mono;
+}
+
+.custom-popup-box {
+  background: #111;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+}
+
+.custom-popup button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: #fff;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  font-family: "dico-mono", mono;
 }

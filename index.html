@@ -10,6 +10,9 @@
 </head>
 
 <body>
+
+
+  
   
   <div id="popup">
     <div id="popup-box">
@@ -25,28 +28,31 @@
     <div class="header" id="header">ADAM</div>
 
     <div class="content">
-      <p class="about">About</p>
-      <p>Hi! My name is Adam Alkhateeb.</p>
+      <p class="about">_About</p>
+      <p>Hi! My name is Adam Alkhateeb. I am graphic designer currently based in Richmond,VA. Welcome to my portfolio site. </p>
+
+      <div class="resume">
+        <p class="project" data-image="ressite.jpg">Resume</p>
+      </div>
+
+
+
+
+
+
+
+
 
       <hr/>
-
-    <div class="resume">
-      <p class="project" data-image="ressite.jpg">Resume</p>
-    </div>
-
-
-
-
-      <hr/>
-      <p class="work">Work</p>
-
-      <div class="project" data-image="sit.gif">How2sitinaChair.jpg</div>
-      <div class="project" data-image="soup-bg.jpg">goodSoup.png</div>
-      <div class="project" data-image="human.gif">How2beHuman.pdf</div>
-      <div class="project" data-image="map.gif">Map4VCU.gif</div>
-      <div class="project" data-image="puredata.gif">AVT.png</div>
-      <div class="project" data-image="motion.gif">motionGraphics.mov</div>
-      <div class="project" data-image="drown.gif">Drown.toe</div>
+      <p class="work">_Work</p>
+      <div class="project" data-self="true">adamkhtb.com</div>
+      <div class="project" data-image="sit.gif" data-link="projects/chair/">How2sitinaChair.jpg</div>
+      <div class="project" data-image="soup-bg.jpg"  data-image="projects/soup/" >goodSoup.png</div>
+      <div class="project" data-image="human.gif"  data-image="projects/human" >How2beHuman.pdf</div>
+      <div class="project" data-image="map.gif"  data-image="projects/map" >Map4VCU.gif</div>
+      <div class="project" data-image="puredata.gif"  data-image="projects/avt" >AVT.png</div>
+      <div class="project" data-image="digitalfire.gif"  data-image="projects/motion" >motionGraphics.mov</div>
+      <div class="project" data-image="drown.gif"  data-image="projects/drown" >Drown.toe</div>
 
 
       <hr/>
@@ -105,6 +111,15 @@
   <div id="image-preview"></div>
     <div class="last-name" id="footer">ALKHATEEB</div>
   </div>
+
+
+  <div id="here-popup" class="custom-popup">
+    <div class="custom-popup-box">
+      <p>You’re already here!</p>
+      <button onclick="closeHerePopup()">Close</button>
+    </div>
+  </div>
+
 
   <script src="jquery-3.7.1.min.js"></script>
   <script src="jquery-ui.min.js"></script>
