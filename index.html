@@ -1,128 +1,953 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="main.css" />
-  <link rel="stylesheet" href="https://use.typekit.net/hed8dlg.css" />
-  <title>Adam Alkhateeb | Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Project Catalog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-
-
-  
-  
-  <div id="popup">
-    <div id="popup-box">
-      <p>Please view this website on a computer at full screen for best viewing experience.</p>
-      <button onclick="closePopup()">Close</button>
-    </div>
-  </div>
-
-
-  <div id="left">
-    <div class="border">
-
-    <div class="header" id="header">ADAM</div>
-
-    <div class="content">
-      <p class="about">_About</p>
-      <p>Hi! My name is Adam Alkhateeb. I am graphic designer currently based in Richmond,VA. Welcome to my portfolio site. </p>
-
-      <div class="resume">
-        <p class="project" data-image="ressite.jpg">Resume</p>
-      </div>
-
-
-
-
-
-
-
-
-
-      <hr/>
-      <p class="work">_Work</p>
-      <div class="project" data-self="true">adamkhtb.com</div>
-      <div class="project" data-image="sit.gif" data-link="projects/chair/">How2sitinaChair.jpg</div>
-      <div class="project" data-image="soup-bg.jpg"  data-image="projects/soup/" >goodSoup.png</div>
-      <div class="project" data-image="human.gif"  data-image="projects/human" >How2beHuman.pdf</div>
-      <div class="project" data-image="map.gif"  data-image="projects/map" >Map4VCU.gif</div>
-      <div class="project" data-image="puredata.gif"  data-image="projects/avt" >AVT.png</div>
-      <div class="project" data-image="digitalfire.gif"  data-image="projects/motion" >motionGraphics.mov</div>
-      <div class="project" data-image="drown.gif"  data-image="projects/drown" >Drown.toe</div>
-
-
-      <hr/>
-      <div class="picture">
-        <p>Picture</p>
-        <img class = kramer src="kramer.jpeg">
-        <div class="buttons">
-          <button class="change-btn">change</button>
+    <!-- Mobile Warning Banner -->
+    <div class="mobile-warning" id="mobileWarning">
+        <div class="warning-content">
+            <span class="warning-icon">⚠️</span>
+            <span class="warning-text">Mobile version is under construction. For the best experience, please view this portfolio on a desktop.</span>
+            <button class="warning-close" id="warningClose">×</button>
         </div>
-      </div>
-
-
-      <hr/>
-      <p class="contact">Contact</p>
-      <p>adamalkhateeb001@gmail.com</p>
-      <p>Leave A Note Here</p>
     </div>
-  </div>
-</div>
 
-  <div id="right">
-
-
-
-
-
-
-  <div class = "container">
-    <div class ="square-overlay">
-        <div class = "square1"></div>
-        <div class = "square2"></div>
-        <div class = "square3"></div>
-        <div class = "square4"></div>
-        <div class = "square5"></div>
-        <div class = "square6"></div>
-        <div class = "square7"></div>
-        <div class = "square8"></div>
-        <div class = "square9"></div>
-        <div class = "square10"></div>
-        <div class = "square11"></div>
-        <div class = "square12"></div>
-        <div class = "square13"></div>
-        <div class = "square14"></div>
-        <div class = "square15"></div>
-        <div class = "square16"></div>
-        <div class = "square17"></div>
-        <div class = "square18"></div>
-        <div class = "square19"></div>
-        <div class = "square20"></div>
-      </div>
-     </div>
-
-
+    <div class="container">
+        <!-- Left Panel - Project List -->
+        <div class="left-panel">
+            <div class="header">
+                <h1>Adamkhtb.com</h1>
+                <p class="subtitle">Selected Works</p>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">+</button>
+            </div>
+            
+            <div class="navigation">
+                <div class="nav-item active" data-section="about">
+                    <span class="nav-title">About</span>
+                </div>
+                <div class="nav-item" data-section="work">
+                    <span class="nav-title">Work</span>
+                    <span class="nav-toggle">+</span>
+                </div>
+                <div class="nav-item" data-section="resume">
+                    <span class="nav-title">Resume</span>
+                </div>
+                <div class="nav-item" data-section="contact">
+                    <span class="nav-title">Contact</span>
+                </div>
+            </div>
+            
+            
+            <div class="content-section collapsed" id="work-content">
+                <div class="project-list">
+                <div class="project-item" data-project="asciimotion">
+                    <div class="project-content">
+                        <div class="project-info">
+                            <div class="project-title">
+                                <span class="title">ASCII Motion</span>
+                            </div>
+                            <div class="project-subtitle">Motion Graphics</div>
+                        </div>
+                        <div class="project-keywords">
+                            <span class="keyword">Motion</span>
+                            <span class="keyword">Video</span>
+                            <span class="keyword">After Effects</span>
+                        </div>
+                    </div>
+                    <div class="project-thumbnail">
+                        <img src="images/ascii.png" alt="ASCII Motion">
+                    </div>
+                </div>
+                
+                <div class="project-item" data-project="map">
+                    <div class="project-content">
+                        <div class="project-info">
+                            <div class="project-title">
+                                <span class="title">Map4VCU</span>
+                            </div>
+                            <div class="project-subtitle">UI/UX Design</div>
+                        </div>
+                        <div class="project-keywords">
+                            <span class="keyword">Ui/Ux</span>
+                            <span class="keyword">Collaboration</span>
+                            <span class="keyword">figma</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item" data-project="vcu">
+                    <div class="project-content">
+                        <div class="project-info">
+                            <div class="project-title">
+                                <span class="title">College of Engineering</span>
+                            </div>
+                            <div class="project-subtitle">Marketing Design</div>
+                        </div>
+                        <div class="project-keywords">
+                            <span class="keyword">Marketing</span>
+                            <span class="keyword">InDesign</span>
+                            <span class="keyword">Photoshop</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item" data-project="human">
+                    <div class="project-content">
+                        <div class="project-info">
+                            <div class="project-title">
+                                <span class="title">How to be Human</span>
+                            </div>
+                            <div class="project-subtitle">Publication Design</div>
+                        </div>
+                        <div class="project-keywords">
+                            <span class="keyword">Publication</span>
+                            <span class="keyword">InDesign</span>
+                            <span class="keyword">Print</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item" data-project="magicbox">
+                    <div class="project-content">
+                        <div class="project-info">
+                            <div class="project-title">
+                                <span class="title">AVT</span>
+                            </div>
+                            <div class="project-subtitle">Interactive Motion Graphics</div>
+                        </div>
+                        <div class="project-keywords">
+                            <span class="keyword">PureData</span>
+                            <span class="keyword">python</span>
+                            <span class="keyword">translation</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item" data-project="motion">
+                    <div class="project-content">
+                        <div class="project-info">
+                            <div class="project-title">
+                                <span class="title">Vertigo</span>
+                            </div>
+                            <div class="project-subtitle">Interactive Installation</div>
+                        </div>
+                        <div class="project-keywords">
+                            <span class="keyword">Interactive</span>
+                            <span class="keyword">motion graphics</span>
+                            <span class="keyword">touchdesigner</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item" data-project="ageofinfo">
+                    <div class="project-content">
+                        <div class="project-info">
+                            <div class="project-title">
+                                <span class="title">Age of Info</span>
+                            </div>
+                            <div class="project-subtitle">Publication Design</div>
+                        </div>
+                        <div class="project-keywords">
+                            <span class="keyword">publication</span>
+                            <span class="keyword">indesign</span>
+                            <span class="keyword">video</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item" data-project="goodsoup">
+                    <div class="project-content">
+                        <div class="project-info">
+                            <div class="project-title">
+                                <span class="title">Good Soup</span>
+                            </div>
+                            <div class="project-subtitle">Publication Design</div>
+                        </div>
+                        <div class="project-keywords">
+                            <span class="keyword">Publication</span>
+                            <span class="keyword">InDesign</span>
+                            <span class="keyword">Print</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item" data-project="ect">
+                    <div class="project-content">
+                        <div class="project-info">
+                            <div class="project-title">
+                                <span class="title">ECT</span>
+                            </div>
+                            <div class="project-subtitle">etcetera</div>
+                        </div>
+                        <div class="project-keywords">
+                            <span class="keyword">fine art</span>
+                            <span class="keyword">photo</span>
+                            <span class="keyword">video</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item" data-project="freepali">
+                    <div class="project-content">
+                        <div class="project-info">
+                            <div class="project-title">
+                                <span class="title">QR Codes for Palestine</span>
+                            </div>
+                            <div class="project-subtitle">Social Campaign</div>
+                        </div>
+                        <div class="project-keywords">
+                            <span class="keyword">Social</span>
+                            <span class="keyword">Community</span>
+                            <span class="keyword">Impact</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-item" data-project="blahblah">
+                    <div class="project-content">
+                        <div class="project-info">
+                            <div class="project-title">
+                                <span class="title">Blah Blah Manifesto</span>
+                            </div>
+                            <div class="project-subtitle">Publication Design</div>
+                        </div>
+                        <div class="project-keywords">
+                            <span class="keyword">Publication</span>
+                            <span class="keyword">Typography</span>
+                            <span class="keyword">Design</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            
+            <div class="content-section collapsed" id="resume-content">
+            </div>
+            
+            <div class="content-section collapsed" id="contact-content">
+            </div>
+        </div>
+        
+        <!-- Right Panel - Project Details -->
+        <div class="right-panel">
+            <div class="return-button" id="returnToGallery" style="display: none;">
+                <button>← Return to All Projects</button>
+            </div>
+            <div class="project-details-container">
+                <div class="project-detail active" id="default">
+                <div class="detail-header">
+                    <h2>Welcome</h2>
+                </div>
+                <div class="detail-content">
+                    <p>This portfolio site ( that I created ) showcases a selection of my recent work spanning digital experiences, motion graphics, and publications.</p>
+                    <p>Click on "WORK" to begin exploring the portfolio site I have created.</p>
+                    
+                    <h2>About</h2>
+                    <p>Hi, my name is Adam Alkhateeb, I am a graphic designer currently based in Washington, D.C.</p>
+                </div>
+            </div>
+            
+            <div class="project-detail" id="resume-detail">
+                <div class="detail-header">
+                    <h2>Resume</h2>
+                    <p class="detail-subtitle">Professional Experience & Skills</p>
+                </div>
+                <div class="detail-content">
+                    <div class="resume-content">
+                        <div class="resume-layout">
+                            <div class="resume-left">
+                                <div class="resume-section">
+                                    <h3>Education</h3>
+                                    <div class="resume-item">
+                                        <strong>Virginia Commonwealth University</strong>
+                                        <p>Richmond, VA</p>
+                                        <p>Major in Graphic Design</p>
+                                        <p><em>Aug 2021 - May 2025</em></p>
+                                    </div>
+                                </div>
+                                
+                                <div class="resume-section">
+                                    <h3>Skills</h3>
+                                    <div class="skills-category">
+                                        <h4>Design Software:</h4>
+                                        <div class="skills-list">
+                                            <span class="skill">Adobe Creative Suite (Illustrator, Photoshop, InDesign, After Effects, Premiere Pro)</span>
+                                            <span class="skill">TouchDesigner</span>
+                                            <span class="skill">Procreate</span>
+                                            <span class="skill">Canva</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="skills-category">
+                                        <h4>Motion & Visual Media:</h4>
+                                        <div class="skills-list">
+                                            <span class="skill">Motion Graphics</span>
+                                            <span class="skill">Video Editing</span>
+                                            <span class="skill">Visual Storytelling</span>
+                                            <span class="skill">After Effects Animation</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="skills-category">
+                                        <h4>Web & Digital:</h4>
+                                        <div class="skills-list">
+                                            <span class="skill">HTML/CSS</span>
+                                            <span class="skill">Figma</span>
+                                            <span class="skill">Responsive Design</span>
+                                            <span class="skill">Web Layouts</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="skills-category">
+                                        <h4>Core Design Skills:</h4>
+                                        <div class="skills-list">
+                                            <span class="skill">Typography</span>
+                                            <span class="skill">Layout Design</span>
+                                            <span class="skill">Branding</span>
+                                            <span class="skill">Print & Digital Media</span>
+                                            <span class="skill">Social Media Design</span>
+                                            <span class="skill">Illustration</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="skills-category">
+                                        <h4>Soft Skills:</h4>
+                                        <div class="skills-list">
+                                            <span class="skill">Creative Problem-Solving</span>
+                                            <span class="skill">Collaboration</span>
+                                            <span class="skill">Time Management</span>
+                                            <span class="skill">Attention to Detail</span>
+                                            <span class="skill">Feedback Integration</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="resume-right">
+                                <div class="resume-section">
+                                    <h3>Work Experience</h3>
+                                    <div class="resume-item">
+                                        <div class="job-title">Research Assistant</div>
+                                        <div class="job-company">VCUarts</div>
+                                        <div class="job-details">
+                                            <span class="job-location">Richmond, VA</span>
+                                            <span class="job-duration">Jan 2025 - May 2025</span>
+                                        </div>
+                                        <ul style="margin: 0.5rem 0 0 1rem; font-size: 0.9rem; color: #cccccc;">
+                                            <li>Created and maintained spreadsheets cataloging 19th-20th century wood type specimen data</li>
+                                            <li>Conducted quality control by verifying accuracy of existing bibliographic records</li>
+                                            <li>Standardized and organized catalog data to support the development of an analytical bibliography</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="resume-item">
+                                        <div class="job-title">Graphic Design Intern</div>
+                                        <div class="job-company">VCU College of Engineering</div>
+                                        <div class="job-details">
+                                            <span class="job-location">Richmond, VA</span>
+                                            <span class="job-duration">Sep 2024 - May 2025</span>
+                                        </div>
+                                        <ul style="margin: 0.5rem 0 0 1rem; font-size: 0.9rem; color: #cccccc;">
+                                            <li>Developed branded visual assets for academic events and outreach, including print collateral such as banners, posters, and postcards</li>
+                                            <li>Maintained VCU's visual identity standards while designing for digital platforms and promotional materials</li>
+                                            <li>Collaborated with faculty and communications staff to deliver cohesive and engaging design solutions</li>
+                                            <li>Used Adobe Creative Suite and Canva to execute concepts from ideation to final production</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="resume-item">
+                                        <div class="job-title">Graphic Design Intern</div>
+                                        <div class="job-company">ADC National</div>
+                                        <div class="job-details">
+                                            <span class="job-location">Washington, D.C.</span>
+                                            <span class="job-duration">Jun 2024 - Aug 2024</span>
+                                        </div>
+                                        <ul style="margin: 0.5rem 0 0 1rem; font-size: 0.9rem; color: #cccccc;">
+                                            <li>Created illustrated and animated graphics for civic engagement campaigns across social media platforms</li>
+                                            <li>Applied brand guidelines to develop compelling visual narratives in Adobe Illustrator and After Effects</li>
+                                            <li>Helped increase online engagement through strategic visual storytelling and motion design</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-detail" id="contact-detail">
+                <div class="detail-header">
+                    <h2>Contact</h2>
+                    <p class="detail-subtitle">Get in Touch</p>
+                </div>
+                <div class="detail-content">
+                    <div class="contact-form">
+                        <h3>Send a Message</h3>
+                        <form id="contactForm" action="https://formspree.io/f/xpzqkqkr" method="POST">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="6" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-detail" id="work-gallery">
+                <div class="detail-header">
+                    <h2>Work Gallery</h2>
+                    <p class="detail-subtitle">Project Thumbnails</p>
+                </div>
+                <div class="gallery-grid">
+                <div class="gallery-item" data-project="asciimotion">
+                    <img src="images/ascii.png" alt="ASCII Motion">
+                    <div class="gallery-overlay">
+                        <h3>ASCII Motion</h3>
+                        <p>Motion Graphics</p>
+                    </div>
+                </div>
+                    <div class="gallery-item" data-project="map">
+                        <img src="images/mapthumbnail.jpg" alt="Map4College of Engineering">
+                        <div class="gallery-overlay">
+                            <h3>Map4VCU</h3>
+                            <p>UI/UX Design</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-project="vcu">
+                        <img src="images/vcuthumbnail.png" alt="College of Engineering">
+                        <div class="gallery-overlay">
+                            <h3>College of Engineering</h3>
+                            <p>Marketing Design</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-project="human">
+                        <img src="images/humanthumbnail.jpg" alt="Human Project">
+                        <div class="gallery-overlay">
+                            <h3>How to be Human</h3>
+                            <p>Publication Design</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-project="magicbox">
+                        <img src="images/magicboxthumbnail.png" alt="AVT Project">
+                        <div class="gallery-overlay">
+                            <h3>AVT</h3>
+                            <p>Interactive Motion Graphics</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-project="motion">
+                        <img src="images/vertigothumbnail.png" alt="Vertigo Project">
+                        <div class="gallery-overlay">
+                            <h3>Vertigo</h3>
+                            <p>Interactive Installation</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-project="ageofinfo">
+                        <img src="images/ageofinfothumbnail.png" alt="Age of Info Project">
+                        <div class="gallery-overlay">
+                            <h3>Age of Info</h3>
+                            <p>Publication Design</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-project="goodsoup">
+                        <img src="images/goodsoupthumbnail.jpg" alt="Good Soup Project">
+                        <div class="gallery-overlay">
+                            <h3>Good Soup</h3>
+                            <p>Publication Design</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-project="ect">
+                        <img src="images/ectthumbnail.jpeg" alt="ECT Project">
+                        <div class="gallery-overlay">
+                            <h3>ECT</h3>
+                            <p>etcetera</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-project="freepali">
+                        <img src="images/freepalithumbnail.jpg" alt="Free Pali Project">
+                        <div class="gallery-overlay">
+                            <h3>QR Codes for Palestine</h3>
+                            <p>Social Campaign</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-project="blahblah">
+                        <img src="images/blahthumbnail.jpg" alt="Blah Blah Manifesto Project">
+                        <div class="gallery-overlay">
+                            <h3>Blah Blah Manifesto</h3>
+                            <p>Publication Design</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-detail" id="asciimotion">
+                <div class="detail-header">
+                    <h2>ASCII Motion</h2>
+                    <p class="detail-subtitle">Motion Graphics</p>
+                </div>
+                <div class="detail-content">
+                    <div class="project-image">
+                        <video loop controls>
+                            <source src="images/digitalfire.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="project-image">
+                        <video loop controls>
+                            <source src="images/digits.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-detail" id="human">
+                <div class="detail-header">
+                    <h2>How to be Human</h2>
+                    <p class="detail-subtitle">Publication Design</p>
+                </div>
+                <div class="detail-content">
+                    <div class="project-image">
+                        <img src="images/human.gif" alt="Human Project">
+                    </div>
+                    <p>Tasked with creating a how-to guide for any topic at the end of my first semester in the graphic design program at VCUarts, I designed and wrote a guide on how to be human. Scroll down to view all pages.</p>
+                    
+                    <div class="project-gallery">
+                        <h3>Project Gallery</h3>
+                        <div class="page-gallery">
+                            <div class="gallery-controls">
+                                <button class="gallery-btn prev-btn" id="prevPage">← Previous</button>
+                                <span class="page-counter">
+                                    <span id="currentPage">1</span> / <span id="totalPages">19</span>
+                                </span>
+                                <button class="gallery-btn next-btn" id="nextPage">Next →</button>
+                            </div>
+                            <div class="page-viewer">
+                                <div class="page-container">
+                                    <img id="galleryImage" src="images/humanpg01.jpg" alt="Human Project Page">
+                                </div>
+                            </div>
+                            <div class="gallery-thumbnails">
+                                <div class="thumbnail active" data-page="1">
+                                    <img src="images/humanpg01.jpg" alt="Page 1">
+                                </div>
+                                <div class="thumbnail" data-page="2">
+                                    <img src="images/humanpg02.jpg" alt="Page 2">
+                                </div>
+                                <div class="thumbnail" data-page="3">
+                                    <img src="images/humanpg03.jpg" alt="Page 3">
+                                </div>
+                                <div class="thumbnail" data-page="4">
+                                    <img src="images/humanpg04.jpg" alt="Page 4">
+                                </div>
+                                <div class="thumbnail" data-page="5">
+                                    <img src="images/humanpg05.jpg" alt="Page 5">
+                                </div>
+                                <div class="thumbnail" data-page="6">
+                                    <img src="images/humanpg06.jpg" alt="Page 6">
+                                </div>
+                                <div class="thumbnail" data-page="7">
+                                    <img src="images/humanpg07.jpg" alt="Page 7">
+                                </div>
+                                <div class="thumbnail" data-page="8">
+                                    <img src="images/humanpg08.jpg" alt="Page 8">
+                                </div>
+                                <div class="thumbnail" data-page="9">
+                                    <img src="images/humanpg09.jpg" alt="Page 9">
+                                </div>
+                                <div class="thumbnail" data-page="10">
+                                    <img src="images/humanpg10.jpg" alt="Page 10">
+                                </div>
+                                <div class="thumbnail" data-page="11">
+                                    <img src="images/humanpg11.jpg" alt="Page 11">
+                                </div>
+                                <div class="thumbnail" data-page="12">
+                                    <img src="images/humanpg12.jpg" alt="Page 12">
+                                </div>
+                                <div class="thumbnail" data-page="13">
+                                    <img src="images/humanpg13.jpg" alt="Page 13">
+                                </div>
+                                <div class="thumbnail" data-page="14">
+                                    <img src="images/humanpg14.jpg" alt="Page 14">
+                                </div>
+                                <div class="thumbnail" data-page="15">
+                                    <img src="images/humanpg15.jpg" alt="Page 15">
+                                </div>
+                                <div class="thumbnail" data-page="16">
+                                    <img src="images/humanpg16.jpg" alt="Page 16">
+                                </div>
+                                <div class="thumbnail" data-page="17">
+                                    <img src="images/humanpg17.jpg" alt="Page 17">
+                                </div>
+                                <div class="thumbnail" data-page="18">
+                                    <img src="images/humanpg18.jpg" alt="Page 18">
+                                </div>
+                                <div class="thumbnail" data-page="19">
+                                    <img src="images/humanpg20.jpg" alt="Page 19">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-detail" id="magicbox">
+                <div class="detail-header">
+                    <h2>Audio/Visual Theremin</h2>
+                    <p class="detail-subtitle">Interactive Motion Graphics</p>
+                </div>
+                <div class="detail-content">
+                    <div class="project-image">
+                        <video loop controls>
+                            <source src="images/magicbox.MOV" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="project-image">
+                        <img src="images/puredata.png" alt="Pure Data Interface">
+                    </div>
+                    <div class="project-image">
+                        <img src="images/code.png" alt="Code Implementation">
+                    </div>
+                    <div class="project-image">
+                        <img src="images/box1.jpg" alt="AVT Project Image 1">
+                    </div>
+                    <div class="project-image">
+                        <img src="images/box2.jpg" alt="AVT Project Image 2">
+                    </div>
+                    <p>Translating motion into audio/visuals.</p>
+                </div>
+            </div>
+            
+            <div class="project-detail" id="motion">
+                <div class="detail-header">
+                    <h2>Vertigo</h2>
+                    <p class="detail-subtitle">Interactive Installation</p>
+                </div>
+                <div class="detail-content">
+                    <div class="project-image">
+                        <video autoplay loop muted class="small-video">
+                            <source src="images/motion.mov" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="project-image">
+                        <video autoplay loop muted class="small-video">
+                            <source src="images/colorstatic.mov" type="video/mp4">
+                        </video>
+                    </div>
+                    <p>Vertigo is a visual exploration of overloading information onto users and quantifying the senses as a means to satirize the bombardment of data we often find ourselves overwhelmed by. How do modern modes of information transmission affect our psyche? Are we more informed or more fragmented?</p>
+                </div>
+            </div>
+            
+            <div class="project-detail" id="map">
+                <div class="detail-header">
+                    <h2>Map4VCU</h2>
+                    <p class="detail-subtitle">UI/UX Design</p>
+                </div>
+                <div class="detail-content">
+                    <div class="project-image">
+                        <video autoplay loop muted>
+                            <source src="images/map4vcu.mov" type="video/mp4">
+                        </video>
+                    </div>
+                    <p>MAP4VCU is a collaborative project created in a human-centered design course by classmates Inho Park, Chelsee Sahonero, and myself. We wanted to solve the issue of trip planning for new students on the VCU campus and sought to do so by creating a more accessible source of information.</p>
+                    <p>Understanding that there was no reason to reinvent already existing services over the course of a single semester it was decided the best course of action would to be provide already existing site for a bike paths, bike parking, and car parking maps. The main component designed by our team was the "RVA Transit Options" Tab.</p>
+                    <div class="project-link">
+                        <a href="https://linktr.ee/map4vcu" target="_blank" class="link-button">View Project</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-detail" id="vcu">
+                <div class="detail-header">
+                    <h2>College of Engineering</h2>
+                    <p class="detail-subtitle">Marketing Design</p>
+                </div>
+                <div class="detail-content">
+                    <p>Marketing material created for Virginia Commonwealth University's College of Engineering. My work spans banners, flyers, and postcards. Scroll down to view all materials.</p>
+                    
+                    <div class="project-gallery">
+                        <h3>Project Gallery</h3>
+                        <div class="page-gallery">
+                            <div class="gallery-controls">
+                                <button class="gallery-btn prev-btn" id="vcuPrevPage">← Previous</button>
+                                <span class="page-counter">
+                                    <span id="vcuCurrentPage">1</span> / <span id="vcuTotalPages">10</span>
+                                </span>
+                                <button class="gallery-btn next-btn" id="vcuNextPage">Next →</button>
+                            </div>
+                            <div class="page-viewer">
+                                <div class="page-container">
+                                    <img id="vcuGalleryImage" src="images/fix_Page_04.jpg" alt="VCU Marketing Material">
+                                </div>
+                            </div>
+                            <div class="gallery-thumbnails">
+                                <div class="thumbnail active" data-page="1">
+                                    <img src="images/fix_Page_04.jpg" alt="Page 1">
+                                </div>
+                                <div class="thumbnail" data-page="2">
+                                    <img src="images/fix_Page_05.jpg" alt="Page 2">
+                                </div>
+                                <div class="thumbnail" data-page="3">
+                                    <img src="images/fix_Page_06.jpg" alt="Page 3">
+                                </div>
+                                <div class="thumbnail" data-page="4">
+                                    <img src="images/fix_Page_07.jpg" alt="Page 4">
+                                </div>
+                                <div class="thumbnail" data-page="5">
+                                    <img src="images/fix_Page_08.jpg" alt="Page 5">
+                                </div>
+                                <div class="thumbnail" data-page="6">
+                                    <img src="images/fix_Page_09.jpg" alt="Page 6">
+                                </div>
+                                <div class="thumbnail" data-page="7">
+                                    <img src="images/fix_Page_10.jpg" alt="Page 7">
+                                </div>
+                                <div class="thumbnail" data-page="8">
+                                    <img src="images/fix_Page_11.jpg" alt="Page 8">
+                                </div>
+                                <div class="thumbnail" data-page="9">
+                                    <img src="images/fix_Page_12.jpg" alt="Page 9">
+                                </div>
+                                <div class="thumbnail" data-page="10">
+                                    <img src="images/fix_Page_13.jpg" alt="Page 10">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="advisor-images">
+                        <div class="project-image">
+                            <img src="images/vcu_advisor1.jpg" alt="VCU Advisor 1">
+                        </div>
+                        <div class="project-image">
+                            <img src="images/vcu_advisor2.jpg" alt="VCU Advisor 2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-detail" id="ageofinfo">
+                <div class="detail-header">
+                    <h2>Age of Info</h2>
+                    <p class="detail-subtitle">Publication Design</p>
+                </div>
+                <div class="detail-content">
+                    <div class="project-image">
+                        <img src="images/infoage.jpg" alt="Age of Info Project Image">
+                    </div>
+                    <div class="project-image">
+                        <img src="images/ageofinfo2.jpg" alt="Age of Info Project Image 2">
+                    </div>
+                    <div class="project-image">
+                        <img src="images/ageofinfo1.jpg" alt="Age of Info Project Image 1">
+                    </div>
+                    <div class="project-image">
+                        <img src="images/ageofinfo3.jpg" alt="Age of Info Project Image 3">
+                    </div>
+                    <div class="project-image">
+                        <img src="images/ageofinfo4.jpg" alt="Age of Info Project Image 4">
+                    </div>
+                    <div class="project-image">
+                        <video loop controls>
+                            <source src="images/ageofinfo.mov" type="video/mp4">
+                        </video>
+                    </div>
+                    <p>We exist in an era where information is extremely easy to access. While this can be a good thing, the information we encounter in our daily lives can be easily manipulated or entirely fabricated. Therefore, it is important that people are aware of strategies to avoid misinformation.</p>
+                    <p>However, with the creation of digital media, the constant bombardment of information can become difficult to navigate. This satirical publication emphasizes the danger of the absolute faith people have in information provided by authorities, media outlets, or social media. It also graphically displays the black hole of never-ending information we encounter in our lives.</p>
+                </div>
+            </div>
+            
+            <div class="project-detail" id="goodsoup">
+                <div class="detail-header">
+                    <h2>Good Soup</h2>
+                    <p class="detail-subtitle">Publication Design</p>
+                </div>
+                <div class="detail-content">
+                    <p>What matters to you?<br>Personally, all I need is a good can of soup.</p>
+                    <p>Scroll down to view all pages.</p>
+                    
+                    <div class="project-gallery">
+                        <h3>Project Gallery</h3>
+                        <div class="page-gallery">
+                            <div class="gallery-controls">
+                                <button class="gallery-btn prev-btn" id="soupPrevPage">← Previous</button>
+                                <span class="page-counter">
+                                    <span id="soupCurrentPage">1</span> / <span id="soupTotalPages">22</span>
+                                </span>
+                                <button class="gallery-btn next-btn" id="soupNextPage">Next →</button>
+                            </div>
+                            <div class="page-viewer">
+                                <div class="page-container">
+                                    <img id="soupGalleryImage" src="images/soup.jpg" alt="Good Soup Publication">
+                                </div>
+                            </div>
+                            <div class="gallery-thumbnails">
+                                <div class="thumbnail active" data-page="1">
+                                    <img src="images/soup.jpg" alt="Page 1">
+                                </div>
+                                <div class="thumbnail" data-page="2">
+                                    <img src="images/soup2.jpg" alt="Page 2">
+                                </div>
+                                <div class="thumbnail" data-page="3">
+                                    <img src="images/soup3.jpg" alt="Page 3">
+                                </div>
+                                <div class="thumbnail" data-page="4">
+                                    <img src="images/soup4.jpg" alt="Page 4">
+                                </div>
+                                <div class="thumbnail" data-page="5">
+                                    <img src="images/soup5.jpg" alt="Page 5">
+                                </div>
+                                <div class="thumbnail" data-page="6">
+                                    <img src="images/soup6.jpg" alt="Page 6">
+                                </div>
+                                <div class="thumbnail" data-page="7">
+                                    <img src="images/soup7.jpg" alt="Page 7">
+                                </div>
+                                <div class="thumbnail" data-page="8">
+                                    <img src="images/soup8.jpg" alt="Page 8">
+                                </div>
+                                <div class="thumbnail" data-page="9">
+                                    <img src="images/soup9.jpg" alt="Page 9">
+                                </div>
+                                <div class="thumbnail" data-page="10">
+                                    <img src="images/soup10.jpg" alt="Page 10">
+                                </div>
+                                <div class="thumbnail" data-page="11">
+                                    <img src="images/soup11.jpg" alt="Page 11">
+                                </div>
+                                <div class="thumbnail" data-page="12">
+                                    <img src="images/soup12.jpg" alt="Page 12">
+                                </div>
+                                <div class="thumbnail" data-page="13">
+                                    <img src="images/soup13.jpg" alt="Page 13">
+                                </div>
+                                <div class="thumbnail" data-page="14">
+                                    <img src="images/soup14.jpg" alt="Page 14">
+                                </div>
+                                <div class="thumbnail" data-page="15">
+                                    <img src="images/soup15.jpg" alt="Page 15">
+                                </div>
+                                <div class="thumbnail" data-page="16">
+                                    <img src="images/soup16.jpg" alt="Page 16">
+                                </div>
+                                <div class="thumbnail" data-page="17">
+                                    <img src="images/soup17.jpg" alt="Page 17">
+                                </div>
+                                <div class="thumbnail" data-page="18">
+                                    <img src="images/soup18.jpg" alt="Page 18">
+                                </div>
+                                <div class="thumbnail" data-page="19">
+                                    <img src="images/soup19.jpg" alt="Page 19">
+                                </div>
+                                <div class="thumbnail" data-page="20">
+                                    <img src="images/soup20.jpg" alt="Page 20">
+                                </div>
+                                <div class="thumbnail" data-page="21">
+                                    <img src="images/soup21.jpg" alt="Page 21">
+                                </div>
+                                <div class="thumbnail" data-page="22">
+                                    <img src="images/soup22.jpg" alt="Page 22">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-detail" id="ect">
+                <div class="detail-header">
+                    <h2>ECT</h2>
+                    <p class="detail-subtitle">etcetera</p>
+                </div>
+                <div class="detail-content">
+                    <div class="project-image">
+                        <img src="images/ect.JPG" alt="ECT Project Image 1">
+                    </div>
+                    <div class="project-image">
+                        <img src="images/ect2.JPG" alt="ECT Project Image 2">
+                    </div>
+                    <div class="project-image">
+                        <img src="images/ect3.JPG" alt="ECT Project Image 3">
+                    </div>
+                    <div class="project-image">
+                        <img src="images/ectbwlantern.jpg" alt="ECT Black and White Lantern">
+                    </div>
+                    <div class="project-image">
+                        <img src="images/ectcam.JPG" alt="ECT Camera View">
+                    </div>
+                    <div class="project-image">
+                        <video loop controls>
+                            <source src="images/ect.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <p>A comprehensive digital platform designed to streamline communication and collaboration. This project focuses on creating an intuitive user experience that enhances productivity and connectivity in professional environments.</p>
+                </div>
+            </div>
+            
+            <div class="project-detail" id="freepali">
+                <div class="detail-header">
+                    <h2>QR Codes for Palestine</h2>
+                    <p class="detail-subtitle">Social Campaign</p>
+                </div>
+                <div class="detail-content">
+                    <p>Posters designed to subtly incorporate QR codes into the images and patterns, allowing viewers to scan the whole poster/flyer and be redirected to informational sites.</p>
+                    <div class="project-image">
+                        <img src="images/pali.png" alt="QR Codes for Palestine">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-detail" id="blahblah">
+                <div class="detail-header">
+                    <h2>Blah Blah Manifesto</h2>
+                    <p class="detail-subtitle">Publication Design</p>
+                </div>
+                <div class="detail-content">
+                    <p>How do symbols get in the way of the message? This speculative design project asks what a world where historical texts are distorted by those in power might look like. How these messages are often disrupted by the symbols that they are associated with.</p>
+                    <div class="advisor-images">
+                        <div class="project-image">
+                            <img src="images/blah.jpg" alt="Blah Blah Manifesto Page 1">
+                        </div>
+                        <div class="project-image">
+                            <img src="images/blah2.jpg" alt="Blah Blah Manifesto Page 2">
+                        </div>
+                    </div>
+                    <div class="project-image">
+                        <img src="images/blah3.jpg" alt="Blah Blah Manifesto Page 3">
+                    </div>
+                    <div class="project-image">
+                        <img src="images/blah4.jpg" alt="Blah Blah Manifesto Page 4">
+                    </div>
+                    <div class="project-image">
+                        <img src="images/blah5.jpg" alt="Blah Blah Manifesto Page 5">
+                    </div>
+                    <div class="project-image">
+                        <img src="images/redactoruser2.jpg" alt="Blah Blah Manifesto Redactor User">
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
     
-
-  <div id="image-preview"></div>
-    <div class="last-name" id="footer">ALKHATEEB</div>
-  </div>
-
-
-  <div id="here-popup" class="custom-popup">
-    <div class="custom-popup-box">
-      <p>You’re already here!</p>
-      <button onclick="closeHerePopup()">Close</button>
-    </div>
-  </div>
-
-
-  <script src="jquery-3.7.1.min.js"></script>
-  <script src="jquery-ui.min.js"></script>
-  <script src="main.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
