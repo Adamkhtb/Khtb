@@ -210,11 +210,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentPage = 1;
     const totalPages = 19;
     const pageImages = [
-        'images/humanpg01.jpg', 'images/humanpg02.jpg', 'images/humanpg03.jpg', 'images/humanpg04.jpg',
-        'images/humanpg05.jpg', 'images/humanpg06.jpg', 'images/humanpg07.jpg', 'images/humanpg08.jpg',
-        'images/humanpg09.jpg', 'images/humanpg10.jpg', 'images/humanpg11.jpg', 'images/humanpg12.jpg',
-        'images/humanpg13.jpg', 'images/humanpg14.jpg', 'images/humanpg15.jpg', 'images/humanpg16.jpg',
-        'images/humanpg17.jpg', 'images/humanpg18.jpg', 'images/humanpg20.jpg'
+        'humanpg01.jpg', 'humanpg02.jpg', 'humanpg03.jpg', 'humanpg04.jpg',
+        'humanpg05.jpg', 'humanpg06.jpg', 'humanpg07.jpg', 'humanpg08.jpg',
+        'humanpg09.jpg', 'humanpg10.jpg', 'humanpg11.jpg', 'humanpg12.jpg',
+        'humanpg13.jpg', 'humanpg14.jpg', 'humanpg15.jpg', 'humanpg16.jpg',
+        'humanpg17.jpg', 'humanpg18.jpg', 'humanpg20.jpg'
     ];
     
     const galleryImage = document.getElementById('galleryImage');
@@ -289,9 +289,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let vcuCurrentPage = 1;
     const vcuTotalPages = 10;
     const vcuPageImages = [
-        'images/fix_Page_04.jpg', 'images/fix_Page_05.jpg', 'images/fix_Page_06.jpg', 'images/fix_Page_07.jpg',
-        'images/fix_Page_08.jpg', 'images/fix_Page_09.jpg', 'images/fix_Page_10.jpg', 'images/fix_Page_11.jpg',
-        'images/fix_Page_12.jpg', 'images/fix_Page_13.jpg'
+        'fix_Page_04.jpg', 'fix_Page_05.jpg', 'fix_Page_06.jpg', 'fix_Page_07.jpg',
+        'fix_Page_08.jpg', 'fix_Page_09.jpg', 'fix_Page_10.jpg', 'fix_Page_11.jpg',
+        'fix_Page_12.jpg', 'fix_Page_13.jpg'
     ];
     
     const vcuGalleryImage = document.getElementById('vcuGalleryImage');
@@ -366,12 +366,12 @@ document.addEventListener('DOMContentLoaded', function() {
     let soupCurrentPage = 1;
     const soupTotalPages = 22;
     const soupPageImages = [
-        'images/soup.jpg', 'images/soup2.jpg', 'images/soup3.jpg', 'images/soup4.jpg',
-        'images/soup5.jpg', 'images/soup6.jpg', 'images/soup7.jpg', 'images/soup8.jpg',
-        'images/soup9.jpg', 'images/soup10.jpg', 'images/soup11.jpg', 'images/soup12.jpg',
-        'images/soup13.jpg', 'images/soup14.jpg', 'images/soup15.jpg', 'images/soup16.jpg',
-        'images/soup17.jpg', 'images/soup18.jpg', 'images/soup19.jpg', 'images/soup20.jpg',
-        'images/soup21.jpg', 'images/soup22.jpg'
+        'soup.jpg', 'soup2.jpg', 'soup3.jpg', 'soup4.jpg',
+        'soup5.jpg', 'soup6.jpg', 'soup7.jpg', 'soup8.jpg',
+        'soup9.jpg', 'soup10.jpg', 'soup11.jpg', 'soup12.jpg',
+        'soup13.jpg', 'soup14.jpg', 'soup15.jpg', 'soup16.jpg',
+        'soup17.jpg', 'soup18.jpg', 'soup19.jpg', 'soup20.jpg',
+        'soup21.jpg', 'soup22.jpg'
     ];
     
     const soupGalleryImage = document.getElementById('soupGalleryImage');
