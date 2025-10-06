@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Good Soup Gallery – ADAM Portfolio</title>
+	<meta name="description" content="Gallery showcasing the Good Soup project - a visual exploration of culinary art and design" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.typekit.net/mnz5jej.css">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+	<div id="label-alkhateeb">ALKHATEEB</div>
+	<!-- Mobile Warning Popup -->
+	<div class="popup-overlay" id="mobileWarning">
+		<div class="popup">
+			<button class="popup-close" onclick="closePopup()" aria-label="Close">×</button>
+			<div class="popup-content">
+				<div class="popup-icon">⚠️</div>
+				<h2 class="popup-title">Under Construction</h2>
+				<p class="popup-message">
+					The mobile version of this site is still under construction.<br><br>
+					This site is best viewed on a desktop at full screen.
+				</p>
+				<button class="popup-button" onclick="closePopup()">I Understand</button>
+			</div>
+		</div>
+	</div>
+
+	<header>
+		<div class="container navbar">
+			<div class="brand"><a href="index.html" style="text-decoration: none; color: inherit;"><span id="label-adam">ADAM</span></a></div>
+			<nav>
+				<ul>
+					<li><a href="index.html#about">About</a></li>
+					<li><a href="index.html#projects">Projects</a></li>
+					<li><a href="index.html#contact">Contact</a></li>
+				</ul>
+			</nav>
+			<div class="nav-actions">
+				<a class="button" href="index.html">← Back to Portfolio</a>
+			</div>
+		</div>
+	</header>
+
+	<main class="container">
+		<section class="hero">
+			<div class="hero-inner">
+				<div>
+					<div class="kicker">2023</div>
+					<h1>Good Soup Gallery</h1>
+					<p class="subtitle">What matters to you? Personally all I need is good soup.</p>
+					<div style="display:flex; gap:10px; margin-top:14px;">
+						<a class="button" href="index.html">← Back to Portfolio</a>
+					</div>
+				</div>
+				<div class="card">
+					<img src="goodsoupthumbnail.jpg" alt="Good Soup project preview" style="width: 100%; border-radius: 10px;" />
+				</div>
+			</div>
+		</section>
+
+		<section class="section">
+			<h2>About</h2>
+			<p>After being prompted to create a publication involving a topic that mattered to me I chose the topic of “good soup”. This publication follows a mundane and soup-obsessed narrator who is attempting to fill his sorrows with the temporary pleasures provided by a can of soup. The pages are filled with drawn-out and boring descriptions of various soups. However, we see the narrator grow tired of his coping habits through the imagery shown. He is on the verge of a breakthrough in his cycle of soup but ultimately falls short in his self-reflection</p>
+		</section>
+
+        <section class="section">
+            <h2>Pages</h2>
+            <div class="card">
+                <div id="soup-flipbook" class="flipbook" data-pages="soup.jpg,soup2.jpg,soup3.jpg,soup4.jpg,soup5.jpg,soup6.jpg,soup7.jpg,soup8.jpg,soup9.jpg,soup10.jpg,soup11.jpg,soup12.jpg,soup13.jpg,soup14.jpg,soup15.jpg,soup16.jpg,soup17.jpg,soup18.jpg,soup19.jpg,soup20.jpg,soup21.jpg,soup22.jpg"></div>
+                <div class="flipbook-controls">
+                    <button type="button" class="button" id="soup-prev" aria-label="Previous page">Prev</button>
+                    <div class="flipbook-counter"><span id="soup-current">1</span>/<span id="soup-total">22</span></div>
+                    <button type="button" class="button" id="soup-next" aria-label="Next page">Next</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Lines -->
+        <div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+        <div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+        <div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+        <div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+        <div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+        <div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+        <div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+
+	</main>
+
+	<footer>
+		<div class="container">
+			<div class="footer-content">
+				<div class="footer-left">
+					<div id="datetime"></div>
+				</div>
+				<div class="footer-center">
+					<div class="footer-squares">
+						<div class="square"></div>
+						<div class="square"></div>
+						<div class="square"></div>
+					</div>
+				</div>
+				<div class="footer-right">
+				</div>
+			</div>
+		</div>
+	</footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
