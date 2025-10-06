@@ -12,6 +12,22 @@
 </head>
 <body>
 	<div id="label-alkhateeb">ALKHATEEB</div>
+	<!-- Mobile Warning Popup -->
+	<div class="popup-overlay" id="mobileWarning">
+		<div class="popup">
+			<button class="popup-close" onclick="closePopup()" aria-label="Close">×</button>
+			<div class="popup-content">
+				<div class="popup-icon">⚠️</div>
+				<h2 class="popup-title">Under Construction</h2>
+				<p class="popup-message">
+					The mobile version of this site is still under construction.<br><br>
+					This site is best viewed on a desktop at full screen.
+				</p>
+				<button class="popup-button" onclick="closePopup()">I Understand</button>
+			</div>
+		</div>
+	</div>
+
 	<header>
 		<div class="container navbar">
 			<div class="brand"><span id="label-adam">ADAM</span></div>
@@ -23,6 +39,7 @@
 				</ul>
 			</nav>
 			<div class="nav-actions">
+				<a id="edit-mode-toggle" class="button" href="#" style="display: none;">Edit Mode</a>
 				<a class="button" href="newres2025.pdf" target="_blank" rel="noreferrer">Resume</a>
 				<a class="button primary" href="#contact">Hire me</a>
 			</div>
@@ -35,7 +52,7 @@
 				<div>
 					<div class="kicker">Available for work</div>
 					<h1>Graphic Designer</h1>
-					<p class="subtitle">For more of my work check out my instagram @ addam.psd</p>
+					<p class="subtitle">Welcome to my portfolio site, designed and created by me.</p>
 					<div style="display:flex; gap:10px; margin-top:14px;">
 						<a class="button primary" href="#projects">View projects</a>
 						<a class="button" href="#contact">Get in touch</a>
@@ -55,9 +72,6 @@
 					<div>
 						<h3>VCU Engineering</h3>
 					</div>
-					<div class="tags">
-						<span class="tag">Marketing</span><span class="tag">2025</span>
-					</div>
 					<div style="display:flex; gap:10px;">
 						<a class="button" href="vcu-engineering.html">View Project</a>
 					</div>
@@ -67,9 +81,6 @@
 					<img src="vertigothumbnail.png" alt="Motion Graphics preview" />
 					<div>
 						<h3>Motion Graphics</h3>
-					</div>
-					<div class="tags">
-						<span class="tag">Motion Graphics</span><span class="tag">2024</span>
 					</div>
 					<div style="display:flex; gap:10px;">
 						<a class="button" href="motion-graphics.html">View Project</a>
@@ -81,9 +92,6 @@
 					<div>
 						<h3>Audio/Visual Theremin</h3>
 					</div>
-					<div class="tags">
-						<span class="tag">Audio/Visual</span><span class="tag">2024</span>
-					</div>
 					<div style="display:flex; gap:10px;">
 						<a class="button" href="audio-visual-theremin.html">View Project</a>
 					</div>
@@ -93,9 +101,6 @@
 					<img src="humanthumbnail.jpg" alt="How to be Human preview" />
 					<div>
 						<h3>How to be Human</h3>
-					</div>
-					<div class="tags">
-						<span class="tag">Conceptual</span><span class="tag">2023</span>
 					</div>
 					<div style="display:flex; gap:10px;">
 						<a class="button" href="how-to-be-human.html">View Project</a>
@@ -107,9 +112,6 @@
 					<div>
 						<h3>Good Soup Gallery</h3>
 					</div>
-					<div class="tags">
-						<span class="tag">Food Photography</span><span class="tag">2023</span>
-					</div>
 					<div style="display:flex; gap:10px;">
 						<a class="button" href="good-soup-gallery.html">View Gallery</a>
 					</div>
@@ -120,33 +122,25 @@
 					<div>
 						<h3>MAP4VCU</h3>
 					</div>
-					<div class="tags">
-						<span class="tag">Data Viz</span><span class="tag">2023</span>
-					</div>
 					<div style="display:flex; gap:10px;">
-						<a class="button" href="https://alkhateeba.myportfolio.com/" target="_blank" rel="noreferrer">View Project</a>
+						<a class="button" href="map-for-vcu.html">View Project</a>
 					</div>
 				</article>
 
 				<article class="card project">
-					<a href="age-of-info.html" style="text-decoration: none; color: inherit;">
-						<img src="ageofinfothumbnail.png" alt="Age of Info preview" />
-						<div>
-							<h3>Age of Info</h3>
-						</div>
-						<div class="tags">
-							<span class="tag">Digital Art</span><span class="tag">2023</span>
-						</div>
-					</a>
+					<img src="ageofinfothumbnail.png" alt="Age of Info preview" />
+					<div>
+						<h3>Age of Info</h3>
+					</div>
+					<div style="display:flex; gap:10px;">
+						<a class="button" href="age-of-info.html">View Project</a>
+					</div>
 				</article>
 
 				<article class="card project">
 					<img src="ectthumbnail.jpeg" alt="ECT Project preview" />
 					<div>
 						<h3>ECT Project</h3>
-					</div>
-					<div class="tags">
-						<span class="tag">Graphic Design</span><span class="tag">2024</span>
 					</div>
 					<div style="display:flex; gap:10px;">
 						<a class="button" href="ect-project.html">View Project</a>
@@ -162,23 +156,35 @@
 					<div class="two-col">
 						<label>
 							<div>Name</div>
-							<input name="name" required placeholder="Your name" style="width:100%; padding:8px; border-radius:6px; background:#ffffff; border:1px solid var(--border); color:var(--text);" />
+							<input name="name" required placeholder="Your name" style="width:100%; padding:12px; border-radius:6px; background:#ffffff; border:1px solid var(--border); color:var(--text); font-size:16px;" />
 						</label>
 						<label>
 							<div>Email</div>
-							<input type="email" name="email" required placeholder="you@example.com" style="width:100%; padding:8px; border-radius:6px; background:#ffffff; border:1px solid var(--border); color:var(--text);" />
+							<input type="email" name="email" required placeholder="you@example.com" style="width:100%; padding:12px; border-radius:6px; background:#ffffff; border:1px solid var(--border); color:var(--text); font-size:16px;" />
 						</label>
 					</div>
-					<label style="display:block; margin-top:8px;">
+					<label style="display:block; margin-top:16px;">
 						<div>Message</div>
-						<textarea name="message" rows="3" required placeholder="How can I help?" style="width:100%; padding:8px; border-radius:6px; background:#ffffff; border:1px solid var(--border); color:var(--text);"></textarea>
+						<textarea name="message" rows="4" required placeholder="How can I help?" style="width:100%; padding:12px; border-radius:6px; background:#ffffff; border:1px solid var(--border); color:var(--text); font-size:16px;"></textarea>
 					</label>
-					<div style="display:flex; gap:10px; margin-top:10px;">
-						<button class="button primary" type="submit">Send message</button>
+					<div style="display:flex; gap:10px; margin-top:20px;">
+						<button class="button primary" type="submit" style="padding: 12px 20px; font-size: 16px;">Send message</button>
 					</div>
 				</form>
 			</div>
 		</section>
+		
+		<!-- Bottom Lines -->
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		
+		<!-- Edit Mode Button for Small Screens -->
+		<a id="edit-mode-toggle-mobile" class="button" href="#">Edit Mode</a>
 	</main>
 
 	<footer>
@@ -201,5 +207,6 @@
 	</footer>
 
 	<script src="script.js"></script>
+	<script src="edit-mode.js"></script>
 </body>
 </html>
