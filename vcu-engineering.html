@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>VCU Engineering – ADAM Portfolio</title>
+	<meta name="description" content="Marketing material created for VCU School of Engineering." />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.typekit.net/mnz5jej.css">
+	<link href="style.css" rel="stylesheet">
+</head>
+<body>
+	<div id="label-alkhateeb" aria-hidden="true">ALKHATEEB</div>
+	<!-- Mobile Warning Popup -->
+	<div class="popup-overlay" id="mobileWarning">
+		<div class="popup">
+			<button class="popup-close" onclick="closePopup()" aria-label="Close">×</button>
+			<div class="popup-content">
+				<div class="popup-icon">⚠️</div>
+				<h2 class="popup-title">Under Construction</h2>
+				<p class="popup-message">
+					The mobile version of this site is still under construction.<br><br>
+					This site is best viewed on a desktop at full screen.
+				</p>
+				<button class="popup-button" onclick="closePopup()">I Understand</button>
+			</div>
+		</div>
+	</div>
+
+	<header>
+		<div class="container navbar">
+			<div class="brand"><a href="index.html" style="text-decoration: none; color: inherit;"><span id="label-adam">ADAM</span></a></div>
+			<nav>
+				<ul>
+					<li><a href="index.html#about">About</a></li>
+					<li><a href="index.html#projects">Projects</a></li>
+					<li><a href="index.html#contact">Contact</a></li>
+				</ul>
+			</nav>
+			<div class="nav-actions">
+				<a class="button" href="index.html">← Back to Portfolio</a>
+			</div>
+		</div>
+	</header>
+
+	<main class="container">
+		<section class="hero">
+			<div class="hero-inner">
+				<div>
+					<div class="kicker">2025</div>
+					<h1>VCU Engineering</h1>
+					<p class="subtitle">Marketing material created for VCU College of Engineering.</p>
+					<div style="display:flex; gap:10px; margin-top:14px;">
+						<a class="button" href="index.html">← Back to Portfolio</a>
+					</div>
+				</div>
+				<div class="card">
+					<img src="vcuthumbnail.png" alt="VCU Engineering preview" style="width: 100%; border-radius: 10px;" />
+				</div>
+			</div>
+		</section>
+
+		<section class="section">
+			<h2>Postcards</h2>
+			<div class="card">
+				<div id="fix-flipbook" class="flipbook" data-pages="fix_Page_04.jpg,fix_Page_05.jpg,fix_Page_06.jpg,fix_Page_07.jpg,fix_Page_08.jpg,fix_Page_09.jpg,fix_Page_10.jpg,fix_Page_11.jpg,fix_Page_12.jpg,fix_Page_13.jpg"></div>
+				<div class="flipbook-controls">
+					<button type="button" class="button" id="fix-prev" aria-label="Previous page">Prev</button>
+					<div class="flipbook-counter"><span id="fix-current">1</span>/<span id="fix-total">10</span></div>
+					<button type="button" class="button" id="fix-next" aria-label="Next page">Next</button>
+				</div>
+			</div>
+		</section>
+
+		<section class="section">
+			<h2>Flyer</h2>
+			<div class="card">
+				<div class="grid" style="grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px;">
+					<div>
+						<img src="vcu_advisor1.jpg" alt="VCU Advisor Project 1" style="width: 100%; border-radius: 10px;" />
+					</div>
+					<div>
+						<img src="vcu_advisor2.jpg" alt="VCU Advisor Project 2" style="width: 100%; border-radius: 10px;" />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Bottom Lines -->
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+
+	</main>
+
+	<footer>
+		<div class="container">
+			<div class="footer-content">
+				<div class="footer-left">
+					<div id="datetime"></div>
+				</div>
+				<div class="footer-center">
+					<div class="footer-squares">
+						<div class="square"></div>
+						<div class="square"></div>
+						<div class="square"></div>
+					</div>
+				</div>
+				<div class="footer-right">
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script src="script.js"></script>
+</body>
+</html>
