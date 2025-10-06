@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Age of Info – ADAM Portfolio</title>
+	<meta name="description" content="Exploration of information overload and digital culture in the modern age." />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.typekit.net/mnz5jej.css">
+	<link href="style.css" rel="stylesheet">
+</head>
+<body>
+	<div id="label-alkhateeb">ALKHATEEB</div>
+	<!-- Mobile Warning Popup -->
+	<div class="popup-overlay" id="mobileWarning">
+		<div class="popup">
+			<button class="popup-close" onclick="closePopup()" aria-label="Close">×</button>
+			<div class="popup-content">
+				<div class="popup-icon">⚠️</div>
+				<h2 class="popup-title">Under Construction</h2>
+				<p class="popup-message">
+					The mobile version of this site is still under construction.<br><br>
+					This site is best viewed on a desktop at full screen.
+				</p>
+				<button class="popup-button" onclick="closePopup()">I Understand</button>
+			</div>
+		</div>
+	</div>
+
+	<header>
+		<div class="container navbar">
+			<div class="brand"><a href="index.html" style="text-decoration: none; color: inherit;"><span id="label-adam">ADAM</span></a></div>
+			<nav>
+				<ul>
+					<li><a href="index.html#about">About</a></li>
+					<li><a href="index.html#projects">Projects</a></li>
+					<li><a href="index.html#contact">Contact</a></li>
+				</ul>
+			</nav>
+			<div class="nav-actions">
+				<a class="button" href="index.html">← Back to Portfolio</a>
+			</div>
+		</div>
+	</header>
+
+	<main class="container">
+		<section class="hero">
+			<div class="hero-inner">
+				<div>
+					<div class="kicker">2023</div>
+					<h1>Age of Info</h1>
+					<p class="subtitle">Exploration of information overload and digital culture in the modern age.</p>
+					<div style="display:flex; gap:10px; margin-top:14px;">
+						<a class="button" href="index.html">← Back to Portfolio</a>
+					</div>
+				</div>
+				<div class="card">
+					<img src="ageofinfothumbnail.png" alt="Age of Info preview" style="width: 100%; border-radius: 10px;" />
+				</div>
+			</div>
+		</section>
+
+		<section class="section">
+			<h2>About</h2>
+			<p>We exist in an era where information is extremely easy to access. While this can be a good thing, the information we encounter in our daily lives can be easily manipulated or entirely fabricated. Therefore, it is important that people are aware of strategies to avoid misinformation.</p>
+			<p>However, with the creation of digital media, the constant bombardment of information can become difficult to navigate.</p>
+			<p>This satirical publication emphasizes the danger of the absolute faith people have in information provided by authorities, media outlets, or social media. It also graphically displays the black hole of never-ending information we encounter in our lives.</p>
+		</section>
+
+		<section class="section">
+			<h2>Video</h2>
+			<div class="card">
+				<iframe title="vimeo-player" src="https://player.vimeo.com/video/1116969302?h=f6ec070c6a&loop=1&autoplay=0&muted=0" width="100%" height="600" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen style="border-radius: 2px;"></iframe>
+			</div>
+		</section>
+
+		<section class="section">
+			<h2>Pages</h2>
+			<div class="card">
+				<div class="grid" style="grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px;">
+					<div>
+						<img src="ageofinfo2.jpg" alt="Age of Info image 2" style="width: 100%; border-radius: 10px;" />
+					</div>
+					<div>
+						<img src="ageofinfo1.jpg" alt="Age of Info image 1" style="width: 100%; border-radius: 10px;" />
+					</div>
+					<div>
+						<img src="ageofinfo3.jpg" alt="Age of Info image 3" style="width: 100%; border-radius: 10px;" />
+					</div>
+					<div>
+						<img src="ageofinfo4.jpg" alt="Age of Info image 4" style="width: 100%; border-radius: 10px;" />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Bottom Lines -->
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+
+	</main>
+
+	<footer>
+		<div class="container">
+			<div class="footer-content">
+				<div class="footer-left">
+					<div id="datetime"></div>
+				</div>
+				<div class="footer-center">
+					<div class="footer-squares">
+						<div class="square"></div>
+						<div class="square"></div>
+						<div class="square"></div>
+					</div>
+				</div>
+				<div class="footer-right">
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script src="script.js"></script>
+</body>
+</html>
