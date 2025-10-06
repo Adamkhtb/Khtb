@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Map for VCU – ADAM Portfolio</title>
+	<meta name="description" content="Interactive map design for Virginia Commonwealth University" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.typekit.net/mnz5jej.css">
+	<link href="style.css" rel="stylesheet">
+</head>
+<body>
+	<div id="label-alkhateeb" aria-hidden="true">ALKHATEEB</div>
+	<!-- Mobile Warning Popup -->
+	<div class="popup-overlay" id="mobileWarning">
+		<div class="popup">
+			<button class="popup-close" onclick="closePopup()" aria-label="Close">×</button>
+			<div class="popup-content">
+				<div class="popup-icon">⚠️</div>
+				<h2 class="popup-title">Under Construction</h2>
+				<p class="popup-message">
+					The mobile version of this site is still under construction.<br><br>
+					This site is best viewed on a desktop at full screen.
+				</p>
+				<button class="popup-button" onclick="closePopup()">I Understand</button>
+			</div>
+		</div>
+	</div>
+
+	<header>
+		<div class="container navbar">
+			<div class="brand"><a href="index.html" style="text-decoration: none; color: inherit;"><span id="label-adam">ADAM</span></a></div>
+			<nav>
+				<ul>
+					<li><a href="index.html#about">About</a></li>
+					<li><a href="index.html#projects">Projects</a></li>
+					<li><a href="index.html#contact">Contact</a></li>
+				</ul>
+			</nav>
+			<div class="nav-actions">
+				<a class="button" href="index.html">← Back to Portfolio</a>
+			</div>
+		</div>
+	</header>
+
+	<main class="container">
+		<section class="hero">
+			<div class="hero-inner">
+				<div>
+					<div class="kicker">2024</div>
+					<h1>Map for VCU</h1>
+					<p class="subtitle">Helpful tool for those new to Richmond, VA</p>
+					<div style="display:flex; gap:10px; margin-top:14px;">
+						<a class="button" href="index.html">← Back to Portfolio</a>
+					</div>
+				</div>
+				<div class="card">
+					<img src="mapthumbnail.jpg" alt="Map for VCU preview" style="width: 100%; border-radius: 10px;" />
+				</div>
+			</div>
+		</section>
+
+		<section class="section">
+			<h2>About</h2>
+			<p>MAP4VCU is a collaborative project created in a human-centered design course by classmates Inho Park, Chelsee Sahonero, and myself.</p>
+			<p>We wanted to solve the issue of trip planning for new students on the VCU campus and sought to do so by creating a more accessible source of information.</p>
+			<p>Understanding that there was no reason to reinvent already existing services over the course of a single semester it was decided the best course of action would to be provide already existing site for a bike paths, bike parking, and car parking maps.</p>
+			<p>The component designed by our team was the "RVA Transit Options" Tab.</p>
+			<div style="display:flex; gap:10px; margin-top:20px;">
+				<a class="button primary" href="https://linktr.ee/map4vcu" target="_blank" rel="noreferrer">View Live Project</a>
+			</div>
+		</section>
+
+		<!-- Bottom Lines -->
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+		<div style="width: 100%; height: 1px; background: #000000; margin: 20px 0;"></div>
+
+	</main>
+
+	<footer>
+		<div class="container">
+			<div class="footer-content">
+				<div class="footer-left">
+					<div id="datetime"></div>
+				</div>
+				<div class="footer-center">
+					<div class="footer-squares">
+						<div class="square"></div>
+						<div class="square"></div>
+						<div class="square"></div>
+					</div>
+				</div>
+				<div class="footer-right">
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script src="script.js"></script>
+</body>
+</html>

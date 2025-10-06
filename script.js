@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			navbarEl.style.height = headerHeight.toFixed(0) + 'px';
 			bodyEl.style.paddingTop = headerHeight.toFixed(0) + 'px';
 			footerEl.style.paddingBottom = footerHeight.toFixed(0) + 'px';
-			bodyEl.style.paddingBottom = (footerHeight.toFixed(0) + 15) + 'px';
+			bodyEl.style.paddingBottom = (footerHeight.toFixed(0) + 3) + 'px';
 			
 			var footerContentEl = document.querySelector('.footer-content');
 			if (footerContentEl) {
@@ -247,4 +247,100 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		});
 	});
+});
+
+// Custom cursor (optional): dot follows mouse, hidden on touch and reduced motion
+(function() {
+	var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+	if (prefersReduced || isTouch) return;
+	var dot = document.createElement('div');
+	dot.setAttribute('aria-hidden','true');
+	dot.style.cssText = 'position:fixed;inset:auto;left:0;top:0;width:8px;height:8px;border-radius:50%;background:#000;mix-blend-mode:difference;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.02s linear;';
+	document.body.appendChild(dot);
+	window.addEventListener('mousemove', function(e){ dot.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)'; }, { passive: true });
+})();
+
+// Pause footer squares animation when footer is off-screen
+(function(){
+	var footer = document.querySelector('footer');
+	if (!footer || !('IntersectionObserver' in window)) return;
+	var obs = new IntersectionObserver(function(entries){
+		entries.forEach(function(entry){
+			if (entry.isIntersecting) {
+				document.documentElement.style.setProperty('--footer-animate', '1');
+			} else {
+				document.documentElement.style.setProperty('--footer-animate', '0');
+			}
+		});
+	}, { threshold: 0 });
+	obs.observe(footer);
+})();
+
+// Mobile warning popup functionality
+document.addEventListener('DOMContentLoaded', function() {
+	// Check if user is on mobile and show popup
+	function isMobile() {
+		return window.innerWidth <= 768;
+	}
+
+	// Show popup only on mobile devices
+	function checkAndShowPopup() {
+		const popup = document.getElementById('mobileWarning');
+		const hasSeenWarning = sessionStorage.getItem('mobileWarningDismissed');
+		const isMobileDevice = isMobile();
+		
+		console.log('Popup check:', {
+			popup: !!popup,
+			isMobile: isMobileDevice,
+			hasSeenWarning: !!hasSeenWarning,
+			windowWidth: window.innerWidth
+		});
+		
+		if (popup) {
+			if (isMobileDevice && !hasSeenWarning) {
+				console.log('Showing popup');
+				popup.classList.remove('hidden');
+			} else {
+				console.log('Hiding popup');
+				popup.classList.add('hidden');
+			}
+		}
+	}
+
+	// Close popup
+	window.closePopup = function() {
+		const popup = document.getElementById('mobileWarning');
+		popup.classList.add('hidden');
+		sessionStorage.setItem('mobileWarningDismissed', 'true');
+	}
+
+	// Close on overlay click
+	const popup = document.getElementById('mobileWarning');
+	if (popup) {
+		popup.addEventListener('click', function(e) {
+			if (e.target === this) {
+				closePopup();
+			}
+		});
+	}
+
+	// Close on Escape key
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'Escape') {
+			closePopup();
+		}
+	});
+
+	// Clear session storage for testing (remove this line later)
+	sessionStorage.removeItem('mobileWarningDismissed');
+	
+	// Check immediately when DOM is ready
+	checkAndShowPopup();
+
+	// Check on page load
+	window.addEventListener('load', checkAndShowPopup);
+
+	// Check on resize
+	window.addEventListener('resize', checkAndShowPopup);
 });
