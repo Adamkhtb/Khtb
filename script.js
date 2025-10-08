@@ -290,19 +290,10 @@ document.addEventListener('DOMContentLoaded', function() {
 		const hasSeenWarning = sessionStorage.getItem('mobileWarningDismissed');
 		const isMobileDevice = isMobile();
 		
-		console.log('Popup check:', {
-			popup: !!popup,
-			isMobile: isMobileDevice,
-			hasSeenWarning: !!hasSeenWarning,
-			windowWidth: window.innerWidth
-		});
-		
 		if (popup) {
 			if (isMobileDevice && !hasSeenWarning) {
-				console.log('Showing popup');
 				popup.classList.remove('hidden');
 			} else {
-				console.log('Hiding popup');
 				popup.classList.add('hidden');
 			}
 		}
@@ -311,30 +302,48 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Close popup
 	window.closePopup = function() {
 		const popup = document.getElementById('mobileWarning');
-		popup.classList.add('hidden');
-		sessionStorage.setItem('mobileWarningDismissed', 'true');
+		if (popup) {
+			popup.classList.add('hidden');
+			sessionStorage.setItem('mobileWarningDismissed', 'true');
+		}
 	}
 
-	// Close on overlay click
-	const popup = document.getElementById('mobileWarning');
-	if (popup) {
+	// Set up popup event listeners
+	function setupPopupEvents() {
+		const popup = document.getElementById('mobileWarning');
+		if (!popup) return;
+
+		// Close button event listener
+		const closeButton = popup.querySelector('.popup-close');
+		if (closeButton) {
+			closeButton.addEventListener('click', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				closePopup();
+			});
+		}
+
+		// Close on overlay click (but not on popup content)
 		popup.addEventListener('click', function(e) {
 			if (e.target === this) {
+				e.preventDefault();
+				e.stopPropagation();
+				closePopup();
+			}
+		});
+
+		// Close on Escape key
+		document.addEventListener('keydown', function(e) {
+			if (e.key === 'Escape' && !popup.classList.contains('hidden')) {
+				e.preventDefault();
 				closePopup();
 			}
 		});
 	}
 
-	// Close on Escape key
-	document.addEventListener('keydown', function(e) {
-		if (e.key === 'Escape') {
-			closePopup();
-		}
-	});
+	// Set up events after DOM is ready
+	setupPopupEvents();
 
-	// Clear session storage for testing (remove this line later)
-	sessionStorage.removeItem('mobileWarningDismissed');
-	
 	// Check immediately when DOM is ready
 	checkAndShowPopup();
 
@@ -344,3 +353,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Check on resize
 	window.addEventListener('resize', checkAndShowPopup);
 });
+
+// Mobile edit mode popup close function
+window.closeEditPopup = function() {
+	const popup = document.getElementById('edit-mode-popup');
+	if (popup) {
+		popup.classList.remove('show');
+	}
+};

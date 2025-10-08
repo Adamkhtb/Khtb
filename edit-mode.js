@@ -57,6 +57,13 @@ class EditMode {
         this.createFontPanel();
         this.createColorPanel();
         
+        // Show popup for both desktop and mobile
+        this.showMobilePopup("Don't like my site? Fine you can fix it.");
+        // Auto-hide after 3 seconds
+        setTimeout(() => {
+            this.hideMobilePopup();
+        }, 3000);
+        
         console.log('Edit mode enabled - Fonts & Colors');
     }
     
@@ -77,6 +84,12 @@ class EditMode {
         if (this.editToggle) {
             this.editToggle.textContent = this.isEditMode ? 'Exit Edit' : 'Edit Mode';
             this.editToggle.classList.toggle('primary', this.isEditMode);
+        }
+        
+        // Update mobile button text and styling
+        if (this.editToggleMobile) {
+            this.editToggleMobile.textContent = this.isEditMode ? 'Exit Edit' : 'Edit Mode';
+            this.editToggleMobile.classList.toggle('primary', this.isEditMode);
         }
     }
     
@@ -150,22 +163,22 @@ class EditMode {
                 <label>
                     <span>Background:</span>
                     <div class="color-input-wrapper">
-                        <input type="color" id="bg-color" value="#ffffff">
                         <button class="close-color" data-target="bg-color">×</button>
+                        <input type="color" id="bg-color" value="#ffffff">
                     </div>
                 </label>
                 <label>
                     <span>Text:</span>
                     <div class="color-input-wrapper">
-                        <input type="color" id="text-color" value="#000000">
                         <button class="close-color" data-target="text-color">×</button>
+                        <input type="color" id="text-color" value="#000000">
                     </div>
                 </label>
                 <label>
                     <span>Border:</span>
                     <div class="color-input-wrapper">
-                        <input type="color" id="border-color" value="#000000">
                         <button class="close-color" data-target="border-color">×</button>
+                        <input type="color" id="border-color" value="#000000">
                     </div>
                 </label>
             </div>
@@ -184,30 +197,58 @@ class EditMode {
             this.resetColors();
         });
         
-        // Add close button listeners
-        document.querySelectorAll('.close-color').forEach(button => {
-            button.addEventListener('click', (e) => {
+        // Add close button listeners using event delegation
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('close-color')) {
                 e.preventDefault();
                 e.stopPropagation();
+                
                 const targetId = e.target.getAttribute('data-target');
                 const colorInput = document.getElementById(targetId);
-                colorInput.blur(); // Close the color picker
-            });
+                
+                // Hide the close button immediately
+                e.target.style.display = 'none';
+                
+                // Prevent the color picker from reopening
+                if (colorInput) {
+                    colorInput.style.pointerEvents = 'none';
+                    colorInput.blur();
+                    // Re-enable after a brief delay
+                    setTimeout(() => {
+                        colorInput.style.pointerEvents = 'auto';
+                    }, 200);
+                }
+            }
         });
         
-        // Show/hide close buttons when color pickers are focused/blurred
-        document.querySelectorAll('input[type="color"]').forEach(input => {
+        // Attach event listeners to all color inputs
+        this.attachColorInputListeners();
+    }
+    
+    attachColorInputListeners(specificInput = null) {
+        const inputs = specificInput ? [specificInput] : document.querySelectorAll('input[type="color"]');
+        
+        inputs.forEach(input => {
             input.addEventListener('focus', () => {
                 const closeBtn = input.parentElement.querySelector('.close-color');
-                closeBtn.style.display = 'flex';
+                if (closeBtn) {
+                    closeBtn.style.display = 'flex';
+                }
             });
             
             input.addEventListener('blur', () => {
-                // Small delay to allow close button click to complete
-                setTimeout(() => {
-                    const closeBtn = input.parentElement.querySelector('.close-color');
+                const closeBtn = input.parentElement.querySelector('.close-color');
+                if (closeBtn) {
                     closeBtn.style.display = 'none';
-                }, 100);
+                }
+            });
+            
+            // Hide close button when color changes
+            input.addEventListener('change', () => {
+                const closeBtn = input.parentElement.querySelector('.close-color');
+                if (closeBtn) {
+                    closeBtn.style.display = 'none';
+                }
             });
         });
     }
@@ -231,27 +272,30 @@ class EditMode {
     }
     
     showExitMessage() {
-        // Temporarily change the tooltip content
-        const originalContent = "Don't like my site? Fine you can fix it.";
+        // Show popup for both desktop and mobile
         const exitContent = "Really? That's the best you can do?";
+        this.showMobilePopup(exitContent);
         
-        // Change the tooltip content
-        const style = document.createElement('style');
-        style.textContent = `
-            #edit-mode-toggle::before {
-                content: "${exitContent}" !important;
-            }
-        `;
-        document.head.appendChild(style);
-        
-        // Force show the tooltip
-        this.editToggle.style.setProperty('--show-tooltip', '1');
-        
-        // Reset after 3 seconds
+        // Auto-hide after 3 seconds
         setTimeout(() => {
-            style.remove();
-            this.editToggle.style.removeProperty('--show-tooltip');
+            this.hideMobilePopup();
         }, 3000);
+    }
+    
+    showMobilePopup(message) {
+        const popup = document.getElementById('edit-mode-popup');
+        const messageEl = document.getElementById('edit-popup-message');
+        if (popup && messageEl) {
+            messageEl.textContent = message;
+            popup.classList.add('show');
+        }
+    }
+    
+    hideMobilePopup() {
+        const popup = document.getElementById('edit-mode-popup');
+        if (popup) {
+            popup.classList.remove('show');
+        }
     }
     
     resetFonts() {
@@ -269,16 +313,31 @@ class EditMode {
     }
     
     setColors() {
-        // Apply all color changes at once
+        // Get current color values from inputs
         const bgColor = document.getElementById('bg-color').value;
         const textColor = document.getElementById('text-color').value;
         const borderColor = document.getElementById('border-color').value;
         
+        // Apply the colors using CSS custom properties
         this.applyColorChange('--bg', bgColor);
         this.applyColorChange('--text', textColor);
         this.applyColorChange('--border', borderColor);
         
         console.log('Colors applied:', { bgColor, textColor, borderColor });
+    }
+    
+    resetColors() {
+        // Reset to original colors
+        this.applyColorChange('--bg', '#ffffff');
+        this.applyColorChange('--text', '#000000');
+        this.applyColorChange('--border', '#000000');
+        
+        // Reset color picker values
+        document.getElementById('bg-color').value = '#ffffff';
+        document.getElementById('text-color').value = '#000000';
+        document.getElementById('border-color').value = '#000000';
+        
+        console.log('Colors reset to original');
     }
     
     removePanels() {

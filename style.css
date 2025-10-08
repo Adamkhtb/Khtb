@@ -34,10 +34,10 @@ img {
 }
 
 .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--space); }
-header {
+	header {
 	position: fixed; top: 0; left: 0; right: 0; z-index: 10;
 	background: #ffffff;
-	border-bottom: 1px solid #000000;
+	border-bottom: 1px solid var(--border);
 	overflow: visible; /* allow growing brand to extend beyond header */
 }
 .navbar {
@@ -61,7 +61,7 @@ nav a { color: var(--text); opacity: 0.9; }
 	background: #ffffff; color: var(--text);
 	box-shadow: var(--shadow); text-decoration: none; font-weight: 600;
 }
-.button.primary { background: #000000; border-color: #000000; color: #ffffff; }
+.button.primary { background: var(--border); border-color: var(--border); color: #ffffff; }
 .button.primary:hover { filter: brightness(1.08); }
 .button:hover { text-decoration: none; transform: translateY(-1px); }
 
@@ -82,7 +82,7 @@ h1 { margin: 8px 0 10px; font-size: 40px; line-height: 1.15; }
 	transition: border 0.3s ease;
 }
 .card:hover {
-	border: 3px solid #000000;
+	border: 3px solid var(--border);
 }
 
 #contact {
@@ -105,7 +105,7 @@ h1 { margin: 8px 0 10px; font-size: 40px; line-height: 1.15; }
 	object-fit: cover;
 	display: block;
 	border-radius: 10px;
-	border: 1px solid #000000;
+	border: 1px solid var(--border);
 }
 /* VCU thumbnail - prevent bottom cropping */
 .project img[src="vcuthumbnail.png"] {
@@ -133,7 +133,7 @@ section:has(#fix-flipbook) .card {
 }
 /* Ensure VCU flipbook pages have a visible border */
 #fix-flipbook img {
-	border: 1px solid #000000;
+	border: 1px solid var(--border);
 	width: auto;            /* don't stretch to container width */
 	max-width: 100%;        /* still respect container on small screens */
 	height: auto;
@@ -185,7 +185,7 @@ footer {
 	left: 0; 
 	right: 0; 
 	z-index: 10;
-	border-top: 1px solid #000000; 
+	border-top: 1px solid var(--border); 
 	color: var(--muted); 
 	padding: 40px 0 60px; 
 	margin-top: 30px; 
@@ -265,7 +265,7 @@ footer {
 
 .popup {
 	background: #ffffff;
-	border: 3px solid #000000;
+	border: 3px solid var(--border);
 	max-width: 500px;
 	width: 100%;
 	position: relative;
@@ -404,6 +404,33 @@ footer {
 		right: 20px;
 		z-index: 1000;
 	}
+
+	/* Mobile edit mode popup */
+	.edit-mode-popup {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: #000000;
+		color: #ffffff;
+		padding: 20px 30px;
+		border-radius: 10px;
+		font-size: 16px;
+		font-weight: 600;
+		text-align: center;
+		z-index: 10001;
+		box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+		opacity: 0;
+		visibility: hidden;
+		transition: all 0.3s ease;
+		max-width: 300px;
+		width: 90%;
+	}
+
+	.edit-mode-popup.show {
+		opacity: 1;
+		visibility: visible;
+	}
 }
 
 /* Corner/brand labels */
@@ -526,7 +553,7 @@ body::before {
 	top: 50%;
 	transform: translateY(-50%);
 	background: #ffffff;
-	border: 2px solid #000000;
+	border: 2px solid var(--border);
 	border-radius: 10px;
 	padding: 20px;
 	box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -566,7 +593,7 @@ body::before {
 .edit-panel input[type="range"] {
 	width: 100%;
 	padding: 6px 8px;
-	border: 1px solid #000000;
+	border: 1px solid var(--border);
 	border-radius: 4px;
 	font-size: 14px;
 }
@@ -574,7 +601,7 @@ body::before {
 .edit-panel input[type="color"] {
 	width: 100%;
 	height: 40px;
-	border: 1px solid #000000;
+	border: 1px solid var(--border);
 	border-radius: 4px;
 	cursor: pointer;
 }
@@ -594,9 +621,9 @@ body::before {
 .close-color {
 	width: 24px;
 	height: 24px;
-	background: #000000;
+	background: var(--border);
 	color: #ffffff;
-	border: 1px solid #000000;
+	border: 1px solid var(--border);
 	border-radius: 50%;
 	font-size: 14px;
 	font-weight: bold;
@@ -627,9 +654,9 @@ body::before {
 	width: 100%;
 	padding: 8px 12px;
 	margin-top: 15px;
-	background: #000000;
+	background: var(--border);
 	color: #ffffff;
-	border: 1px solid #000000;
+	border: 1px solid var(--border);
 	border-radius: 6px;
 	font-size: 14px;
 	font-weight: 600;
@@ -647,8 +674,8 @@ body::before {
 	padding: 8px 12px;
 	margin-top: 10px;
 	background: #ffffff;
-	color: #000000;
-	border: 1px solid #000000;
+	color: var(--text);
+	border: 1px solid var(--border);
 	border-radius: 6px;
 	font-size: 14px;
 	font-weight: 600;
@@ -667,59 +694,36 @@ body::before {
 	display: block; /* Show by default on larger screens */
 }
 
-#edit-mode-toggle-mobile {
-	display: none; /* Hidden by default */
+/* Desktop edit mode popup */
+.edit-mode-popup {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: #000000;
+	color: #ffffff;
+	padding: 20px 30px;
+	border-radius: 10px;
+	font-size: 16px;
+	font-weight: 600;
+	text-align: center;
+	z-index: 10001;
+	box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.3s ease;
+	max-width: 300px;
+	width: 90%;
 }
+
+.edit-mode-popup.show {
+	opacity: 1;
+	visibility: visible;
+}
+
 
 #edit-mode-toggle:hover {
 	transform: translateY(-1px);
-}
-
-#edit-mode-toggle::before {
-	content: "Don't like my site? Fine you can fix it.";
-	position: absolute;
-	top: 100%;
-	left: 50%;
-	transform: translateX(-50%);
-	background: #000000;
-	color: #ffffff;
-	padding: 8px 12px;
-	border-radius: 6px;
-	font-size: 12px;
-	font-weight: 600;
-	white-space: nowrap;
-	opacity: 0;
-	visibility: hidden;
-	transition: all 0.2s ease;
-	z-index: 10001;
-	margin-top: 8px;
-}
-
-#edit-mode-toggle::after {
-	content: "";
-	position: absolute;
-	top: 100%;
-	left: 50%;
-	transform: translateX(-50%);
-	border: 5px solid transparent;
-	border-bottom-color: #000000;
-	opacity: 0;
-	visibility: hidden;
-	transition: all 0.2s ease;
-	z-index: 10001;
-	margin-top: 3px;
-}
-
-#edit-mode-toggle:hover::before,
-#edit-mode-toggle:hover::after {
-	opacity: 1;
-	visibility: visible;
-}
-
-#edit-mode-toggle[style*="--show-tooltip"]::before,
-#edit-mode-toggle[style*="--show-tooltip"]::after {
-	opacity: 1;
-	visibility: visible;
 }
 
 /* Footer squares pulse */
