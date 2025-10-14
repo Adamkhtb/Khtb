@@ -51,6 +51,7 @@ img {
 	letter-spacing: 0.3px; 
 	overflow: visible; 
 	padding: 0 20px 0 0; /* align left edge with content */
+	margin-left: 15px; /* space from left edge */
 }
 nav ul { display: flex; gap: 18px; list-style: none; margin: 0; padding: 0; align-items: center; }
 nav a { color: var(--text); opacity: 0.9; }
@@ -414,7 +415,7 @@ footer {
 		visibility: visible;
 		position: absolute;
 		top: 5px;
-		left: 5px;
+		left: 15px;
 		font-size: 20px;
 		font-weight: 800;
 		letter-spacing: 0.08em;
@@ -945,6 +946,52 @@ body::before {
 }
 
 
+/* Hide nav buttons on medium screens to prevent overlaps */
+@media (max-width: 900px) {
+	nav ul { display: none !important; }
+}
+
+/* Medium screen adjustments */
+@media (max-width: 768px) and (min-width: 641px) {
+	.navbar {
+		flex-wrap: wrap !important;
+		gap: 8px !important;
+		padding: 8px 0 !important;
+	}
+	
+	.brand {
+		flex: 1 !important;
+		min-width: 0 !important;
+	}
+	
+	nav {
+		order: 3 !important;
+		width: 100% !important;
+		margin-top: 8px !important;
+	}
+	
+	nav ul {
+		justify-content: center !important;
+		gap: 15px !important;
+	}
+	
+	.nav-actions {
+		order: 2 !important;
+		gap: 8px !important;
+		flex-wrap: wrap !important;
+		margin: 0 15px 0 0 !important;
+	}
+	
+	.button {
+		padding: 8px 12px !important;
+		font-size: 13px !important;
+		min-width: auto !important;
+		white-space: nowrap !important;
+		flex-shrink: 0 !important;
+		border-radius: 8px !important;
+	}
+}
+
 /* Mobile adjustments */
 @media (max-width: 640px) {
 	.edit-panel-container {
@@ -961,6 +1008,62 @@ body::before {
 
 	.edit-tab-content {
 		max-height: 300px;
+	}
+	
+	/* Make header more responsive */
+	.navbar {
+		flex-wrap: wrap !important;
+		gap: 8px !important;
+		padding: 5px 0 !important;
+	}
+	
+	.brand {
+		flex: 1 !important;
+		min-width: 0 !important;
+	}
+	
+	nav {
+		order: 3 !important;
+		width: 100% !important;
+		margin-top: 5px !important;
+	}
+	
+	nav ul {
+		justify-content: center !important;
+		gap: 15px !important;
+	}
+	
+	.nav-actions {
+		order: 2 !important;
+		gap: 6px !important;
+		flex-wrap: wrap !important;
+		margin: 0 15px 0 0 !important;
+	}
+	
+	/* Fix button deformation on mobile */
+	.button {
+		padding: 6px 10px !important;
+		font-size: 12px !important;
+		min-width: auto !important;
+		white-space: nowrap !important;
+		flex-shrink: 0 !important;
+		border-radius: 6px !important;
+	}
+	
+	/* Make header higher on smaller screens */
+	@media (max-width: 480px) {
+		.navbar {
+			padding: 2px 0 !important;
+			gap: 4px !important;
+		}
+		
+		nav {
+			margin-top: 2px !important;
+		}
+		
+		.nav-actions {
+			gap: 4px !important;
+		}
 	}
 	
 }
