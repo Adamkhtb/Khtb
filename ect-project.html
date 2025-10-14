@@ -48,7 +48,6 @@
 		<section class="hero">
 			<div class="hero-inner">
 				<div>
-					<div class="kicker">2024</div>
 					<h1>ECT Project</h1>
 					<p class="subtitle">Other stuff I've made or taken pictures of</p>
 					<div style="display:flex; gap:10px; margin-top:14px;">
@@ -105,10 +104,6 @@
 		</div>
 
 		<style>
-			.tree-gallery .gallery-item img {
-			height: 400px;
-		}
-		
 		@media (max-width: 768px) {
 				/* Main gallery - blue images get smaller with more space */
 				.gallery:first-of-type {
@@ -145,29 +140,6 @@
 				.gallery:first-of-type .gallery-item:nth-child(5) img,
 				.gallery:first-of-type .gallery-item:nth-child(6) img {
 					height: 250px !important;
-				}
-				
-				/* Tree images stack vertically and take full width on mobile */
-				.tree-gallery {
-					grid-template-columns: 1fr !important;
-					grid-template-rows: auto auto !important;
-				}
-				
-				.tree-gallery .gallery-item {
-					grid-column: 1 !important;
-				}
-				
-				.tree-gallery .gallery-item:nth-child(1) {
-					grid-row: 1 !important;
-				}
-				
-				.tree-gallery .gallery-item:nth-child(2) {
-					grid-row: 2 !important;
-				}
-				
-				/* Make tree images taller on mobile */
-				.tree-gallery .gallery-item img {
-					height: 800px !important;
 				}
 				
 				/* Chan images stack vertically and take full width on mobile */
