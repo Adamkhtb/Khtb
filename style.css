@@ -51,7 +51,7 @@ img {
 	letter-spacing: 0.3px; 
 	overflow: visible; 
 	padding: 0 20px 0 0; /* align left edge with content */
-	margin-left: 15px; /* space from left edge */
+	margin-left: 20px; /* space from left edge */
 }
 nav ul { display: flex; gap: 18px; list-style: none; margin: 0; padding: 0; align-items: center; }
 nav a { color: var(--text); opacity: 0.9; }
@@ -415,7 +415,7 @@ footer {
 		visibility: visible;
 		position: absolute;
 		top: 5px;
-		left: 15px;
+		left: 20px;
 		font-size: 20px;
 		font-weight: 800;
 		letter-spacing: 0.08em;
@@ -979,7 +979,7 @@ body::before {
 		order: 2 !important;
 		gap: 8px !important;
 		flex-wrap: wrap !important;
-		margin: 0 15px 0 0 !important;
+		margin: 0 20px 0 0 !important;
 	}
 	
 	.button {
@@ -1037,7 +1037,7 @@ body::before {
 		order: 2 !important;
 		gap: 6px !important;
 		flex-wrap: wrap !important;
-		margin: 0 15px 0 0 !important;
+		margin: 0 20px 0 0 !important;
 	}
 	
 	/* Fix button deformation on mobile */
