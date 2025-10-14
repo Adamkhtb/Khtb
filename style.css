@@ -54,7 +54,7 @@ img {
 }
 nav ul { display: flex; gap: 18px; list-style: none; margin: 0; padding: 0; align-items: center; }
 nav a { color: var(--text); opacity: 0.9; }
-.nav-actions { display: flex; gap: 10px; align-items: center; margin: 0; }
+.nav-actions { display: flex; gap: 10px; align-items: center; margin: 0 0 0 20px; }
 .button {
 	display: inline-flex; align-items: center; justify-content: center; gap: 8px;
 	padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border);
@@ -368,15 +368,54 @@ footer {
 	.hero { padding-top: 40px; }
 	h1 { font-size: 32px; }
 	footer { display: none; }
+	
+	/* Project images - no cropping on mobile */
+	.project img {
+		object-fit: cover !important;
+		height: 280px !important;
+		width: 100% !important;
+		margin: 0 !important;
+		display: block !important;
+		border: 3px solid var(--border) !important;
+		border-radius: 8px !important;
+	}
+	
+	/* Fix card shapes on mobile - make them narrower */
+	.grid .project {
+		border: 1px solid var(--border) !important;
+		padding: 20px !important;
+		background: var(--card) !important;
+		border-radius: 10px !important;
+		margin-bottom: 16px !important;
+		margin-left: 20px !important;
+		margin-right: 20px !important;
+		max-width: calc(100% - 40px) !important;
+	}
+	
+	/* Make card content bigger on mobile */
+	.grid .project h3 {
+		font-size: 20px !important;
+		margin-bottom: 12px !important;
+	}
+	
+	.grid .project p {
+		font-size: 16px !important;
+		line-height: 1.5 !important;
+	}
+	
+	.grid .project .tag {
+		font-size: 14px !important;
+		padding: 6px 12px !important;
+	}
 	#label-alkhateeb { display: none; }
 	#label-adam { visibility: hidden; }
 	#label-adam::before { 
 		content: "KHTB"; 
 		visibility: visible;
 		position: absolute;
-		top: 0;
-		left: 0;
-		font-size: 28px;
+		top: 5px;
+		left: 5px;
+		font-size: 20px;
 		font-weight: 800;
 		letter-spacing: 0.08em;
 		color: #000000;
@@ -392,18 +431,9 @@ footer {
 		text-rendering: optimizeLegibility;
 		backface-visibility: hidden;
 		-webkit-backface-visibility: hidden;
-	}
-	.nav-actions #edit-mode-toggle {
-		display: none !important; /* Hide in header on small screens */
+		z-index: 5;
 	}
 	
-	#edit-mode-toggle-mobile {
-		display: block !important; /* Show at bottom right on small screens */
-		position: fixed;
-		bottom: 20px;
-		right: 20px;
-		z-index: 1000;
-	}
 
 	/* Mobile edit mode popup */
 	.edit-mode-popup {
@@ -449,7 +479,7 @@ footer {
 	display: inline-block;
 	transform-origin: center center;
 	font-size: 28px;
-	transform: scale(2.2) translateY(0px) translateX(20px);
+	transform: scale(2.2) translateY(20px) translateX(20px);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
@@ -458,7 +488,7 @@ footer {
 }
 #label-alkhateeb {
 	position: fixed;
-	right: calc(var(--space) + 300px);
+	right: calc(var(--space) + 320px);
 	bottom: calc(var(--space) + 10px);
 	transform-origin: bottom right;
 	font-size: 24px;
@@ -732,4 +762,206 @@ body::before {
 .footer-squares .square:nth-child(1) { animation-delay: 0s; }
 .footer-squares .square:nth-child(2) { animation-delay: 0.3s; }
 .footer-squares .square:nth-child(3) { animation-delay: 0.6s; }
+
+/* Hide squares when screen is not full size */
+@media (max-width: 1200px) {
+	.footer-squares { 
+		display: none !important;
+	}
+}
+
+/* Tree gallery styling */
+.tree-gallery .gallery-item img {
+	height: 400px;
+}
+
+/* ===== TABBED EDIT PANEL STYLES ===== */
+
+.edit-panel-container {
+	position: fixed;
+	top: 50%;
+	left: 20px;
+	right: auto;
+	transform: translateY(-50%);
+	background: #ffffff;
+	border: 2px solid var(--border);
+	border-radius: 10px;
+	padding: 0;
+	box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+	z-index: 10000;
+	min-width: 200px;
+	max-width: 200px;
+	overflow: hidden;
+}
+
+/* Tab header */
+.edit-tabs-header {
+	display: flex;
+	border-bottom: 1px solid var(--border);
+	background: #f9f9f9;
+}
+
+.edit-tab-btn {
+	flex: 1;
+	padding: 10px;
+	border: none;
+	background: #ffffff;
+	color: var(--text);
+	font-size: 12px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	border-bottom: 2px solid transparent;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.edit-tab-btn:hover {
+	background: #f0f0f0;
+}
+
+.edit-tab-btn.active {
+	border-bottom-color: var(--border);
+	background: #ffffff;
+}
+
+/* Tab content */
+.edit-tab-content {
+	padding: 16px;
+	display: none;
+	max-height: 400px;
+	overflow-y: auto;
+}
+
+.edit-tab-content.active {
+	display: block;
+}
+
+.edit-tab-content label {
+	display: block;
+	margin-bottom: 12px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.edit-tab-content label span {
+	display: block;
+	margin-bottom: 4px;
+	color: #000000;
+	font-size: 11px;
+}
+
+.edit-tab-content select,
+.edit-tab-content input[type="range"] {
+	width: 100%;
+	padding: 6px 8px;
+	border: 1px solid var(--border);
+	border-radius: 4px;
+	font-size: 12px;
+}
+
+.edit-tab-content input[type="color"] {
+	width: 100%;
+	height: 35px;
+	border: 1px solid var(--border);
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.color-input-wrapper {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.color-input-wrapper input[type="color"] {
+	flex: 1;
+	width: auto;
+}
+
+.close-color {
+	width: 24px;
+	height: 24px;
+	background: var(--border);
+	color: #ffffff;
+	border: 1px solid var(--border);
+	border-radius: 50%;
+	font-size: 12px;
+	font-weight: bold;
+	cursor: pointer;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.2s ease;
+	flex-shrink: 0;
+	padding: 0;
+}
+
+.close-color:hover {
+	background: #333333;
+	transform: scale(1.1);
+}
+
+#font-size-value {
+	font-weight: 600;
+	color: #000000;
+	margin-left: 6px;
+	font-size: 11px;
+}
+
+.reset-button,
+.set-button {
+	width: 100%;
+	padding: 8px 12px;
+	margin-top: 10px;
+	background: var(--border);
+	color: #ffffff;
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	font-size: 11px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.reset-button:hover,
+.set-button:hover {
+	background: #333333;
+	transform: translateY(-1px);
+}
+
+.set-button {
+	background: #ffffff;
+	color: var(--text);
+	border: 1px solid var(--border);
+}
+
+.set-button:hover {
+	background: #f0f0f0;
+	color: var(--text);
+}
+
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+	.edit-panel-container {
+		position: fixed;
+		top: auto;
+		bottom: 20px;
+		left: 10px;
+		right: 10px;
+		transform: none;
+		max-width: none;
+		width: auto;
+		min-width: auto;
+	}
+
+	.edit-tab-content {
+		max-height: 300px;
+	}
+	
+}
 
