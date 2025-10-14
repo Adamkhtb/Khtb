@@ -240,6 +240,68 @@ footer {
 	background: #000000;
 }
 
+/* Responsive Header - Clean & Minimal */
+
+/* Medium screens (900px and below) - keep it simple */
+@media (max-width: 900px) {
+	.navbar {
+		height: 80px;
+		padding-right: 15px;
+	}
+	
+	body {
+		padding-top: 80px;
+	}
+	
+	.brand {
+		left: 0;
+		margin-left: 15px;
+	}
+	
+	nav ul {
+		gap: 16px;
+	}
+	
+	.button {
+		padding: 8px 14px;
+		font-size: 13px;
+	}
+	
+	.nav-actions {
+		margin-left: 16px;
+	}
+}
+
+/* Tablets (768px and below) - hide nav, keep buttons */
+@media (max-width: 768px) {
+	.navbar {
+		height: 70px;
+		padding-right: 12px;
+	}
+	
+	body {
+		padding-top: 70px;
+	}
+	
+	.brand {
+		left: 0;
+		margin-left: 12px;
+	}
+	
+	nav {
+		display: none;
+	}
+	
+	.nav-actions {
+		margin-left: 0;
+	}
+	
+	.button {
+		padding: 8px 12px;
+		font-size: 12px;
+	}
+}
+
 /* Responsive */
 @media (max-width: 960px) {
 	.hero-inner { grid-template-columns: 1fr; }
@@ -415,8 +477,8 @@ footer {
 		visibility: visible;
 		position: absolute;
 		top: 5px;
-		left: 20px;
-		font-size: 20px;
+		left: 5px;
+		font-size: clamp(12px, 4vw, 16px);
 		font-weight: 800;
 		letter-spacing: 0.08em;
 		color: #000000;
@@ -435,6 +497,13 @@ footer {
 		z-index: 5;
 	}
 	
+	/* Extra small screens - prevent overlap */
+	@media (max-width: 480px) {
+		#label-adam::before {
+			font-size: clamp(10px, 3vw, 14px) !important;
+			left: 3px !important;
+		}
+	}
 
 	/* Mobile edit mode popup */
 	.edit-mode-popup {
