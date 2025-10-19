@@ -1,17 +1,22 @@
-// Edit Mode for Portfolio Site - Fonts & Colors Only
+// Edit Mode for Portfolio Site - User-Friendly Version
 class EditMode {
     constructor() {
         this.isEditMode = false;
         this.editToggle = document.getElementById('edit-mode-toggle');
-        this.fontPanel = null;
-        this.colorPanel = null;
-        this.activeTab = 'fonts'; // Track which tab is active
+        this.activeTab = 'fonts';
+        this.currentSettings = {
+            headingFont: 'dico-mono',
+            bodyFont: 'dico-mono',
+            fontSize: 16,
+            bgColor: '#ffffff',
+            textColor: '#000000',
+            borderColor: '#000000'
+        };
         
         this.init();
     }
     
     init() {
-        // Show edit button (hidden by default)
         if (this.editToggle) {
             this.editToggle.style.display = 'inline-flex';
             this.editToggle.addEventListener('click', (e) => {
@@ -20,7 +25,7 @@ class EditMode {
             });
         }
         
-        // Keyboard shortcut: Ctrl+E to toggle edit mode
+        // Keyboard shortcut: Ctrl+E
         document.addEventListener('keydown', (e) => {
             if (e.ctrlKey && e.key === 'e') {
                 e.preventDefault();
@@ -42,29 +47,21 @@ class EditMode {
     }
     
     enableEditMode() {
-        // Add edit mode class to body
         document.body.classList.add('edit-mode');
-        
-        // Create unified edit panel with tabs
         this.createEditPanel();
-        
-        // Show entry message
-        this.showEntryMessage();
-        
-        console.log('Edit mode enabled - Fonts & Colors');
+        // Show message after a brief delay to ensure it appears above the panel
+        setTimeout(() => {
+            this.showMessage("Don't like my site? Fine, you can fix it.", 'entry');
+        }, 100);
     }
     
     disableEditMode() {
-        // Remove edit mode class
         document.body.classList.remove('edit-mode');
-        
-        // Remove panels
         this.removePanels();
-        
-        // Show exit message
-        this.showExitMessage();
-        
-        console.log('Edit mode disabled');
+        // Show exit message immediately
+        setTimeout(() => {
+            this.showMessage("Really? That's the best you can do?", 'exit');
+        }, 100);
     }
     
     updateToggleButton() {
@@ -75,117 +72,165 @@ class EditMode {
     }
     
     createEditPanel() {
-        // Create container
         const container = document.createElement('div');
         container.className = 'edit-panel-container';
         
-        // Create tabs
-        const tabsHeader = document.createElement('div');
-        tabsHeader.className = 'edit-tabs-header';
-        tabsHeader.innerHTML = `
-            <button class="edit-tab-btn active" data-tab="fonts">Fonts</button>
-            <button class="edit-tab-btn" data-tab="colors">Colors</button>
+        // Header with tabs and close button
+        const header = document.createElement('div');
+        header.className = 'edit-panel-header';
+        header.innerHTML = `
+            <div class="edit-tabs-header">
+                <button class="edit-tab-btn active" data-tab="fonts">
+                    Fonts
+                </button>
+                <button class="edit-tab-btn" data-tab="colors">
+                    Colors
+                </button>
+            </div>
+            <button class="edit-panel-close" title="Close Edit Mode (Ctrl+E)">×</button>
         `;
         
-        // Fonts tab content
-        const fontsContent = document.createElement('div');
-        fontsContent.className = 'edit-tab-content active';
-        fontsContent.id = 'fonts-tab';
-        fontsContent.innerHTML = `
-            <label>
-                <span>Heading Font:</span>
-                <select id="heading-font">
-                    <option value="dico-mono">Dico Mono</option>
-                    <option value="Inter">Inter</option>
-                    <option value="Arial">Arial</option>
-                    <option value="Helvetica">Helvetica</option>
-                    <option value="Georgia">Georgia</option>
-                    <option value="Times New Roman">Times New Roman</option>
-                    <option value="Courier New">Courier New</option>
-                </select>
-            </label>
-            <label>
-                <span>Body Font:</span>
-                <select id="body-font">
-                    <option value="dico-mono">Dico Mono</option>
-                    <option value="Inter">Inter</option>
-                    <option value="Arial">Arial</option>
-                    <option value="Helvetica">Helvetica</option>
-                    <option value="Georgia">Georgia</option>
-                    <option value="Times New Roman">Times New Roman</option>
-                    <option value="Courier New">Courier New</option>
-                </select>
-            </label>
-            <label>
-                <span>Font Size:</span>
-                <input type="range" id="font-size" min="12" max="24" value="16">
-                <span id="font-size-value">16px</span>
-            </label>
-            <button id="reset-fonts" class="reset-button">Reset Fonts</button>
+        // Fonts tab
+        const fontsTab = document.createElement('div');
+        fontsTab.className = 'edit-tab-content active';
+        fontsTab.id = 'fonts-tab';
+        fontsTab.innerHTML = `
+            <div class="edit-section">
+                <label class="edit-label">
+                    <span class="label-text">Heading Font</span>
+                    <select id="heading-font" class="edit-select">
+                        <option value="dico-mono">Dico Mono (Default)</option>
+                        <option value="Inter">Inter</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Helvetica">Helvetica</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Courier New">Courier New</option>
+                    </select>
+                </label>
+                
+                <label class="edit-label">
+                    <span class="label-text">Body Font</span>
+                    <select id="body-font" class="edit-select">
+                        <option value="dico-mono">Dico Mono (Default)</option>
+                        <option value="Inter">Inter</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Helvetica">Helvetica</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Courier New">Courier New</option>
+                    </select>
+                </label>
+                
+                <label class="edit-label">
+                    <span class="label-text">
+                        Font Size 
+                        <span id="font-size-value" class="value-display">16px</span>
+                    </span>
+                    <input type="range" id="font-size" class="edit-range" min="12" max="24" value="16" step="1">
+                    <div class="range-labels">
+                        <span>Small</span>
+                        <span>Large</span>
+                    </div>
+                </label>
+            </div>
+            
+            <div class="edit-actions">
+                <button id="reset-fonts" class="edit-button secondary">
+                    ↺ Reset to Default
+                </button>
+            </div>
         `;
         
-        // Colors tab content
-        const colorsContent = document.createElement('div');
-        colorsContent.className = 'edit-tab-content';
-        colorsContent.id = 'colors-tab';
-        colorsContent.innerHTML = `
-            <label>
-                <span>Background:</span>
-                <div class="color-input-wrapper">
-                    <button class="close-color" data-target="bg-color">×</button>
-                    <input type="color" id="bg-color" value="#ffffff">
+        // Colors tab
+        const colorsTab = document.createElement('div');
+        colorsTab.className = 'edit-tab-content';
+        colorsTab.id = 'colors-tab';
+        colorsTab.innerHTML = `
+            <div class="edit-section">
+                <label class="edit-label">
+                    <span class="label-text">Background Color</span>
+                    <div class="color-input-group">
+                        <input type="color" id="bg-color" class="edit-color" value="#ffffff">
+                        <input type="text" id="bg-color-hex" class="hex-input" value="#ffffff" maxlength="7">
+                    </div>
+                </label>
+                
+                <label class="edit-label">
+                    <span class="label-text">Text Color</span>
+                    <div class="color-input-group">
+                        <input type="color" id="text-color" class="edit-color" value="#000000">
+                        <input type="text" id="text-color-hex" class="hex-input" value="#000000" maxlength="7">
+                    </div>
+                </label>
+                
+                <label class="edit-label">
+                    <span class="label-text">Border Color</span>
+                    <div class="color-input-group">
+                        <input type="color" id="border-color" class="edit-color" value="#000000">
+                        <input type="text" id="border-color-hex" class="hex-input" value="#000000" maxlength="7">
+                    </div>
+                </label>
+                
+                <div class="color-presets">
+                    <span class="label-text">Quick Presets:</span>
+                    <div class="preset-buttons">
+                        <button class="preset-btn" data-preset="light" title="Light Mode">Light</button>
+                        <button class="preset-btn" data-preset="dark" title="Dark Mode">Dark</button>
+                        <button class="preset-btn" data-preset="blue" title="Blue Theme">Blue</button>
+                        <button class="preset-btn" data-preset="green" title="Green Theme">Green</button>
+                    </div>
                 </div>
-            </label>
-            <label>
-                <span>Text:</span>
-                <div class="color-input-wrapper">
-                    <button class="close-color" data-target="text-color">×</button>
-                    <input type="color" id="text-color" value="#000000">
-                </div>
-            </label>
-            <label>
-                <span>Border:</span>
-                <div class="color-input-wrapper">
-                    <button class="close-color" data-target="border-color">×</button>
-                    <input type="color" id="border-color" value="#000000">
-                </div>
-            </label>
-            <button id="set-colors" class="set-button">Set Colors</button>
-            <button id="reset-colors" class="reset-button">Reset Colors</button>
+            </div>
+            
+            <div class="edit-actions">
+                <button id="apply-colors" class="edit-button primary">
+                    ✓ Apply Colors
+                </button>
+                <button id="reset-colors" class="edit-button secondary">
+                    ↺ Reset to Default
+                </button>
+            </div>
         `;
         
-        // Assemble panel
-        container.appendChild(tabsHeader);
-        container.appendChild(fontsContent);
-        container.appendChild(colorsContent);
-        
+        container.appendChild(header);
+        container.appendChild(fontsTab);
+        container.appendChild(colorsTab);
         document.body.appendChild(container);
         
-        // Store references
-        this.fontPanel = fontsContent;
-        this.colorPanel = colorsContent;
-        
-        // Tab switching
-        tabsHeader.addEventListener('click', (e) => {
-            if (e.target.classList.contains('edit-tab-btn')) {
-                const tab = e.target.getAttribute('data-tab');
-                this.switchTab(tab, tabsHeader);
-            }
+        this.attachEventListeners();
+    }
+    
+    attachEventListeners() {
+        // Close button
+        document.querySelector('.edit-panel-close').addEventListener('click', () => {
+            this.toggleEditMode();
         });
         
-        // Font controls
+        // Tab switching
+        document.querySelectorAll('.edit-tab-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const tab = e.currentTarget.getAttribute('data-tab');
+                this.switchTab(tab);
+            });
+        });
+        
+        // Font controls - apply immediately
         document.getElementById('heading-font').addEventListener('change', (e) => {
-            this.applyFontChange('h1, h2, h3', e.target.value);
+            this.currentSettings.headingFont = e.target.value;
+            this.applyFonts();
         });
         
         document.getElementById('body-font').addEventListener('change', (e) => {
-            this.applyFontChange('body, p', e.target.value);
+            this.currentSettings.bodyFont = e.target.value;
+            this.applyFonts();
         });
         
         document.getElementById('font-size').addEventListener('input', (e) => {
             const value = e.target.value;
+            this.currentSettings.fontSize = value;
             document.getElementById('font-size-value').textContent = value + 'px';
-            this.applyFontSize(value);
+            this.applyFonts();
         });
         
         document.getElementById('reset-fonts').addEventListener('click', () => {
@@ -193,273 +238,209 @@ class EditMode {
         });
         
         // Color controls
-        document.getElementById('set-colors').addEventListener('click', () => {
-            this.setColors();
+        this.attachColorSync('bg-color');
+        this.attachColorSync('text-color');
+        this.attachColorSync('border-color');
+        
+        document.getElementById('apply-colors').addEventListener('click', () => {
+            this.applyColors();
+            this.showMessage('Colors applied!', 'success');
         });
         
         document.getElementById('reset-colors').addEventListener('click', () => {
             this.resetColors();
         });
         
-        // Close button listeners
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('close-color')) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const targetId = e.target.getAttribute('data-target');
-                const colorInput = document.getElementById(targetId);
-                
-                // Hide the close button immediately
-                e.target.style.display = 'none';
-                
-                // Close the color picker
-                if (colorInput) {
-                    colorInput.blur();
-                }
-            }
+        // Color presets
+        document.querySelectorAll('.preset-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const preset = e.currentTarget.getAttribute('data-preset');
+                this.applyPreset(preset);
+            });
         });
-        
-        // Attach color input listeners
-        this.attachColorInputListeners();
     }
     
-    switchTab(tab, tabsHeader) {
+    attachColorSync(colorId) {
+        const colorInput = document.getElementById(colorId);
+        const hexInput = document.getElementById(colorId + '-hex');
+        
+        // Sync color picker to hex input
+        colorInput.addEventListener('input', (e) => {
+            hexInput.value = e.target.value;
+            this.updateColorSetting(colorId, e.target.value);
+        });
+        
+        // Sync hex input to color picker
+        hexInput.addEventListener('input', (e) => {
+            let hex = e.target.value;
+            if (hex.match(/^#[0-9A-Fa-f]{6}$/)) {
+                colorInput.value = hex;
+                this.updateColorSetting(colorId, hex);
+            }
+        });
+    }
+    
+    updateColorSetting(colorId, value) {
+        if (colorId === 'bg-color') this.currentSettings.bgColor = value;
+        if (colorId === 'text-color') this.currentSettings.textColor = value;
+        if (colorId === 'border-color') this.currentSettings.borderColor = value;
+    }
+    
+    switchTab(tab) {
         this.activeTab = tab;
         
-        // Update tab buttons
-        tabsHeader.querySelectorAll('.edit-tab-btn').forEach(btn => {
+        document.querySelectorAll('.edit-tab-btn').forEach(btn => {
             btn.classList.remove('active');
         });
-        tabsHeader.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+        document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
         
-        // Update content visibility
         document.querySelectorAll('.edit-tab-content').forEach(content => {
             content.classList.remove('active');
         });
         document.getElementById(`${tab}-tab`).classList.add('active');
     }
     
-    attachColorInputListeners(specificInput = null) {
-        const inputs = specificInput ? [specificInput] : document.querySelectorAll('input[type="color"]');
+    applyFonts() {
+        // Remove old font styles
+        document.querySelectorAll('style[data-custom-font]').forEach(s => s.remove());
         
-        inputs.forEach(input => {
-            input.addEventListener('focus', () => {
-                const closeBtn = input.parentElement.querySelector('.close-color');
-                if (closeBtn) {
-                    closeBtn.style.display = 'flex';
-                }
-            });
-            
-            input.addEventListener('blur', () => {
-                const closeBtn = input.parentElement.querySelector('.close-color');
-                if (closeBtn) {
-                    closeBtn.style.display = 'none';
-                }
-            });
-            
-            input.addEventListener('change', () => {
-                const closeBtn = input.parentElement.querySelector('.close-color');
-                if (closeBtn) {
-                    closeBtn.style.display = 'none';
-                }
-            });
-        });
-    }
-    
-    applyFontChange(selector, fontFamily) {
+        // Apply new fonts
         const style = document.createElement('style');
         style.setAttribute('data-custom-font', 'true');
-        style.textContent = `${selector} { font-family: "${fontFamily}", sans-serif !important; }`;
-        document.head.appendChild(style);
-    }
-    
-    applyFontSize(size) {
-        const style = document.createElement('style');
-        style.setAttribute('data-custom-font', 'true');
-        style.textContent = `body { font-size: ${size}px !important; }`;
-        document.head.appendChild(style);
-    }
-    
-    applyColorChange(cssVar, color) {
-        document.documentElement.style.setProperty(cssVar, color);
-    }
-    
-    showEntryMessage() {
-        const entryContent = "Don't like my site? Fine you can fix it.";
-        
-        // Create entry message popup
-        const popup = document.createElement('div');
-        popup.className = 'entry-message-popup';
-        popup.innerHTML = `
-            <div class="entry-message-content">
-                <p>${entryContent}</p>
-            </div>
-        `;
-        
-        // Add styles
-        const style = document.createElement('style');
         style.textContent = `
-            .entry-message-popup {
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: #000000;
-                color: #ffffff;
-                padding: 20px 30px;
-                border-radius: 10px;
-                font-size: 16px;
-                font-weight: 600;
-                text-align: center;
-                z-index: 10001;
-                box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.3s ease;
-                max-width: 300px;
-                width: 90%;
+            h1, h2, h3, h4, h5, h6 { 
+                font-family: "${this.currentSettings.headingFont}", sans-serif !important; 
             }
-            
-            .entry-message-popup.show {
-                opacity: 1;
-                visibility: visible;
-            }
-            
-            .entry-message-content p {
-                margin: 0;
+            body, p, div, span, a, button, input, textarea, select { 
+                font-family: "${this.currentSettings.bodyFont}", sans-serif !important;
+                font-size: ${this.currentSettings.fontSize}px !important;
             }
         `;
-        
         document.head.appendChild(style);
-        document.body.appendChild(popup);
-        
-        // Show popup
-        setTimeout(() => {
-            popup.classList.add('show');
-        }, 100);
-        
-        // Hide and remove popup after 3 seconds
-        setTimeout(() => {
-            popup.classList.remove('show');
-            setTimeout(() => {
-                popup.remove();
-                style.remove();
-            }, 300);
-        }, 3000);
     }
     
-    showExitMessage() {
-        const exitContent = "Really? That's the best you can do?";
+    applyColors() {
+        document.documentElement.style.setProperty('--bg', this.currentSettings.bgColor);
+        document.documentElement.style.setProperty('--text', this.currentSettings.textColor);
+        document.documentElement.style.setProperty('--border', this.currentSettings.borderColor);
+        document.documentElement.style.setProperty('--card', this.currentSettings.bgColor);
         
-        // Create exit message popup
-        const popup = document.createElement('div');
-        popup.className = 'exit-message-popup';
-        popup.innerHTML = `
-            <div class="exit-message-content">
-                <p>${exitContent}</p>
-            </div>
-        `;
+        // Update header/footer backgrounds
+        const header = document.querySelector('header');
+        const footer = document.querySelector('footer');
+        if (header) header.style.background = this.currentSettings.bgColor;
+        if (footer) footer.style.background = this.currentSettings.bgColor;
+    }
+    
+    applyPreset(preset) {
+        const presets = {
+            light: { bg: '#ffffff', text: '#000000', border: '#000000' },
+            dark: { bg: '#1a1a1a', text: '#ffffff', border: '#ffffff' },
+            blue: { bg: '#e8f4f8', text: '#0a3d62', border: '#3498db' },
+            green: { bg: '#e8f5e9', text: '#1b5e20', border: '#4caf50' }
+        };
         
-        // Add styles
-        const style = document.createElement('style');
-        style.textContent = `
-            .exit-message-popup {
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: #000000;
-                color: #ffffff;
-                padding: 20px 30px;
-                border-radius: 10px;
-                font-size: 16px;
-                font-weight: 600;
-                text-align: center;
-                z-index: 10001;
-                box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.3s ease;
-                max-width: 300px;
-                width: 90%;
-            }
-            
-            .exit-message-popup.show {
-                opacity: 1;
-                visibility: visible;
-            }
-            
-            .exit-message-content p {
-                margin: 0;
-            }
-        `;
+        const colors = presets[preset];
+        if (!colors) return;
         
-        document.head.appendChild(style);
-        document.body.appendChild(popup);
+        this.currentSettings.bgColor = colors.bg;
+        this.currentSettings.textColor = colors.text;
+        this.currentSettings.borderColor = colors.border;
         
-        // Show popup
-        setTimeout(() => {
-            popup.classList.add('show');
-        }, 100);
+        document.getElementById('bg-color').value = colors.bg;
+        document.getElementById('bg-color-hex').value = colors.bg;
+        document.getElementById('text-color').value = colors.text;
+        document.getElementById('text-color-hex').value = colors.text;
+        document.getElementById('border-color').value = colors.border;
+        document.getElementById('border-color-hex').value = colors.border;
         
-        // Hide and remove popup after 3 seconds
-        setTimeout(() => {
-            popup.classList.remove('show');
-            setTimeout(() => {
-                popup.remove();
-                style.remove();
-            }, 300);
-        }, 3000);
+        this.applyColors();
+        this.showMessage(`${preset.charAt(0).toUpperCase() + preset.slice(1)} theme applied!`, 'success');
     }
     
     resetFonts() {
-        const customStyles = document.querySelectorAll('style[data-custom-font]');
-        customStyles.forEach(style => style.remove());
+        this.currentSettings.headingFont = 'dico-mono';
+        this.currentSettings.bodyFont = 'dico-mono';
+        this.currentSettings.fontSize = 16;
         
         document.getElementById('heading-font').value = 'dico-mono';
         document.getElementById('body-font').value = 'dico-mono';
         document.getElementById('font-size').value = '16';
         document.getElementById('font-size-value').textContent = '16px';
         
-        console.log('Fonts reset to original');
-    }
-    
-    setColors() {
-        const bgColor = document.getElementById('bg-color').value;
-        const textColor = document.getElementById('text-color').value;
-        const borderColor = document.getElementById('border-color').value;
-        
-        this.applyColorChange('--bg', bgColor);
-        this.applyColorChange('--text', textColor);
-        this.applyColorChange('--border', borderColor);
-        
-        console.log('Colors applied:', { bgColor, textColor, borderColor });
+        document.querySelectorAll('style[data-custom-font]').forEach(s => s.remove());
+        this.showMessage('Fonts reset!', 'success');
     }
     
     resetColors() {
-        this.applyColorChange('--bg', '#ffffff');
-        this.applyColorChange('--text', '#000000');
-        this.applyColorChange('--border', '#000000');
+        this.currentSettings.bgColor = '#ffffff';
+        this.currentSettings.textColor = '#000000';
+        this.currentSettings.borderColor = '#000000';
         
         document.getElementById('bg-color').value = '#ffffff';
+        document.getElementById('bg-color-hex').value = '#ffffff';
         document.getElementById('text-color').value = '#000000';
+        document.getElementById('text-color-hex').value = '#000000';
         document.getElementById('border-color').value = '#000000';
+        document.getElementById('border-color-hex').value = '#000000';
         
-        console.log('Colors reset to original');
+        this.applyColors();
+        this.showMessage('Colors reset!', 'success');
+    }
+    
+    showMessage(text, type = 'info') {
+        console.log('Showing message:', text, type); // Debug log
+        
+        const popup = document.createElement('div');
+        popup.className = `edit-message ${type}`;
+        popup.textContent = text;
+        popup.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #000000;
+            color: #ffffff;
+            padding: 20px 30px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            text-align: center;
+            z-index: 10002;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            max-width: 320px;
+            pointer-events: none;
+        `;
+        
+        document.body.appendChild(popup);
+        
+        // Force reflow
+        popup.offsetHeight;
+        
+        // Show the message
+        setTimeout(() => {
+            popup.style.opacity = '1';
+            popup.style.visibility = 'visible';
+        }, 50);
+        
+        // Hide and remove
+        setTimeout(() => {
+            popup.style.opacity = '0';
+            popup.style.visibility = 'hidden';
+            setTimeout(() => popup.remove(), 300);
+        }, 3000);
     }
     
     removePanels() {
         const container = document.querySelector('.edit-panel-container');
-        if (container) {
-            container.remove();
-        }
-        this.fontPanel = null;
-        this.colorPanel = null;
+        if (container) container.remove();
     }
 }
 
-// Initialize edit mode when DOM is loaded
+// Initialize
 document.addEventListener('DOMContentLoaded', () => {
     new EditMode();
 });
