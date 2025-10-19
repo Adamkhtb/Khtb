@@ -119,12 +119,16 @@ h1 { margin: 8px 0 10px; font-size: 40px; line-height: 1.15; }
 	position: relative;
 	width: 100%;
 	max-width: 900px;
+	height: 60vh;  /* Added fixed height */
 	max-height: 60vh;
 	margin: 0 auto;
 	border: 1px solid var(--border);
 	border-radius: 10px;
 	overflow: hidden;
 	background: #ffffff;
+	display: flex;  /* Added flex display */
+	align-items: center;  /* Center vertically */
+	justify-content: center;  /* Center horizontally */
 }
 
 /* Remove border from VCU Postcards card container */
@@ -242,6 +246,20 @@ footer {
 
 /* Responsive Header - Clean & Minimal */
 
+/* Large screens (1024px and above) - center squares between date and ALKHATEEB */
+@media (min-width: 1025px) {
+	.footer-center {
+		margin-right: 200px; /* Account for ALKHATEEB positioning */
+	}
+	
+	#label-alkhateeb {
+		right: var(--space);
+		bottom: calc(var(--space) + 8px);
+		font-size: clamp(18px, 2.7vw, 26px);
+		transform: scale(4.0);
+	}
+}
+
 /* Medium screens (900px and below) - keep it simple */
 @media (max-width: 900px) {
 	.navbar {
@@ -269,6 +287,19 @@ footer {
 	
 	.nav-actions {
 		margin-left: 16px;
+	}
+	
+	/* ALKHATEEB responsive adjustments for medium screens */
+	#label-alkhateeb {
+		right: 15px;
+		bottom: calc(var(--space) + 12px);
+		font-size: clamp(15px, 2.3vw, 22px);
+		transform: scale(3.6);
+	}
+	
+	/* Center squares between date and ALKHATEEB on medium screens */
+	.footer-center {
+		margin-right: 50px; /* Account for ALKHATEEB positioning */
 	}
 }
 
@@ -299,6 +330,19 @@ footer {
 	.button {
 		padding: 8px 12px;
 		font-size: 12px;
+	}
+	
+	/* ALKHATEEB responsive adjustments for tablets */
+	#label-alkhateeb {
+		right: 12px;
+		bottom: calc(var(--space) + 15px);
+		font-size: clamp(14px, 2.2vw, 20px);
+		transform: scale(3.2);
+	}
+	
+	/* Center squares between date and ALKHATEEB on tablets */
+	.footer-center {
+		margin-right: 30px; /* Account for ALKHATEEB positioning */
 	}
 }
 
@@ -432,6 +476,10 @@ footer {
 	h1 { font-size: 32px; }
 	footer { display: none; }
 	
+	#label-alkhateeb {
+		display: none !important;
+	}
+	
 	/* Project images - no cropping on mobile */
 	.project img {
 		object-fit: cover !important;
@@ -470,7 +518,19 @@ footer {
 		font-size: 14px !important;
 		padding: 6px 12px !important;
 	}
-	#label-alkhateeb { display: none; }
+	/* ALKHATEEB responsive adjustments for small mobile */
+	#label-alkhateeb {
+		right: 20px;
+		bottom: calc(var(--space) + 20px);
+		font-size: clamp(12px, 2vw, 16px);
+		transform: scale(2.8);
+		opacity: 0.8;
+	}
+	
+	/* Center squares between date and ALKHATEEB on small mobile */
+	.footer-center {
+		margin-right: 40px; /* Account for ALKHATEEB positioning */
+	}
 	#label-adam { visibility: hidden; }
 	#label-adam::before { 
 		content: "KHTB"; 
@@ -558,10 +618,10 @@ footer {
 }
 #label-alkhateeb {
 	position: fixed;
-	right: calc(var(--space) + 320px);
+	right: max(var(--space), calc(50% - var(--maxw)/2 + var(--space)));
 	bottom: calc(var(--space) + 10px);
 	transform-origin: bottom right;
-	font-size: 24px;
+	font-size: clamp(16px, 2.5vw, 24px);
 	transform: scale(4.0);
 	z-index: 1000;
 	-webkit-font-smoothing: antialiased;
