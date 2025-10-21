@@ -324,12 +324,180 @@ class EditMode {
         document.documentElement.style.setProperty('--text', this.currentSettings.textColor);
         document.documentElement.style.setProperty('--border', this.currentSettings.borderColor);
         document.documentElement.style.setProperty('--card', this.currentSettings.bgColor);
+        document.documentElement.style.setProperty('--muted', this.currentSettings.textColor);
+        document.documentElement.style.setProperty('--accent', this.currentSettings.textColor);
+        document.documentElement.style.setProperty('--accent-2', this.currentSettings.borderColor);
         
         // Update header/footer backgrounds
         const header = document.querySelector('header');
         const footer = document.querySelector('footer');
         if (header) header.style.background = this.currentSettings.bgColor;
         if (footer) footer.style.background = this.currentSettings.bgColor;
+        
+        // Update body background and text
+        document.body.style.background = this.currentSettings.bgColor;
+        document.body.style.color = this.currentSettings.textColor;
+        
+        // Fix button colors - invert text/background for primary buttons on dark backgrounds
+        this.updateButtonColors();
+        this.applyForcedStyles();
+    }
+    
+    applyForcedStyles() {
+        // Remove old forced styles
+        document.querySelectorAll('style[data-forced-colors]').forEach(s => s.remove());
+        
+        // Create comprehensive color override
+        const style = document.createElement('style');
+        style.setAttribute('data-forced-colors', 'true');
+        style.textContent = `
+            body, main, section, div, p, span, a, li, label, h1, h2, h3, h4, h5, h6, 
+            .kicker, .subtitle, nav a, #datetime, .project h3, .hero h1, 
+            .hero p, .section h2, .card, .card *, article, article * {
+                color: ${this.currentSettings.textColor} !important;
+            }
+            
+            header, footer, .card, body {
+                background: ${this.currentSettings.bgColor} !important;
+                border-color: ${this.currentSettings.borderColor} !important;
+            }
+            
+            .button:not(.edit-panel-container .button):not(.edit-button):not(.preset-btn):not(.edit-tab-btn):not(.popup-button):not(.reset-button):not(.set-button) {
+                background: ${this.currentSettings.bgColor} !important;
+                color: ${this.currentSettings.textColor} !important;
+                border-color: ${this.currentSettings.borderColor} !important;
+            }
+            
+            .button.primary:not(.edit-panel-container .button):not(.edit-button):not(.preset-btn):not(.edit-tab-btn):not(.popup-button):not(.reset-button):not(.set-button) {
+                background: ${this.currentSettings.borderColor} !important;
+                color: ${this.currentSettings.bgColor} !important;
+                border-color: ${this.currentSettings.borderColor} !important;
+            }
+            
+            /* Keep edit mode panel always visible */
+            .edit-panel-container,
+            .edit-panel-container *,
+            .edit-tab-btn,
+            .edit-button,
+            .preset-btn,
+            .reset-button,
+            .set-button {
+                background: #ffffff !important;
+                color: #000000 !important;
+                border-color: #000000 !important;
+            }
+            
+            /* Keep popup messages always visible */
+            .edit-message,
+            .edit-message * {
+                background: #000000 !important;
+                color: #ffffff !important;
+            }
+            
+            .edit-tab-btn.active {
+                border-bottom-color: #000000 !important;
+            }
+            
+            .edit-button.primary,
+            .reset-button {
+                background: #000000 !important;
+                color: #ffffff !important;
+                border-color: #000000 !important;
+            }
+            
+            .edit-panel-container input[type="color"],
+            .edit-panel-container input[type="text"],
+            .edit-panel-container input[type="range"],
+            .edit-panel-container select {
+                background: #ffffff !important;
+                color: #000000 !important;
+                border-color: #000000 !important;
+            }
+            
+            .label-text,
+            .edit-section label span,
+            .value-display,
+            .range-labels span {
+                color: #000000 !important;
+            }
+            
+            input:not(.edit-panel-container input), 
+            textarea:not(.edit-panel-container textarea), 
+            select:not(.edit-panel-container select), 
+            input::placeholder, 
+            textarea::placeholder {
+                background: ${this.currentSettings.bgColor} !important;
+                color: ${this.currentSettings.textColor} !important;
+                border-color: ${this.currentSettings.borderColor} !important;
+            }
+            
+            .square {
+                background: ${this.currentSettings.borderColor} !important;
+            }
+            
+            #label-adam, #label-alkhateeb {
+                color: ${this.currentSettings.textColor} !important;
+            }
+            
+            .tag {
+                background: ${this.currentSettings.bgColor} !important;
+                color: ${this.currentSettings.textColor} !important;
+                border-color: ${this.currentSettings.borderColor} !important;
+            }
+            
+            .grid, .grid * {
+                color: ${this.currentSettings.textColor} !important;
+            }
+            
+            nav ul li a {
+                color: ${this.currentSettings.textColor} !important;
+                opacity: 0.9 !important;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    updateButtonColors() {
+        // Check if background is dark
+        const isDarkBg = this.isColorDark(this.currentSettings.bgColor);
+        
+        // Update all buttons
+        const buttons = document.querySelectorAll('.button');
+        buttons.forEach(button => {
+            if (button.classList.contains('primary')) {
+                // Primary buttons: background uses border color, text inverts
+                button.style.background = this.currentSettings.borderColor;
+                button.style.borderColor = this.currentSettings.borderColor;
+                button.style.color = this.currentSettings.bgColor;
+            } else {
+                // Regular buttons: background matches page bg, text matches page text
+                button.style.background = this.currentSettings.bgColor;
+                button.style.borderColor = this.currentSettings.borderColor;
+                button.style.color = this.currentSettings.textColor;
+            }
+        });
+        
+        // Update form inputs
+        const inputs = document.querySelectorAll('input, textarea, select');
+        inputs.forEach(input => {
+            input.style.background = this.currentSettings.bgColor;
+            input.style.color = this.currentSettings.textColor;
+            input.style.borderColor = this.currentSettings.borderColor;
+        });
+    }
+    
+    isColorDark(hexColor) {
+        // Convert hex to RGB
+        const hex = hexColor.replace('#', '');
+        const r = parseInt(hex.substr(0, 2), 16);
+        const g = parseInt(hex.substr(2, 2), 16);
+        const b = parseInt(hex.substr(4, 2), 16);
+        
+        // Calculate relative luminance
+        const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+        
+        // Return true if dark (luminance < 0.5)
+        return luminance < 0.5;
     }
     
     applyPreset(preset) {

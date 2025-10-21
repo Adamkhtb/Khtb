@@ -40,16 +40,18 @@ document.addEventListener('DOMContentLoaded', function () {
 		var update = function () {
 			var y = window.scrollY || window.pageYOffset || 0;
 			var t = clamp(y / maxProgress, 0, 1);
-			var adamScale = lerp(2.2, 1.0, t);
-			var alkScale = lerp(0.6, 2.0, t);
+			var adamFontSize = lerp(48, 24, t);
+			var alkFontSize = lerp(24, 48, t);
 			var headerHeight = lerp(124, 64, t);
-			var adamTranslateY = lerp(0, 6, t);
-			var alkTranslateY = lerp(0, 5, t);
+			var adamTranslateY = lerp(0, 0, t);
+			var adamTranslateX = lerp(0, 0, t);
+			var alkTranslateY = lerp(0, 0, t);
 			var footerHeight = lerp(20, 60, t);
 			var footerContentTranslateY = lerp(0, 15, t);
 			
-			adamEl.style.transform = 'scale(' + adamScale.toFixed(3) + ') translateY(' + adamTranslateY.toFixed(0) + 'px) translateX(' + lerp(20, 0, t).toFixed(0) + 'px)';
-			alkEl.style.transform = 'scale(' + alkScale.toFixed(3) + ') translateY(' + alkTranslateY.toFixed(0) + 'px)';
+			adamEl.style.fontSize = adamFontSize.toFixed(1) + 'px';
+			alkEl.style.fontSize = alkFontSize.toFixed(1) + 'px';
+			alkEl.style.transform = 'translateY(' + alkTranslateY.toFixed(0) + 'px)';
 			navbarEl.style.height = headerHeight.toFixed(0) + 'px';
 			bodyEl.style.paddingTop = headerHeight.toFixed(0) + 'px';
 			footerEl.style.paddingBottom = footerHeight.toFixed(0) + 'px';
