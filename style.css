@@ -1214,6 +1214,14 @@ body::before {
 	display: block;
 }
 
+/* Make grid and profile pic tappable on mobile */
+@media (max-width: 640px) {
+	#number-grid,
+	#profile-pic {
+		cursor: pointer;
+	}
+}
+
 #profile-pic {
 	display: none;
 }

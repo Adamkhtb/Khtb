@@ -605,6 +605,12 @@ document.addEventListener('DOMContentLoaded', function() {
             message.style.display = 'none';
         }
         
+        // Add tap/click handlers to canvas and image on touch devices
+        if (isTouchDevice) {
+            canvas.addEventListener('click', toggleView);
+            img.addEventListener('click', toggleView);
+        }
+        
         initNumberGrid();
     }
 });
