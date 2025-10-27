@@ -537,9 +537,9 @@ footer {
 		content: "KHTB"; 
 		visibility: visible;
 		position: absolute;
-		top: 5px;
-		left: 5px;
-		font-size: clamp(12px, 4vw, 16px);
+		top: 50%;
+		left: 15px;
+		font-size: clamp(18px, 5vw, 24px);
 		font-weight: 800;
 		letter-spacing: 0.08em;
 		color: #000000;
@@ -548,7 +548,7 @@ footer {
 		pointer-events: none;
 		will-change: transform;
 		text-transform: uppercase;
-		transform: scale(1.0) translateY(0px) translateX(0px);
+		transform: translateY(-50%);
 		transform-origin: center center;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
@@ -561,8 +561,8 @@ footer {
 	/* Extra small screens - prevent overlap */
 	@media (max-width: 480px) {
 		#label-adam::before {
-			font-size: clamp(10px, 3vw, 14px) !important;
-			left: 3px !important;
+			font-size: clamp(16px, 4.5vw, 22px) !important;
+			left: 12px !important;
 		}
 	}
 

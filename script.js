@@ -397,8 +397,8 @@ function initNumberGrid() {
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     let autoCursorX = gridWidth / 2;
     let autoCursorY = gridHeight / 2;
-    let autoCursorVx = 0.05;
-    let autoCursorVy = 0.03;
+    let autoCursorVx = isTouchDevice ? 0.15 : 0.05;
+    let autoCursorVy = isTouchDevice ? 0.10 : 0.03;
     
     let grid = [];
     let targetGrid = [];
@@ -431,9 +431,10 @@ function initNumberGrid() {
                 
                 if (dist < maxRadius) {
                     const angle = Math.atan2(dy, dx);
-                    const noiseX = Math.sin(angle * 2.5 + x * 0.4 + time * 0.02) * 0.8;
-                    const noiseY = Math.cos(angle * 2.2 + y * 0.4 + time * 0.025) * 0.8;
-                    const pulse = Math.sin(time * 0.03) * 0.3;
+                    const speedMult = isTouchDevice ? 2.0 : 1.0;
+                    const noiseX = Math.sin(angle * 2.5 + x * 0.4 + time * 0.02 * speedMult) * 0.8;
+                    const noiseY = Math.cos(angle * 2.2 + y * 0.4 + time * 0.025 * speedMult) * 0.8;
+                    const pulse = Math.sin(time * 0.03 * speedMult) * 0.3;
                     const organicDist = dist + noiseX + noiseY + pulse;
                     
                     if (organicDist < maxRadius) {
@@ -481,7 +482,8 @@ function initNumberGrid() {
         
         for (let y = 0; y < gridHeight; y++) {
             for (let x = 0; x < gridWidth; x++) {
-                const speed = 0.05 + (Math.sin(x * 0.7 + y * 0.5) * 0.02);
+                const baseSpeed = isTouchDevice ? 0.12 : 0.05;
+                const speed = baseSpeed + (Math.sin(x * 0.7 + y * 0.5) * 0.02);
                 const diff = targetGrid[y][x] - grid[y][x];
                 grid[y][x] += diff * speed;
             }
@@ -547,12 +549,14 @@ window.toggleView = function() {
     
     if (!canvas || !img || !btn) return;
     
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
     if (canvas.style.display === 'none') {
         // Show canvas, hide image
         canvas.style.display = 'block';
         img.style.display = 'none';
         btn.textContent = 'Show Photo';
-        if (message) message.textContent = 'Hover over the grid!';
+        if (message) message.textContent = isTouchDevice ? 'Tap to switch!' : 'Hover over the grid!';
         if (!numberGrid) {
             initNumberGrid();
         }
@@ -561,7 +565,7 @@ window.toggleView = function() {
         canvas.style.display = 'none';
         img.style.display = 'block';
         btn.textContent = 'Show Grid';
-        if (message) message.textContent = "That's just me";
+        if (message) message.textContent = isTouchDevice ? 'Tap to switch!' : "That's just me";
         if (numberGrid) {
             cancelAnimationFrame(numberGrid);
             numberGrid = null;
@@ -574,11 +578,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the number grid if canvas exists
     const canvas = document.getElementById('number-grid');
     const img = document.getElementById('profile-pic');
+    const message = document.getElementById('hero-message');
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     
     if (canvas && img) {
         // Make sure only canvas is visible by default
         canvas.style.display = 'block';
         img.style.display = 'none';
+        
+        // Update message for touch devices
+        if (message && isTouchDevice) {
+            message.textContent = 'Tap to switch!';
+        }
+        
         initNumberGrid();
     }
 });
