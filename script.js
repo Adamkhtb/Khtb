@@ -556,7 +556,14 @@ window.toggleView = function() {
         canvas.style.display = 'block';
         img.style.display = 'none';
         btn.textContent = 'Show Photo';
-        if (message) message.textContent = isTouchDevice ? 'Tap to switch!' : 'Hover over the grid!';
+        if (message) {
+            if (isTouchDevice) {
+                message.style.display = 'none';
+            } else {
+                message.style.display = 'block';
+                message.textContent = 'Hover over the grid!';
+            }
+        }
         if (!numberGrid) {
             initNumberGrid();
         }
@@ -565,7 +572,14 @@ window.toggleView = function() {
         canvas.style.display = 'none';
         img.style.display = 'block';
         btn.textContent = 'Show Grid';
-        if (message) message.textContent = isTouchDevice ? 'Tap to switch!' : "That's just me";
+        if (message) {
+            if (isTouchDevice) {
+                message.style.display = 'none';
+            } else {
+                message.style.display = 'block';
+                message.textContent = "That's just me";
+            }
+        }
         if (numberGrid) {
             cancelAnimationFrame(numberGrid);
             numberGrid = null;
@@ -586,9 +600,9 @@ document.addEventListener('DOMContentLoaded', function() {
         canvas.style.display = 'block';
         img.style.display = 'none';
         
-        // Update message for touch devices
+        // Hide message on touch devices
         if (message && isTouchDevice) {
-            message.textContent = 'Tap to switch!';
+            message.style.display = 'none';
         }
         
         initNumberGrid();
