@@ -61,6 +61,7 @@ nav a { color: var(--text); opacity: 0.9; }
 	padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border);
 	background: #ffffff; color: var(--text);
 	box-shadow: var(--shadow); text-decoration: none; font-weight: 600;
+	font-family: "dico-mono", Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
 }
 .button.primary { background: var(--border); border-color: var(--border); color: #ffffff; }
 .button.primary:hover { filter: brightness(1.08); }
@@ -1196,5 +1197,39 @@ body::before {
 		}
 	}
 	
+}
+
+/* Number Grid Animation Styles */
+#hero-card {
+	position: relative;
+	overflow: hidden;
+}
+
+#number-grid {
+	width: 100%;
+	height: auto;
+	cursor: crosshair;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
+	display: block;
+}
+
+#profile-pic {
+	display: none;
+}
+
+/* Make sure the card displays properly */
+.hero-inner .card {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	position: relative;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+	#number-grid {
+		max-height: 80vh;
+	}
 }
 

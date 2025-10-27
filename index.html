@@ -56,11 +56,16 @@
 					<div style="display:flex; gap:10px; margin-top:14px;">
 						<a class="button primary" href="#projects">View projects</a>
 						<a class="button" href="#contact">Get in touch</a>
+						<button class="button" onclick="toggleView()" id="view-toggle-btn">Show Photo</button>
 					</div>
 				</div>
-				<div class="card">
-					<img src="pfp.JPG" alt="Portfolio image" style="width: 100%; border-radius: 10px; filter: grayscale(100%) contrast(2000%) brightness(1.2);" />
+			<div>
+				<div class="card" id="hero-card">
+					<canvas id="number-grid" style="width: 100%; border-radius: 10px; display: block;"></canvas>
+					<img id="profile-pic" src="pfp.JPG" alt="Portfolio image" style="width: 100%; border-radius: 10px; filter: grayscale(100%) contrast(2000%) brightness(1.2); display: none;" />
 				</div>
+				<div id="hero-message" style="text-align: center; margin-top: 10px; font-size: 14px; color: var(--text); opacity: 0.7;">Hover over the grid!</div>
+			</div>
 			</div>
 		</section>
 

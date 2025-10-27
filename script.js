@@ -363,3 +363,222 @@ window.closeEditPopup = function() {
 		popup.classList.remove('show');
 	}
 };
+
+// Number Grid Animation
+let numberGrid = null;
+
+function initNumberGrid() {
+    const canvas = document.getElementById('number-grid');
+    const img = document.getElementById('profile-pic');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    const cellSize = 48;
+    const gridWidth = 25;
+    
+    // Calculate grid height based on image dimensions to match the photo size
+    let gridHeight = 25;
+    if (img && img.naturalHeight && img.naturalWidth) {
+        // Get the actual displayed size of the image
+        const imgRect = img.getBoundingClientRect();
+        const aspectRatio = img.naturalHeight / img.naturalWidth;
+        // Calculate grid height based on canvas width and image aspect ratio
+        const canvasWidth = gridWidth * cellSize;
+        const canvasHeight = canvasWidth * aspectRatio;
+        gridHeight = Math.ceil(canvasHeight / cellSize);
+    }
+    
+    // Set canvas internal resolution
+    canvas.width = gridWidth * cellSize;
+    canvas.height = gridHeight * cellSize;
+    ctx.imageSmoothingEnabled = false;
+    
+    // Check if device is touch/tablet/mobile (has touch capability)
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    let autoCursorX = gridWidth / 2;
+    let autoCursorY = gridHeight / 2;
+    let autoCursorVx = 0.05;
+    let autoCursorVy = 0.03;
+    
+    let grid = [];
+    let targetGrid = [];
+    let mouseX = -1;
+    let mouseY = -1;
+    let time = 0;
+    
+    // Initialize grids
+    function initGrid() {
+        grid = [];
+        targetGrid = [];
+        for (let y = 0; y < gridHeight; y++) {
+            grid[y] = [];
+            targetGrid[y] = [];
+            for (let x = 0; x < gridWidth; x++) {
+                grid[y][x] = 0;
+                targetGrid[y][x] = 0;
+            }
+        }
+    }
+    
+    function spreadInfluence(centerX, centerY) {
+        const maxRadius = 12;
+        
+        for (let y = 0; y < gridHeight; y++) {
+            for (let x = 0; x < gridWidth; x++) {
+                const dx = x - centerX;
+                const dy = y - centerY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                
+                if (dist < maxRadius) {
+                    const angle = Math.atan2(dy, dx);
+                    const noiseX = Math.sin(angle * 2.5 + x * 0.4 + time * 0.02) * 0.8;
+                    const noiseY = Math.cos(angle * 2.2 + y * 0.4 + time * 0.025) * 0.8;
+                    const pulse = Math.sin(time * 0.03) * 0.3;
+                    const organicDist = dist + noiseX + noiseY + pulse;
+                    
+                    if (organicDist < maxRadius) {
+                        const influence = 1 - (organicDist / maxRadius);
+                        const growth = Math.pow(influence, 1.5) * 18;
+                        const speedVariation = 0.8 + Math.sin(x + y + time * 0.01) * 0.2;
+                        targetGrid[y][x] = Math.min(9, targetGrid[y][x] + growth * speedVariation * 0.5);
+                    }
+                }
+            }
+        }
+    }
+    
+    function update() {
+        time++;
+        
+        // Auto-animate cursor on touch devices
+        if (isTouchDevice) {
+            autoCursorX += autoCursorVx;
+            autoCursorY += autoCursorVy;
+            
+            // Bounce off edges
+            if (autoCursorX < 0 || autoCursorX >= gridWidth) {
+                autoCursorVx *= -1;
+                autoCursorX = Math.max(0, Math.min(gridWidth - 1, autoCursorX));
+            }
+            if (autoCursorY < 0 || autoCursorY >= gridHeight) {
+                autoCursorVy *= -1;
+                autoCursorY = Math.max(0, Math.min(gridHeight - 1, autoCursorY));
+            }
+            
+            mouseX = Math.floor(autoCursorX);
+            mouseY = Math.floor(autoCursorY);
+        }
+        
+        for (let y = 0; y < gridHeight; y++) {
+            for (let x = 0; x < gridWidth; x++) {
+                targetGrid[y][x] = 0;
+            }
+        }
+        
+        if (mouseX >= 0 && mouseY >= 0) {
+            spreadInfluence(mouseX, mouseY);
+        }
+        
+        for (let y = 0; y < gridHeight; y++) {
+            for (let x = 0; x < gridWidth; x++) {
+                const speed = 0.05 + (Math.sin(x * 0.7 + y * 0.5) * 0.02);
+                const diff = targetGrid[y][x] - grid[y][x];
+                grid[y][x] += diff * speed;
+            }
+        }
+    }
+    
+    function draw() {
+        // Get colors from CSS variables (affected by edit mode)
+        const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#ffffff';
+        const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text').trim() || '#000000';
+        
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.font = 'bold 60px Courier New';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        for (let y = 0; y < gridHeight; y++) {
+            for (let x = 0; x < gridWidth; x++) {
+                const value = Math.floor(grid[y][x]);
+                const px = x * cellSize;
+                const py = y * cellSize;
+                
+                ctx.fillStyle = textColor;
+                ctx.fillText(value, px + cellSize / 2, py + cellSize / 2);
+            }
+        }
+    }
+    
+    function animate() {
+        update();
+        draw();
+        numberGrid = requestAnimationFrame(animate);
+    }
+    
+    // Only enable hover effects on non-touch devices
+    if (!isTouchDevice) {
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            mouseX = Math.floor((e.clientX - rect.left) * scaleX / cellSize);
+            mouseY = Math.floor((e.clientY - rect.top) * scaleY / cellSize);
+        });
+        
+        canvas.addEventListener('mouseleave', () => {
+            mouseX = -1;
+            mouseY = -1;
+        });
+    }
+    
+    initGrid();
+    animate();
+}
+
+// Toggle between profile picture and number grid
+window.toggleView = function() {
+    const canvas = document.getElementById('number-grid');
+    const img = document.getElementById('profile-pic');
+    const btn = document.getElementById('view-toggle-btn');
+    const message = document.getElementById('hero-message');
+    
+    if (!canvas || !img || !btn) return;
+    
+    if (canvas.style.display === 'none') {
+        // Show canvas, hide image
+        canvas.style.display = 'block';
+        img.style.display = 'none';
+        btn.textContent = 'Show Photo';
+        if (message) message.textContent = 'Hover over the grid!';
+        if (!numberGrid) {
+            initNumberGrid();
+        }
+    } else {
+        // Show image, hide canvas
+        canvas.style.display = 'none';
+        img.style.display = 'block';
+        btn.textContent = 'Show Grid';
+        if (message) message.textContent = "That's just me";
+        if (numberGrid) {
+            cancelAnimationFrame(numberGrid);
+            numberGrid = null;
+        }
+    }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize the number grid if canvas exists
+    const canvas = document.getElementById('number-grid');
+    const img = document.getElementById('profile-pic');
+    
+    if (canvas && img) {
+        // Make sure only canvas is visible by default
+        canvas.style.display = 'block';
+        img.style.display = 'none';
+        initNumberGrid();
+    }
+});

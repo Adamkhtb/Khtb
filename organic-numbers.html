@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Growing Numbers</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #000;
+            overflow: hidden;
+        }
+        
+        #container {
+            border: 8px solid #fff;
+            box-shadow: 0 8px 24px rgba(255,255,255,0.3);
+        }
+        
+        canvas {
+            display: block;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            cursor: crosshair;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .controls {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #fff;
+            border: 3px solid #000;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+        
+        .controls button {
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            margin: 5px 0;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            display: block;
+            width: 100%;
+        }
+        
+        .controls button:hover {
+            background: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <div>HOVER TO GROW</div>
+        <button onclick="resetGrid()">RESET</button>
+    </div>
+    
+    <div id="container">
+        <canvas id="canvas"></canvas>
+    </div>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        const cellSize = 48;
+        const gridWidth = 25;
+        const gridHeight = 25;
+        
+        canvas.width = gridWidth * cellSize;
+        canvas.height = gridHeight * cellSize;
+        
+        ctx.imageSmoothingEnabled = false;
+        
+        let grid = [];
+        let targetGrid = [];
+        let mouseX = -1;
+        let mouseY = -1;
+        let time = 0;
+        
+        // Initialize grids
+        function initGrid() {
+            grid = [];
+            targetGrid = [];
+            for (let y = 0; y < gridHeight; y++) {
+                grid[y] = [];
+                targetGrid[y] = [];
+                for (let x = 0; x < gridWidth; x++) {
+                    grid[y][x] = 0;
+                    targetGrid[y][x] = 0;
+                }
+            }
+        }
+        
+        function spreadInfluence(centerX, centerY) {
+            // Organic spread using perlin-like noise
+            const maxRadius = 8;
+            
+            for (let y = 0; y < gridHeight; y++) {
+                for (let x = 0; x < gridWidth; x++) {
+                    const dx = x - centerX;
+                    const dy = y - centerY;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < maxRadius) {
+                        // Create organic shape using noise-like function with time
+                        const angle = Math.atan2(dy, dx);
+                        const noiseX = Math.sin(angle * 2.5 + x * 0.4 + time * 0.02) * 0.8;
+                        const noiseY = Math.cos(angle * 2.2 + y * 0.4 + time * 0.025) * 0.8;
+                        const pulse = Math.sin(time * 0.03) * 0.3;
+                        const organicDist = dist + noiseX + noiseY + pulse;
+                        
+                        // Falloff curve for organic spread
+                        if (organicDist < maxRadius) {
+                            const influence = 1 - (organicDist / maxRadius);
+                            const growth = Math.pow(influence, 1.5) * 18;
+                            
+                            // Add some randomness to growth speed
+                            const speedVariation = 0.8 + Math.sin(x + y + time * 0.01) * 0.2;
+                            targetGrid[y][x] = Math.min(9, targetGrid[y][x] + growth * speedVariation * 0.5);
+                        }
+                    }
+                }
+            }
+        }
+        
+        function update() {
+            time++;
+            
+            // Reset all targets to 0 first
+            for (let y = 0; y < gridHeight; y++) {
+                for (let x = 0; x < gridWidth; x++) {
+                    targetGrid[y][x] = 0;
+                }
+            }
+            
+            // Apply mouse influence only where mouse is
+            if (mouseX >= 0 && mouseY >= 0) {
+                spreadInfluence(mouseX, mouseY);
+            }
+            
+            // Smooth interpolation toward target values with varying speeds
+            for (let y = 0; y < gridHeight; y++) {
+                for (let x = 0; x < gridWidth; x++) {
+                    // Each cell grows at slightly different speed for organic feel
+                    const speed = 0.15 + (Math.sin(x * 0.7 + y * 0.5) * 0.05);
+                    const diff = targetGrid[y][x] - grid[y][x];
+                    grid[y][x] += diff * speed;
+                }
+            }
+        }
+        
+        function draw() {
+            // Clear canvas
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw grid
+            ctx.font = 'bold 40px Courier New';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            for (let y = 0; y < gridHeight; y++) {
+                for (let x = 0; x < gridWidth; x++) {
+                    const value = Math.floor(grid[y][x]);
+                    const px = x * cellSize;
+                    const py = y * cellSize;
+                    
+                    // Number - always white
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillText(value, px + cellSize / 2, py + cellSize / 2);
+                }
+            }
+        }
+        
+        function animate() {
+            update();
+            draw();
+            requestAnimationFrame(animate);
+        }
+        
+        function resetGrid() {
+            initGrid();
+        }
+        
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouseX = Math.floor((e.clientX - rect.left) / cellSize);
+            mouseY = Math.floor((e.clientY - rect.top) / cellSize);
+        });
+        
+        canvas.addEventListener('mouseleave', () => {
+            mouseX = -1;
+            mouseY = -1;
+        });
+        
+        window.resetGrid = resetGrid;
+        
+        initGrid();
+        animate();
+    </script>
+</body>
+</html>
