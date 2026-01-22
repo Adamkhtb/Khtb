@@ -502,8 +502,9 @@ function initNumberGrid() {
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         
-        for (let y = 0; y < gridHeight; y++) {
-            for (let x = 0; x < gridWidth; x++) {
+        // Skip edge rows and columns for more padding
+        for (let y = 1; y < gridHeight - 1; y++) {
+            for (let x = 1; x < gridWidth - 1; x++) {
                 const value = Math.floor(grid[y][x]);
                 const px = x * cellSize;
                 const py = y * cellSize;
