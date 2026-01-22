@@ -371,6 +371,10 @@ footer {
 	display: none;
 }
 
+.popup-overlay:not(.hidden) {
+	display: flex;
+}
+
 .popup {
 	background: #ffffff;
 	border: 3px solid var(--border);

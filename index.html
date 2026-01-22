@@ -9,6 +9,106 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://use.typekit.net/mnz5jej.css">
 	<link href="style.css" rel="stylesheet">
+	<style>
+		#number-grid { display: none !important; }
+		#number-grid.visible { display: block !important; }
+		
+		/* KHTB - hidden on desktop, shown on mobile */
+		#label-khtb {
+			display: none;
+			font-weight: 800;
+			letter-spacing: 0.08em;
+			color: #000000;
+			opacity: 0.95;
+			font-size: clamp(20px, 8vw, 48px);
+			transition: font-size 0.1s ease-out;
+		}
+		
+		/* Fluid hero layout */
+		.hero-inner {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+			gap: 28px;
+			align-items: center;
+		}
+		
+		/* Hero card fluid sizing */
+		#hero-card {
+			width: 100%;
+			max-width: min(100%, 600px);
+			margin: 0 auto;
+		}
+		
+		/* Fluid buttons */
+		.hero-buttons {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			margin-top: 14px;
+		}
+		
+		.hero-toggle-buttons {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			justify-content: center;
+			margin-top: 10px;
+		}
+		
+		/* When hero stacks to single column, reorder */
+		@container (max-width: 700px) {
+			.hero-inner > div:first-child {
+				order: 2;
+			}
+			.hero-inner > div:last-child {
+				order: 1;
+			}
+		}
+		
+		/* Tablet and mobile */
+		@media (max-width: 960px) {
+			.hero-inner {
+				text-align: center;
+			}
+			
+			.hero-inner > div:first-child {
+				order: 2;
+			}
+			
+			.hero-inner > div:last-child {
+				order: 1;
+				margin-bottom: 24px;
+			}
+			
+			.hero-buttons {
+				justify-content: center;
+			}
+			
+			/* Show KHTB, hide ADAM on mobile */
+			#label-adam {
+				display: none !important;
+			}
+			
+			#label-khtb {
+				display: block;
+			}
+		}
+		
+		/* Small mobile */
+		@media (max-width: 480px) {
+			.hero-buttons,
+			.hero-toggle-buttons {
+				flex-direction: column;
+				align-items: stretch;
+			}
+			
+			.hero-buttons .button,
+			.hero-toggle-buttons .button {
+				text-align: center;
+				justify-content: center;
+			}
+		}
+	</style>
 </head>
 <body>
 	<div id="label-alkhateeb">ALKHATEEB</div>
@@ -28,9 +128,24 @@
 		</div>
 	</div>
 
+	<!-- Coming Soon Popup -->
+	<div class="popup-overlay hidden" id="comingSoonPopup">
+		<div class="popup">
+			<button class="popup-close" onclick="closeComingSoonPopup()" aria-label="Close">×</button>
+			<div class="popup-content">
+				<h2 class="popup-title">Coming Soon</h2>
+				<p class="popup-message">
+					This project page is currently under development.<br><br>
+					Check back soon for more details!
+				</p>
+				<button class="popup-button" onclick="closeComingSoonPopup()">Got it</button>
+			</div>
+		</div>
+	</div>
+
 	<header>
 		<div class="container navbar">
-			<div class="brand"><span id="label-adam">ADAM</span></div>
+			<div class="brand"><span id="label-adam">ADAM</span><span id="label-khtb">Khtb</span></div>
 			<nav>
 				<ul>
 					<li><a href="#about">About</a></li>
@@ -40,7 +155,7 @@
 			</nav>
 			<div class="nav-actions">
 				<a id="edit-mode-toggle" class="button" href="#" style="display: none;">Edit Mode</a>
-				<a class="button" href="AdamA_Resume.pdf" target="_blank" rel="noreferrer">Resume</a>
+				<a class="button" href="AdamA_Resume.pdf" target="_blank" rel="noreferrer" style="display: none;">Resume</a>
 				<a class="button primary" href="#contact">Hire me</a>
 			</div>
 		</div>
@@ -53,18 +168,23 @@
 					<div class="kicker">Available for work</div>
 					<h1>Graphic Designer</h1>
 					<p class="subtitle">Welcome to my portfolio site, designed and created by me.</p>
-					<div style="display:flex; gap:10px; margin-top:14px;">
+					<div class="hero-buttons">
 						<a class="button primary" href="#projects">View projects</a>
 						<a class="button" href="#contact">Get in touch</a>
-						<button class="button" onclick="toggleView()" id="view-toggle-btn">Show Photo</button>
 					</div>
 				</div>
 			<div>
-				<div class="card" id="hero-card">
-					<canvas id="number-grid" style="width: 100%; border-radius: 10px; display: block;"></canvas>
-					<img id="profile-pic" src="pfp.JPG" alt="Portfolio image" style="width: 100%; border-radius: 10px; filter: grayscale(100%) contrast(2000%) brightness(1.2); display: none;" />
+				<div class="card" id="hero-card" style="position: relative; aspect-ratio: 1/1; overflow: hidden;">
+					<canvas id="number-grid" style="width: 100%; height: 100%; border-radius: 10px; position: absolute; top: 0; left: 0;"></canvas>
+					<img id="profile-pic" src="pfp.JPG" alt="Portfolio image" style="width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 10px; display: none; position: absolute; top: 0; left: 0; filter: grayscale(100%) contrast(2000%) brightness(1.2);" />
+					<iframe id="profile-video" src="https://player.vimeo.com/video/1157028149?background=1&amp;autoplay=1&amp;loop=1&amp;muted=1" style="width: 100%; height: 100%; border-radius: 10px; display: block; position: absolute; top: 0; left: 0;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" title="khtb_greensquare"></iframe>
 				</div>
-				<div id="hero-message" style="text-align: center; margin-top: 10px; font-size: 14px; color: var(--text); opacity: 0.7;">Hover over the grid!</div>
+				<div id="hero-message" style="text-align: center; margin-top: 10px; font-size: 14px; color: var(--text); opacity: 0.7;"></div>
+				<div class="hero-toggle-buttons">
+					<button class="button" onclick="showContent('video')" id="btn-video">Video</button>
+					<button class="button" onclick="showContent('profile')" id="btn-profile">Profile</button>
+					<button class="button" onclick="showContent('grid')" id="btn-grid">Other Thing</button>
+				</div>
 			</div>
 			</div>
 		</section>
@@ -72,6 +192,26 @@
 		<section id="projects" class="section">
 			<h2>Projects</h2>
 			<div class="grid">
+				<article class="card project">
+					<img src="vertigo_thumb.gif" alt="Vertigo preview" />
+					<div>
+						<h3>Vertigo</h3>
+					</div>
+					<div style="display:flex; gap:10px;">
+						<a class="button" href="#" onclick="event.preventDefault(); showComingSoonPopup(); return false;">View Project</a>
+					</div>
+				</article>
+
+				<article class="card project">
+					<img src="lowkey_kindacool.jpg" alt="Past Systems preview" />
+					<div>
+						<h3>Past Systems</h3>
+					</div>
+					<div style="display:flex; gap:10px;">
+						<a class="button" href="#" onclick="event.preventDefault(); showComingSoonPopup(); return false;">View Project</a>
+					</div>
+				</article>
+
 				<article class="card project">
 					<img src="vcuthumbnail.png" alt="VCU Engineering preview" class="thumb-zoom" />
 					<div>
@@ -214,6 +354,146 @@
 	</footer>
 
 	<script src="script.js"></script>
+	<script>
+		// Hide the grid on page load (override script.js)
+		document.addEventListener('DOMContentLoaded', function() {
+			const grid = document.getElementById('number-grid');
+			if (grid) {
+				grid.classList.remove('visible');
+			}
+		});
+		
+		function showContent(type) {
+			const grid = document.getElementById('number-grid');
+			const photo = document.getElementById('profile-pic');
+			const video = document.getElementById('profile-video');
+			const message = document.getElementById('hero-message');
+			
+			// Hide all
+			grid.classList.remove('visible');
+			photo.style.display = 'none';
+			video.style.display = 'none';
+			
+			// Show selected
+			switch(type) {
+				case 'video':
+					video.style.display = 'block';
+					message.textContent = '';
+					break;
+				case 'profile':
+					photo.style.display = 'block';
+					message.textContent = '';
+					break;
+				case 'grid':
+					grid.classList.add('visible');
+					message.textContent = 'Hover over the grid!';
+					break;
+			}
+		}
+		
+		// Coming Soon Popup functions
+		function showComingSoonPopup() {
+			const popup = document.getElementById('comingSoonPopup');
+			if (popup) {
+				popup.classList.remove('hidden');
+				popup.style.display = 'flex';
+			}
+		}
+		
+		function closeComingSoonPopup() {
+			const popup = document.getElementById('comingSoonPopup');
+			if (popup) {
+				popup.classList.add('hidden');
+				popup.style.display = 'none';
+			}
+		}
+		
+		// Set up coming soon popup event listeners
+		document.addEventListener('DOMContentLoaded', function() {
+			const popup = document.getElementById('comingSoonPopup');
+			if (!popup) return;
+			
+			// Close button event listener
+			const closeButton = popup.querySelector('.popup-close');
+			if (closeButton) {
+				closeButton.addEventListener('click', function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+					closeComingSoonPopup();
+				});
+			}
+			
+			// Close on overlay click
+			popup.addEventListener('click', function(e) {
+				if (e.target === this) {
+					e.preventDefault();
+					e.stopPropagation();
+					closeComingSoonPopup();
+				}
+			});
+			
+			// Close on Escape key
+			document.addEventListener('keydown', function(e) {
+				if (e.key === 'Escape' && !popup.classList.contains('hidden')) {
+					e.preventDefault();
+					closeComingSoonPopup();
+				}
+			});
+		});
+		
+		// KHTB scroll-based resize for mobile
+		(function() {
+			const khtbEl = document.getElementById('label-khtb');
+			const navbarEl = document.querySelector('.navbar');
+			const bodyEl = document.body;
+			if (!khtbEl) return;
+			
+			const maxProgress = 300; // px to reach final size
+			const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+			const lerp = (a, b, t) => a + (b - a) * t;
+			
+			let ticking = false;
+			
+			function updateKhtb() {
+				// Only apply on mobile/tablet
+				if (window.innerWidth > 960) {
+					khtbEl.style.fontSize = '';
+					ticking = false;
+					return;
+				}
+				
+				const y = window.scrollY || window.pageYOffset || 0;
+				const t = clamp(y / maxProgress, 0, 1);
+				
+				// Fluid sizing based on viewport width
+				const vw = window.innerWidth;
+				const maxSize = Math.min(48, vw * 0.08);
+				const minSize = Math.max(20, vw * 0.04);
+				const fontSize = lerp(maxSize, minSize, t);
+				khtbEl.style.fontSize = fontSize.toFixed(1) + 'px';
+				
+				// Also adjust navbar height on mobile
+				if (navbarEl && bodyEl) {
+					const navHeight = lerp(100, 60, t);
+					navbarEl.style.height = navHeight.toFixed(0) + 'px';
+					bodyEl.style.paddingTop = navHeight.toFixed(0) + 'px';
+				}
+				
+				ticking = false;
+			}
+			
+			function onScroll() {
+				if (!ticking) {
+					ticking = true;
+					requestAnimationFrame(updateKhtb);
+				}
+			}
+			
+			window.addEventListener('scroll', onScroll, { passive: true });
+			window.addEventListener('resize', updateKhtb);
+			updateKhtb();
+		})();
+	</script>
 	<script src="edit-mode.js"></script>
 </body>
 </html>
