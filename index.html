@@ -13,6 +13,135 @@
 		#number-grid { display: none !important; }
 		#number-grid.visible { display: block !important; }
 		
+		/* Welcome Screen */
+		#welcome-screen {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100vh;
+			background: #ffffff;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			z-index: 10000;
+			transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+		}
+		
+		#welcome-screen.slide-up {
+			height: 124px;
+			justify-content: flex-start;
+			align-items: flex-start;
+			background: #ffffff;
+			border-bottom: 1px solid #000000;
+			padding: 0;
+		}
+		
+		#welcome-screen.slide-up .welcome-content {
+			display: none;
+		}
+		
+		#welcome-screen.hidden {
+			display: none;
+		}
+		
+		.welcome-content {
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+		}
+		
+		#welcome-screen.slide-up .welcome-content {
+			opacity: 0;
+			height: 0;
+			overflow: hidden;
+		}
+		
+		.welcome-title {
+			font-family: "dico-mono", Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+			font-weight: 800;
+			font-size: clamp(48px, 12vw, 120px);
+			letter-spacing: 0.08em;
+			color: #000000;
+			margin-bottom: 0;
+			line-height: 1;
+			display: inline-block;
+			transition: background-color 0.2s ease;
+			cursor: pointer;
+			padding: 4px 8px;
+		}
+		
+		.welcome-title:hover {
+			background-color: #0066FF;
+			color: #ffffff;
+		}
+		
+		.welcome-subtitle {
+			font-family: "dico-mono", Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+			font-weight: 400;
+			font-size: clamp(16px, 3vw, 24px);
+			color: #666666;
+			margin-bottom: 40px;
+			letter-spacing: 0.02em;
+		}
+		
+		.enter-btn {
+			padding: 16px 48px;
+			font-size: 16px;
+			font-weight: 600;
+			background: #000000;
+			color: #ffffff;
+			border: 2px solid #000000;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			font-family: "dico-mono", Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+			letter-spacing: 0.05em;
+			margin-top: 60px;
+		}
+		
+		.enter-btn:hover {
+			background: #ffffff;
+			color: #000000;
+		}
+		
+		/* Hide header content initially */
+		body.welcome-active header .brand,
+		body.welcome-active header nav,
+		body.welcome-active header .nav-actions {
+			opacity: 0;
+			transform: translateY(-20px);
+		}
+		
+		body.welcome-active main {
+			opacity: 0;
+		}
+		
+		/* Animate header items after welcome screen */
+		header .brand {
+			opacity: 1;
+			transform: translateY(0);
+			transition: opacity 0.5s ease 0.6s, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s;
+		}
+		
+		header nav {
+			opacity: 1;
+			transform: translateY(0);
+			transition: opacity 0.5s ease 0.7s, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.7s;
+		}
+		
+		header .nav-actions {
+			opacity: 1;
+			transform: translateY(0);
+			transition: opacity 0.5s ease 0.8s, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s;
+		}
+		
+		main {
+			transition: opacity 0.8s ease 0.8s;
+		}
+		
 		/* KHTB - hidden on desktop, shown on mobile */
 		#label-khtb {
 			display: none;
@@ -110,7 +239,15 @@
 		}
 	</style>
 </head>
-<body>
+<body class="welcome-active">
+	<!-- Welcome Screen -->
+	<div id="welcome-screen">
+		<div class="welcome-content">
+			<h1 class="welcome-title">adamkhtb.com</h1>
+			<button class="enter-btn" id="enter-btn">Enter</button>
+		</div>
+	</div>
+	
 	<div id="label-alkhateeb">ALKHATEEB</div>
 	<!-- Mobile Warning Popup -->
 	<div class="popup-overlay" id="mobileWarning">
@@ -148,7 +285,7 @@
 			<div class="brand"><span id="label-adam">ADAM</span><span id="label-khtb">Khtb</span></div>
 			<nav>
 				<ul>
-					<li><a href="#about">About</a></li>
+					<li><a href="#">About</a></li>
 					<li><a href="#projects">Projects</a></li>
 					<li><a href="#contact">Contact</a></li>
 				</ul>
@@ -162,7 +299,7 @@
 	</header>
 
 	<main class="container">
-		<section class="hero">
+		<section id="about" class="hero">
 			<div class="hero-inner">
 				<div>
 					<div class="kicker">Available for work</div>
@@ -213,7 +350,7 @@
 				</article>
 
 				<article class="card project">
-					<img src="vcuthumbnail.png" alt="VCU Engineering preview" class="thumb-zoom" />
+					<img src="vcuthumbnail.png" alt="VCU Engineering preview" />
 					<div>
 						<h3>VCU Engineering</h3>
 					</div>
@@ -492,6 +629,33 @@
 			window.addEventListener('scroll', onScroll, { passive: true });
 			window.addEventListener('resize', updateKhtb);
 			updateKhtb();
+		})();
+		
+		// Welcome Screen Animation
+		(function() {
+			const welcomeScreen = document.getElementById('welcome-screen');
+			const enterBtn = document.getElementById('enter-btn');
+			const body = document.body;
+			
+			if (!welcomeScreen || !enterBtn) return;
+			
+			enterBtn.addEventListener('click', function() {
+				// Start the slide-up animation
+				welcomeScreen.classList.add('slide-up');
+				body.classList.remove('welcome-active');
+				
+				// After animation completes (0.8s), hide the welcome screen instantly
+				setTimeout(function() {
+					welcomeScreen.classList.add('hidden');
+				}, 800);
+			});
+			
+			// Allow Enter key to trigger
+			document.addEventListener('keydown', function(e) {
+				if (e.key === 'Enter' && body.classList.contains('welcome-active')) {
+					enterBtn.click();
+				}
+			});
 		})();
 	</script>
 	<script src="edit-mode.js"></script>
