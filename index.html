@@ -13,135 +13,6 @@
 		#number-grid { display: none !important; }
 		#number-grid.visible { display: block !important; }
 		
-		/* Welcome Screen */
-		#welcome-screen {
-			position: fixed;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100vh;
-			background: #ffffff;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			z-index: 10000;
-			transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
-		}
-		
-		#welcome-screen.slide-up {
-			height: 124px;
-			justify-content: flex-start;
-			align-items: flex-start;
-			background: #ffffff;
-			border-bottom: 1px solid #000000;
-			padding: 0;
-		}
-		
-		#welcome-screen.slide-up .welcome-content {
-			display: none;
-		}
-		
-		#welcome-screen.hidden {
-			display: none;
-		}
-		
-		.welcome-content {
-			text-align: center;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
-		}
-		
-		#welcome-screen.slide-up .welcome-content {
-			opacity: 0;
-			height: 0;
-			overflow: hidden;
-		}
-		
-		.welcome-title {
-			font-family: "dico-mono", Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
-			font-weight: 800;
-			font-size: clamp(48px, 12vw, 120px);
-			letter-spacing: 0.08em;
-			color: #000000;
-			margin-bottom: 0;
-			line-height: 1;
-			display: inline-block;
-			transition: background-color 0.2s ease;
-			cursor: pointer;
-			padding: 4px 8px;
-		}
-		
-		.welcome-title:hover {
-			background-color: #0066FF;
-			color: #ffffff;
-		}
-		
-		.welcome-subtitle {
-			font-family: "dico-mono", Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
-			font-weight: 400;
-			font-size: clamp(16px, 3vw, 24px);
-			color: #666666;
-			margin-bottom: 40px;
-			letter-spacing: 0.02em;
-		}
-		
-		.enter-btn {
-			padding: 16px 48px;
-			font-size: 16px;
-			font-weight: 600;
-			background: #000000;
-			color: #ffffff;
-			border: 2px solid #000000;
-			cursor: pointer;
-			transition: all 0.3s ease;
-			font-family: "dico-mono", Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
-			letter-spacing: 0.05em;
-			margin-top: 60px;
-		}
-		
-		.enter-btn:hover {
-			background: #ffffff;
-			color: #000000;
-		}
-		
-		/* Hide header content initially */
-		body.welcome-active header .brand,
-		body.welcome-active header nav,
-		body.welcome-active header .nav-actions {
-			opacity: 0;
-			transform: translateY(-20px);
-		}
-		
-		body.welcome-active main {
-			opacity: 0;
-		}
-		
-		/* Animate header items after welcome screen */
-		header .brand {
-			opacity: 1;
-			transform: translateY(0);
-			transition: opacity 0.5s ease 0.6s, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s;
-		}
-		
-		header nav {
-			opacity: 1;
-			transform: translateY(0);
-			transition: opacity 0.5s ease 0.7s, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.7s;
-		}
-		
-		header .nav-actions {
-			opacity: 1;
-			transform: translateY(0);
-			transition: opacity 0.5s ease 0.8s, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s;
-		}
-		
-		main {
-			transition: opacity 0.8s ease 0.8s;
-		}
-		
 		/* KHTB - hidden on desktop, shown on mobile */
 		#label-khtb {
 			display: none;
@@ -239,14 +110,7 @@
 		}
 	</style>
 </head>
-<body class="welcome-active">
-	<!-- Welcome Screen -->
-	<div id="welcome-screen">
-		<div class="welcome-content">
-			<h1 class="welcome-title">adamkhtb.com</h1>
-			<button class="enter-btn" id="enter-btn">Enter</button>
-		</div>
-	</div>
+<body>
 	
 	<div id="label-alkhateeb">ALKHATEEB</div>
 	<!-- Mobile Warning Popup -->
@@ -327,7 +191,7 @@
 		</section>
 
 		<section id="projects" class="section">
-			<h2>Projects</h2>
+			<h2 class="reveal">Projects</h2>
 			<div class="grid">
 				<article class="card project">
 					<img src="vertigo_thumb.gif" alt="Vertigo preview" />
@@ -431,7 +295,7 @@
 			</div>
 		</section>
 
-		<section id="contact" class="section">
+		<section id="contact" class="section reveal">
 			<h2>Contact</h2>
 			<div class="card">
 				<form action="https://formspree.io/f/xyznwvbq" method="POST">
@@ -631,33 +495,32 @@
 			updateKhtb();
 		})();
 		
-		// Welcome Screen Animation
+	</script>
+	<script src="edit-mode.js"></script>
+	<script>
+		// Scroll-reveal: animate elements when they enter the viewport
 		(function() {
-			const welcomeScreen = document.getElementById('welcome-screen');
-			const enterBtn = document.getElementById('enter-btn');
-			const body = document.body;
-			
-			if (!welcomeScreen || !enterBtn) return;
-			
-			enterBtn.addEventListener('click', function() {
-				// Start the slide-up animation
-				welcomeScreen.classList.add('slide-up');
-				body.classList.remove('welcome-active');
-				
-				// After animation completes (0.8s), hide the welcome screen instantly
-				setTimeout(function() {
-					welcomeScreen.classList.add('hidden');
-				}, 800);
-			});
-			
-			// Allow Enter key to trigger
-			document.addEventListener('keydown', function(e) {
-				if (e.key === 'Enter' && body.classList.contains('welcome-active')) {
-					enterBtn.click();
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('visible');
+						observer.unobserve(entry.target); // only animate once
+					}
+				});
+			}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+			document.addEventListener('DOMContentLoaded', () => {
+				// Reveal generic .reveal elements
+				document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+				// Reveal project cards
+				document.querySelectorAll('.project').forEach(el => observer.observe(el));
+				// Fade in ALKHATEEB label after delay
+				const alkhateeb = document.getElementById('label-alkhateeb');
+				if (alkhateeb) {
+					setTimeout(() => { alkhateeb.style.opacity = '1'; }, 1000);
 				}
 			});
 		})();
 	</script>
-	<script src="edit-mode.js"></script>
 </body>
 </html>

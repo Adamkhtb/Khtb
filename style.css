@@ -43,6 +43,8 @@ img {
 	background: #ffffff;
 	border-bottom: 1px solid var(--border);
 	overflow: visible; /* allow growing brand to extend beyond header */
+	transform: translateY(-100%);
+	animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
 }
 .navbar {
 	display: flex; align-items: center; justify-content: space-between;
@@ -56,10 +58,16 @@ img {
 	overflow: visible; 
 	padding: 0 20px 0 0; /* align left edge with content */
 	margin-left: 20px; /* space from left edge */
+	opacity: 0;
+	animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
 }
 nav ul { display: flex; gap: 18px; list-style: none; margin: 0; padding: 0; align-items: center; }
-nav a { color: var(--text); opacity: 0.9; }
-.nav-actions { display: flex; gap: 10px; align-items: center; margin: 0 0 0 20px; }
+nav a { color: var(--text); opacity: 0; animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+nav li:nth-child(1) a { animation-delay: 0.4s; }
+nav li:nth-child(2) a { animation-delay: 0.5s; }
+nav li:nth-child(3) a { animation-delay: 0.6s; }
+nav a:not([style]) { opacity: 0; } /* Ensure starting state */
+.nav-actions { display: flex; gap: 10px; align-items: center; margin: 0 0 0 20px; opacity: 0; animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards; }
 .button {
 	display: inline-flex; align-items: center; justify-content: center; gap: 8px;
 	padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border);
@@ -665,6 +673,8 @@ footer {
 	will-change: font-size;
 	display: flex;
 	align-items: center;
+	opacity: 0;
+	transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .thumb-zoom {
@@ -762,17 +772,42 @@ body::before {
 	} 
 }
 
-/* Staggered project entrance */
-@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-.project { animation: slideUp 0.6s var(--ease, ease) forwards; opacity: 0; }
-.grid .project:nth-child(1) { animation-delay: 0.05s; }
-.grid .project:nth-child(2) { animation-delay: 0.1s; }
-.grid .project:nth-child(3) { animation-delay: 0.15s; }
-.grid .project:nth-child(4) { animation-delay: 0.2s; }
-.grid .project:nth-child(5) { animation-delay: 0.25s; }
-.grid .project:nth-child(6) { animation-delay: 0.3s; }
-.grid .project:nth-child(7) { animation-delay: 0.35s; }
-.grid .project:nth-child(8) { animation-delay: 0.4s; }
+/* Label entrance from right */
+@keyframes fadeInRight {
+	from {
+		opacity: 0;
+		transform: translateX(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+/* Scroll-reveal: elements start hidden, animate when visible */
+.reveal {
+	opacity: 0;
+	transform: translateY(24px);
+	transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Staggered project entrance - scroll triggered */
+.project { opacity: 0; transform: translateY(24px); transition: opacity 0.6s var(--ease, ease), transform 0.6s var(--ease, ease); }
+.project.visible { opacity: 1; transform: translateY(0); }
+.grid .project:nth-child(1) { transition-delay: 0.05s; }
+.grid .project:nth-child(2) { transition-delay: 0.1s; }
+.grid .project:nth-child(3) { transition-delay: 0.15s; }
+.grid .project:nth-child(4) { transition-delay: 0.2s; }
+.grid .project:nth-child(5) { transition-delay: 0.25s; }
+.grid .project:nth-child(6) { transition-delay: 0.3s; }
+.grid .project:nth-child(7) { transition-delay: 0.35s; }
+.grid .project:nth-child(8) { transition-delay: 0.4s; }
+.grid .project:nth-child(9) { transition-delay: 0.45s; }
+.grid .project:nth-child(10) { transition-delay: 0.5s; }
 
 /* Edit Mode Styles - Fonts & Colors Only */
 .edit-mode {
