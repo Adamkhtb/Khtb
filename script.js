@@ -52,6 +52,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			adamEl.style.fontSize = adamFontSize.toFixed(1) + 'px';
 			alkEl.style.fontSize = alkFontSize.toFixed(1) + 'px';
 			alkEl.style.transform = 'translateY(' + alkTranslateY.toFixed(0) + 'px)';
+			var footerAlk = document.querySelector('.footer-alkhateeb');
+			if (footerAlk) footerAlk.style.fontSize = alkFontSize.toFixed(1) + 'px';
 			navbarEl.style.height = headerHeight.toFixed(0) + 'px';
 			bodyEl.style.paddingTop = headerHeight.toFixed(0) + 'px';
 			footerEl.style.paddingBottom = footerHeight.toFixed(0) + 'px';
