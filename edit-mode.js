@@ -128,10 +128,6 @@ class EditMode {
                         <span id="font-size-value" class="value-display">16px</span>
                     </span>
                     <input type="range" id="font-size" class="edit-range" min="12" max="24" value="16" step="1">
-                    <div class="range-labels">
-                        <span>Small</span>
-                        <span>Large</span>
-                    </div>
                 </label>
             </div>
             
