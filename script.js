@@ -31,6 +31,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	var footerEl = document.querySelector('footer');
 	var bodyEl = document.body;
 	
+	// Fade in ALKHATEEB label on all pages
+	if (alkEl) {
+		setTimeout(function() { alkEl.style.opacity = '1'; }, 1000);
+	}
+
 	if (adamEl && alkEl && headerEl && navbarEl && footerEl && bodyEl) {
 		var ticking = false;
 		var maxProgress = 600; // px to reach final scale
